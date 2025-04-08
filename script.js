@@ -128,6 +128,9 @@ document.addEventListener('DOMContentLoaded', () => {
     // Call the setupTypingAnimation function
     setupTypingAnimation();
     
+    // Initialize skills typing effect
+    initSkillsTyping();
+    
     // Original loading animation code
     setTimeout(() => {
         loadingQuote.style.opacity = '1';
@@ -1268,4 +1271,62 @@ function createParticles() {
         
         loadingContainer.appendChild(particle);
     }
+}
+
+// Skills typing effect function
+function initSkillsTyping() {
+    const skillsText = document.querySelector('.skills-typing-text');
+    if (!skillsText) return;
+    
+    const skills = [
+        "HTML/CSS",
+        "JavaScript",
+        "React.js",
+        "Node.js",
+        "Python",
+        "C++",
+        "AI/ML",
+        "UI/UX Design",
+        "Responsive Design",
+        "API Development"
+    ];
+    
+    let currentSkillIndex = 0;
+    let currentCharIndex = 0;
+    let isDeleting = false;
+    let typingSpeed = 100;
+    
+    function typeSkill() {
+        const currentSkill = skills[currentSkillIndex];
+        
+        if (isDeleting) {
+            // Deleting text
+            skillsText.textContent = currentSkill.substring(0, currentCharIndex - 1);
+            currentCharIndex--;
+            typingSpeed = 50; // Faster when deleting
+        } else {
+            // Typing text
+            skillsText.textContent = currentSkill.substring(0, currentCharIndex + 1);
+            currentCharIndex++;
+            typingSpeed = 100; // Normal speed when typing
+        }
+        
+        // If word is complete
+        if (!isDeleting && currentCharIndex === currentSkill.length) {
+            // Pause at the end of typing
+            isDeleting = true;
+            typingSpeed = 1000; // Wait before deleting
+        } 
+        // If deletion is complete
+        else if (isDeleting && currentCharIndex === 0) {
+            isDeleting = false;
+            currentSkillIndex = (currentSkillIndex + 1) % skills.length;
+            typingSpeed = 500; // Pause before typing next word
+        }
+        
+        setTimeout(typeSkill, typingSpeed);
+    }
+    
+    // Start the typing animation
+    setTimeout(typeSkill, 1000);
 }

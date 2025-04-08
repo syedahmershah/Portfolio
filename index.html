@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <link rel="stylesheet" href="styles.css"/>
-  <link rel="stylesheet" href="fix.css"/>
+  <link rel="stylesheet" href="custom-styles.css"/>
   <script src="script.js"></script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -138,6 +138,11 @@
         <p>
           My journey in tech is fueled by curiosity and continuous learning. I've completed over 100+ certifications in AI, web development, and programming, refining my skills to build impactful digital experiences. Let's connect and create something amazing together!
         </p>
+        <div class="skills-typing">
+          <span>I am skilled in: </span>
+          <span class="skills-typing-text"></span>
+          <span class="typing-cursor">|</span>
+        </div>
         <div class="about-buttons">
           <a href="#projects" class="about-button">
             <i class="fas fa-briefcase"></i>
@@ -147,6 +152,10 @@
             <i class="fas fa-envelope"></i>
             Contact Me
           </a>
+          <button type="button" class="about-button open-modal know-more-btn" data-target="modal-know-more">
+            <i class="fas fa-user-circle"></i>
+            More About Me
+          </button>
         </div>
       </div>
     </div>
@@ -1156,5 +1165,39 @@
   <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
   <script src="script.js"></script>
+
+  <!-- Add the modal for "More About Me" button -->
+  <div id="modal-know-more" class="modal">
+    <div class="modal-content">
+      <span class="close-modal">&times;</span>
+      <h2>More About Me <span class="emoji emoji-about">👨‍💻</span></h2>
+      <div class="know-more-content">
+        <div class="know-more-section">
+          <h3><i class="fas fa-heart"></i> My Passions</h3>
+          <p>Beyond coding, I'm passionate about exploring new technologies, solving complex problems, and contributing to open-source projects. I enjoy learning new programming languages and frameworks to expand my skill set.</p>
+        </div>
+        <div class="know-more-section">
+          <h3><i class="fas fa-book"></i> Education</h3>
+          <p>I'm currently pursuing a degree in Software Engineering, where I've maintained a strong academic record while participating in various tech competitions and hackathons.</p>
+        </div>
+        <div class="know-more-section">
+          <h3><i class="fas fa-lightbulb"></i> Fun Facts</h3>
+          <ul class="fun-facts-list">
+            <li>I wrote my first line of code at age 15</li>
+            <li>I've completed over 100 programming certifications</li>
+            <li>I contribute to open-source projects in my free time</li>
+            <li>I love solving algorithmic challenges</li>
+          </ul>
+        </div>
+        <div class="know-more-section">
+          <h3><i class="fas fa-list-check"></i> Goals</h3>
+          <p>I aim to become a full-stack developer with expertise in AI integration and contribute to innovative projects that make a positive impact. I'm constantly working on improving my skills and staying updated with the latest industry trends.</p>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="cta-button modal-close">Close</button>
+      </div>
+    </div>
+  </div>
 </body>
 </html>
