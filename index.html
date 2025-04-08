@@ -1,0 +1,1152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="stylesheet" href="styles.css"/>
+  <link rel="stylesheet" href="fix.css"/>
+  <script src="script.js"></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ahmer Shah | Software Developer & UI/UX Designer</title>
+  <meta name="description" content="Professional portfolio of Syed Ahmer Shah, a Full Stack Developer and UI/UX Designer showcasing web development and design projects. Expertise in AI, Machine Learning, and Web Development. Hire Ahmer Shah for innovative solutions.">
+  <meta name="keywords" content="Syed Ahmer Shah, Ahmer Shah Portfolio, Ahmer Shah, Ahmer, AHMER, Web Developer, Front End Developer, Full Stack Developer, UI/UX Designer, Portfolio, Pakistan, AI Developer, Machine Learning Engineer, Software Engineer">
+  <meta name="author" content="Syed Ahmer Shah">
+  <link rel="canonical" href="https://example.com/portfolio">
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Ahmer Shah - Full Stack Developer Portfolio" />
+  <meta property="og:description" content="Professional portfolio showcasing web development and design projects. Expertise in AI, Machine Learning, and Web Development." />
+  <meta property="og:image" content="https://example.com/image.jpg" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Ahmer Shah - Full Stack Developer Portfolio" />
+  <meta name="twitter:description" content="Professional portfolio showcasing web development and design projects. Expertise in AI, Machine Learning, and Web Development." />
+  <meta name="twitter:image" content="https://example.com/image.jpg" />
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Orbitron:wght@400;500;600;700;800;900&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="icon" href="Images/Favicon/Favicon.ico" type="image/x-icon" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org/",
+    "@type": "Person",
+    "name": "Syed Ahmer Shah",
+    "alternateName": "Ahmer Shah",
+    "jobTitle": "Full Stack Developer & UI/UX Designer",
+    "description": "Professional portfolio of Syed Ahmer Shah, a Full Stack Developer and UI/UX Designer showcasing expertise in AI, Machine Learning, and Web Development. View web development and design projects. Hire Ahmer Shah for innovative solutions.",
+    "url": "https://example.com/portfolio",
+    "image": "https://img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg",
+    "sameAs": [
+      "https://www.linkedin.com/in/ahmer-shah",
+      "https://github.com/ahmershah29",
+      "https://www.facebook.com/ahmershah29"
+    ],
+    "keywords": "Syed Ahmer Shah, Ahmer Shah Portfolio, Ahmer Shah, Ahmer, AHMER, Web Developer, Front End Developer, Full Stack Developer, UI/UX Designer, Portfolio, Pakistan, AI Developer, Machine Learning Engineer, Software Engineer",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Hyderabad",
+      "addressCountry": "PK"
+    },
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "telephone": "+92 331 4413874",
+      "contactType": "Technical Support",
+      "areaServed": "PK",
+      "availableLanguage": ["en"]
+    }
+  }
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/TrackballControls.js"></script>
+  <script src="script.js" defer></script>
+</head>
+<body>
+    <div class="loading-page">
+        <div class="loading-container">
+            <div class="loading-spinner"></div>
+            <div class="loading-text">Loading...</div>
+            <div class="loading-quote">
+                <p class="quote-text">"Write code with logic, train models with precision, and trust the divine architecture that powers it all."</p>
+                <p class="quote-author">-- Ahmer Shah</p>
+            </div>
+            <div class="loading-progress">
+                <div class="progress-bar"></div>
+            </div>
+        </div>
+      </div>
+  <header>
+    <div class="nav-container">
+      <div class="logo-container">
+        <img src="Images/Logo/Character.webp" alt="Syed Ahmer Shah" class="logo" />
+        <span class="logo-text">Ahmer Shah</span>
+      </div>
+      <nav class="nav-links-container">
+        <ul class="nav-links">
+          <li><a href="#home">Home</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li class="dropdown">
+            <a href="#" class="dropbtn">Skills & More</a>
+            <div class="dropdown-content">
+              <a href="#skills">Skills</a>
+              <a href="#certifications">Certifications</a>
+              <a href="#review">Testimonials</a>
+              <a href="#blog">Blog</a>
+            </div>
+          </li>
+          <li><a href="#education">Education</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+  <section id="home" style="position: relative; overflow: hidden;">
+    <div class="section-container home-content">
+      <div id="home-logo-3d"></div> 
+      <img src="Images/Logo/Character.webp" alt="Syed Ahmer Shah - Profile Image" class="profile-header-image" />
+      <h1 class="name-heading">
+        <span id="greeting-text"></span>
+        <span id="name-text"></span>
+      </h1>
+      <div class="role-container">
+        <p class="role-text">
+          <span id="role-text"></span><span class="cursor">|</span>
+        </p>
+      </div>
+     
+        <a href="#contact" class="cta-button">
+          <i class="fas fa-paper-plane"></i>
+          Get in Touch
+        </a>
+        <a href="https://drive.google.com/drive/folders/1xYwejSXki_-rTO2SS7_wnvMzAdJdzRY6?usp=drive_link" target="_blank" class="cta-button resume-button">
+          <i class="fas fa-download"></i>
+          Download My Resume/CV
+        </a>
+      </div>
+    </div>
+  </section>
+  <section id="about">
+  <div class="section-container">
+    <h2>About Me <span class="emoji emoji-about">🌍</span></h2>
+    <div class="about-container">
+      <img src="https://hawramani.com/wp-content/uploads/2018/03/ahmar_name-300x234.png" alt="Syed Ahmer Shah - About Me Image" class="profile-img" />
+      <div class="about-content">
+        <p>
+          Hey there! I'm Ahmer, a passionate Software Engineering student with a deep love for web development, AI, and programming. I specialize in crafting clean, responsive, and SEO-optimized websites using HTML, CSS, and JavaScript. With hands-on experience in multiple internships, I've built projects ranging from dynamic web apps to AI-driven solutions.
+        </p>
+        <p>
+          My journey in tech is fueled by curiosity and continuous learning. I've completed over 100+ certifications in AI, web development, and programming, refining my skills to build impactful digital experiences. Let's connect and create something amazing together!
+        </p>
+        <div class="about-buttons">
+          <a href="#projects" class="about-button">
+            <i class="fas fa-briefcase"></i>
+            View My Projects
+          </a>
+          <a href="#contact" class="about-button">
+            <i class="fas fa-envelope"></i>
+            Contact Me
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+  <section id="projects">
+    <div class="section-container">
+      <h2>My Projects <span class="emoji emoji-projects">💻</span></h2>
+      <div class="projects-grid">
+        <div class="project-card">
+          <img src="https://media.licdn.com/dms/image/v2/D4D22AQGv43TjoOH-aw/feedshare-shrink_2048_1536/B4DZXrBwO2G8Ak-/0/1743404896981?e=1746662400&v=beta&t=D0r_5fVBiRAXdsnWAkxltdyj9Ms4dDNaLGus8uPB7cE" alt="Rock Paper Scissors Lizard Spock: AI-Powered Gesture Recognition Game Project" class="project-image" />
+          <div class="project-info">
+            <h3>Rock Paper Scissors Lizard Spock: AI-Powered Gesture Recognition Game</h3>
+            <p>Built a next-level AI-powered hand gesture game that takes Rock Paper Scissors Lizard Spock to a whole new level—fully AI-driven, running right in the browser, no extra hardware needed.</p>
+            <button type="button" class="cta-button open-modal" data-target="modal-rpsls">View Details</button>
+          </div>
+        </div>
+        <!-- <div class="project-card">
+          <img src="https://repository-images.githubusercontent.com/636382929/7f38c0b4-4ced-441b-a342-5fcfa79ea89b" alt="Task Management App Project" class="project-image" />
+          <div class="project-info">
+            <h3>Spotify Clone</h3>
+            <p>Built a fully functional Spotify clone with a modern, user-friendly interface</p>
+            <button type="button" class="cta-button open-modal" data-target="modal-task">View Details</button>
+          </div>
+        </div>
+        <div class="project-card">
+          <img src="https://repository-images.githubusercontent.com/529567024/9041af7b-8621-4abc-80ce-7b628707510b" alt="Banking App Redesign Project" class="project-image" />
+          <div class="project-info">
+            <h3>Amazon Clone</h3>
+            <p>Developed a feature-packed Amazon clone with seamless functionality</p>
+            <button type="button" class="cta-button open-modal" data-target="modal-banking">View Details</button>
+          </div>
+        </div>
+        <div class="project-card">
+          <img src="https://mir-s3-cdn-cf.behance.net/projects/404/bf1e68214791583.Y3JvcCwzMDY4LDI0MDAsNjgsMA.jpg" alt=" Personal Portfolio Website" class="project-image" />
+          <div class="project-info">
+            <h3>Portfolio Website</h3>
+            <p>Crafted a fully responsive personal portfolio using HTML, CSS, Bootstrap, JavaScript, Three.js and Anime.js</p>
+            <button type="button" class="cta-button open-modal" data-target="modal-portfolio">View Details</button>
+          </div>
+        </div>
+        <div class="project-card">
+          <img src="https://i.ytimg.com/vi/Tgat3-prVv4/maxresdefault.jpg" alt="Weather App Project" class="project-image" />
+          <div class="project-info">
+            <h3>Netflix Clone</h3>
+            <p>Created a fully functional Netflix clone with dynamic media streaming features & account-creation page</p>
+            <button type="button" class="cta-button open-modal" data-target="modal-weather">View Details</button>
+          </div>
+        </div>
+        <div class="project-card">
+          <img src="https://tanzaniaconsultant.com/wp-content/uploads/2023/06/Tanzania-Banks-and-Banking-System.png" alt="Chat Application Project" class="project-image" />
+          <div class="project-info">
+            <h3>Bank Management System</h3>
+            <p>Developed a secure and efficient bank management system with user account features</p>
+            <button type="button" class="cta-button open-modal" data-target="modal-chat">View Details</button>
+          </div>
+        </div>
+      </div>
+    </div> -->
+  </section>
+  <section id="certifications">
+    <div class="section-container">
+      <h2>Certifications <span class="emoji emoji-certifications">📜</span></h2>
+      <div class="certifications-grid">
+        <div class="certification-card">
+          <img src="https://media.licdn.com/dms/image/v2/D4D22AQGB_9J25BWrsw/feedshare-shrink_1280/B4DZVZWoeaGkAk-/0/1740960860315?e=2147483647&v=beta&t=nLDoMPnxDbyfEAZ3qrBVHu29S6eaOUPIYnt2Rdx3BjI" alt="Certified Become a Software Developer Certificate" class="certification-image" />
+          <h3>Certified Software Developer</h3>
+          <p>Issued by Linkedln Learning • <br> 2025</p>
+          <div class="button-group">
+            <button type="button" class="cta-button open-modal" data-target="modal-cert1">Show Details</button>
+            <a href="https://www.linkedin.com/learning/certificates/59c5bd7f8949c26268fea7e3bd9c4321f52f0c0bb6757edd8f3c06518b0d80b5" target="_blank" class="cta-button">Show Credential</a>
+          </div>
+        </div>
+        <div class="certification-card">
+          <img src="https://certificates.simplicdn.net/share/7941723_82541961740161111147.png" alt="Certified Introduction to Front End Development Certificate" class="certification-image" />
+          <h3>Certified Frontend Developer</h3>
+          <p>Issued by Simplilearn • <br> 2025</p>
+          <div class="button-group">
+            <button type="button" class="cta-button open-modal" data-target="modal-cert2">Show Details</button>
+            <a href="https://www.simplilearn.com/skillup-certificate-landing?token=eyJjb3Vyc2VfaWQiOiIxOTMzIiwiY2VydGlmaWNhdGVfdXJsIjoiaHR0cHM6XC9cL2NlcnRpZmljYXRlcy5zaW1wbGljZG4ubmV0XC9zaGFyZVwvNzk0MTcyM184MjU0MTk2MTc0MDE2MTExMTE0Ny5wbmciLCJ1c2VybmFtZSI6IlN5ZWQgQWhtZXIgU2hhaCJ9&utm_source=shared-certificate&utm_medium=app_lms&utm_campaign=shared-certificate-promotion&referrer=https%3A%2F%2Fcertificates.simplicdn.net%2Fshare%2F7941723_82541961740161111147.png&_branch_match_id=1427465688532051026&_branch_referrer=H4sIAAAAAAAAA8soKSkottLXL87MLcjJ1EssKNDLyczL1g8sSTb3LysNSgxKsq8rSk1LLSrKzEuPTyrKLy9OLbJ1zijKz00FAPr80bU9AAAA" target="_blank" class="cta-button">Show Credential</a>
+          </div>
+        </div>
+        <div class="certification-card">
+          <img src="https://media.licdn.com/dms/image/v2/D5622AQEoHu1iHn62mA/feedshare-shrink_1280/B56ZVc38DnHEAk-/0/1741019922937?e=2147483647&v=beta&t=nSx_2s5ipuC-Vz_WwrMqCAfL7RzJ0cQLs6CcOZKFoXo" alt="Certified Become a RESTful API Developer Certificate" class="certification-image" />
+          <h3>Certified RESTful API Developer</h3>
+          <p>Issued by Linkedln Learning • <br> 2025</p>
+          <div class="button-group">
+            <button type="button" class="cta-button open-modal" data-target="modal-cert3">Show Details</button>
+            <a href="https://www.linkedin.com/learning/certificates/c60229019d115db34e252f305fa83f486403be4bb722372a403fcdd746ecc794" target="_blank" class="cta-button">Show Credential</a>
+          </div>
+        </div>
+        <div class="certification-card">
+          <img src="https://media.licdn.com/dms/image/v2/D4D22AQERAbXlWzAsQw/feedshare-shrink_1280/B4DZVJMOwfHIAk-/0/1740689698105?e=2147483647&v=beta&t=RWHfVruUCTd48JHDtCbMArhxPpKUvpdCJ9Y3mpBTCCE" alt="Certified Artificial Intelligence & Machine Learning Certificate" class="certification-image" />
+          <h3>Certified in AI & ML</h3>
+          <p>Issued by Linkedln Learning • <br> 2025</p>
+          <div class="button-group">
+            <button type="button" class="cta-button open-modal" data-target="modal-cert4">Show Details</button>
+            <a href="https://www.linkedin.com/learning/certificates/bd18e234aa6c68e673ddbc5bc66018fca430ca9fa964cdc4a75f59e21d2101b9" target="_blank" class="cta-button">Show Credential</a>
+          </div>
+        </div>
+        <div class="certification-card">
+          <img src="https://s3.amazonaws.com/coursera_assets/meta_images/generated/CERTIFICATE_LANDING_PAGE/CERTIFICATE_LANDING_PAGE~KPHXRZMXZJR5/CERTIFICATE_LANDING_PAGE~KPHXRZMXZJR5.jpeg" alt="Certified AI For Everyone Certificate" class="certification-image" />
+          <h3>Certified in AI For Everyone</h3>
+          <p>Issued by DeepLearning.AI • <br>2025</p>
+          <div class="button-group">
+            <button type="button" class="cta-button open-modal" data-target="modal-cert5">Show Details</button>
+            <a href="https://www.coursera.org/account/accomplishments/records/KPHXRZMXZJR5" target="_blank" class="cta-button">Show Credential</a>
+          </div>
+        </div>
+        <div class="certification-card">
+          <img src="https://s3.amazonaws.com/coursera_assets/meta_images/generated/CERTIFICATE_LANDING_PAGE/CERTIFICATE_LANDING_PAGE~BRBRBJ502Y24/CERTIFICATE_LANDING_PAGE~BRBRBJ502Y24.jpeg" alt="Certified Machine Learning Specialist Certificate" class="certification-image" />
+          <h3>Certified Machine Learning Specialist</h3>
+          <p>Issued by IBM •<br> 2025</p>
+          <div class="button-group">
+            <button type="button" class="cta-button open-modal" data-target="modal-cert6">Show Details</button>
+            <a href="https://www.coursera.org/account/accomplishments/verify/BRBRBJ502Y24?utm_source=mobile&utm_medium=certificate&utm_content=cert_image&utm_campaign=sharing_cta&utm_product=course" target="_blank" class="cta-button">Show Credential</a>
+          </div>
+        </div>
+        <div class="certification-card">
+          <img src="https://s3.amazonaws.com/coursera_assets/meta_images/generated/CERTIFICATE_LANDING_PAGE/CERTIFICATE_LANDING_PAGE~RIBECK9H9GNM/CERTIFICATE_LANDING_PAGE~RIBECK9H9GNM.jpeg" alt="Certified Introduction to Artificial Intelligence (AI) Certificate" class="certification-image" />
+          <h3>Certified in Introduction to Artificial Intelligence </h3>
+          <p>Issued by IBM • <br>2025</p>
+          <div class="button-group">
+            <button type="button" class="cta-button open-modal" data-target="modal-cert7">Show Details</button>
+            <a href="https://coursera.org/share/dbbc9f66b26bc15289c8daa9134ea11e" target="_blank" class="cta-button">Show Credential</a>
+          </div>
+        </div>
+        <div class="certification-card">
+          <img src="https://certificates.simplicdn.net/share/7920252_82541961739822272295.png" alt="Certified in GitHub Copilot Fundamentals Certificate" class="certification-image" />
+          <h3>Certified in GitHub Copilot Fundamentals</h3>
+          <p>Issued by Simplilearn •<br> 2025</p>
+          <div class="button-group">
+            <button type="button" class="cta-button open-modal" data-target="modal-cert8">Show Details</button>
+            <a href="https://www.simplilearn.com/skillup-certificate-landing?token=eyJjb3Vyc2VfaWQiOiI0ODc2IiwiY2VydGlmaWNhdGVfdXJsIjoiaHR0cHM6XC9cL2NlcnRpZmljYXRlcy5zaW1wbGljZG4ubmV0XC9zaGFyZVwvNzkyMDI1Ml84MjU0MTk2MTczOTgyMjI3MjI5NS5wbmciLCJ1c2VybmFtZSI6IlN5ZWQgQWhtZXIgU2hhaCJ9&utm_source=shared-certificate&utm_medium=app_lms&utm_campaign=shared-certificate-promotion&referrer=https%3A%2F%2Fcertificates.simplicdn.net%2Fshare%2F7920252_82541961739822272295.png&_branch_match_id=1427470255385736877&_branch_referrer=H4sIAAAAAAAAA8soKSkottLXL87MLcjJ1EssKNDLyczL1nf1yIgqLnLNMQlMsq8rSk1LLSrKzEuPTyrKLy9OLbJ1zijKz00FAMO7g6Q9AAAA" target="_blank" class="cta-button">Show Credential</a>
+          </div>
+        </div>
+        <div class="certification-card">
+          <img src="https://s3.amazonaws.com/coursera_assets/meta_images/generated/CERTIFICATE_LANDING_PAGE/CERTIFICATE_LANDING_PAGE~7GGU5A4WMN5H/CERTIFICATE_LANDING_PAGE~7GGU5A4WMN5H.jpeg" alt="Certified Full Stack Web Development Certificate" class="certification-image" />
+          <h3>Certified Full Stack Web Developer</h3>
+          <p>Issued by Amazon • <br>2025</p>
+          <div class="button-group">
+            <button type="button" class="cta-button open-modal" data-target="modal-cert9">Show Details</button>
+            <a href="https://coursera.org/share/59624e50daaebda212d556f2f40ae45b" target="_blank" class="cta-button">Show Credential</a>
+          </div>
+        </div>
+        <div class="certification-card">
+          <img src="https://s3.amazonaws.com/coursera_assets/meta_images/generated/CERTIFICATE_LANDING_PAGE/CERTIFICATE_LANDING_PAGE~LLW4BJT0K2RI/CERTIFICATE_LANDING_PAGE~LLW4BJT0K2RI.jpeg" alt="Certified Getting Started with Front-End and Web Development Certificate" class="certification-image" />
+          <h3>Certified Front End Web Developer</h3>
+          <p>Issued by IBM •<br> 2025</p>
+          <div class="button-group">
+            <button type="button" class="cta-button open-modal" data-target="modal-cert10">Show Details</button>
+            <a href="https://coursera.org/share/fab6bb6f3b9661bd0e4e0b6a97e8a0f7" target="_blank" class="cta-button">Show Credential</a>
+          </div>
+        </div>
+        <div class="certification-card">
+          <img src="https://s3.amazonaws.com/coursera_assets/meta_images/generated/CERTIFICATE_LANDING_PAGE/CERTIFICATE_LANDING_PAGE~NWRLH5P524PQ/CERTIFICATE_LANDING_PAGE~NWRLH5P524PQ.jpeg" alt="Certified Introduction to Software Development Certificate" class="certification-image" />
+          <h3>Mastered the Fundamentals of Software Development</h3>
+          <p>Issued by Amazon •<br> 2025</p>
+          <div class="button-group">
+            <button type="button" class="cta-button open-modal" data-target="modal-cert11">Show Details</button>
+            <a href="https://coursera.org/share/a77817bfcee79382be71bbc29201211b" target="_blank" class="cta-button">Show Credential</a>
+          </div>
+        </div>
+        <div class="certification-card">
+          <img src="https://s3.amazonaws.com/coursera_assets/meta_images/generated/CERTIFICATE_LANDING_PAGE/CERTIFICATE_LANDING_PAGE~81FYH2SPL62P/CERTIFICATE_LANDING_PAGE~81FYH2SPL62P.jpeg" alt="Certified Introduction to Front-End Development Certificate" class="certification-image" />
+          <h3>Mastered the Fundamentals of Front-End Development</h3>
+          <p>Issued by Meta • <br>2025</p>
+          <div class="button-group">
+            <button type="button" class="cta-button open-modal" data-target="modal-cert12">Show Details</button>
+            <a href="https://coursera.org/share/d09512c135d50e327d4b69f6e9193e6e" target="_blank" class="cta-button">Show Credential</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section id="skills">
+    <div class="section-container">
+      <h2>Technical Skills <span class="emoji emoji-skills">🛠️</span></h2>
+      <div class="skills-grid">
+        <div class="skill-card">
+          <i class="fab fa-html5 skill-icon"></i>
+          <h3>Frontend Development</h3>
+          <p>HTML5, CSS3, JavaScript, Bootstrap</p>
+          <div class="skill-progress">
+            <div class="skill-progress-bar" style="width: 90%"></div>
+          </div>
+        </div>
+        <div class="skill-card">
+          <i class="fas fa-server skill-icon"></i>
+          <h3>Backend Development</h3>
+          <p>Node.js, Python, Java, C++, REST APIs</p>
+          <div class="skill-progress">
+            <div class="skill-progress-bar" style="width: 65%"></div>
+ z         </div>
+        </div>
+        <div class="skill-card">
+          <i class="fas fa-palette skill-icon"></i>
+          <h3>UI/UX Design</h3>
+          <p>Figma, User Research, Prototyping</p>
+          <div class="skill-progress">
+            <div class="skill-progress-bar" style="width: 85%"></div>
+          </div>
+        </div>
+        <div class="skill-card">
+          <i class="fas fa-brain skill-icon"></i>
+          <h3>Problem Solving & Analysis</h3>
+          <p>Algorithms, Data Structures, Critical Thinking</p>
+          <div class="skill-progress">
+            <div class="skill-progress-bar" style="width: 80%"></div>
+          </div>
+        </div>
+        <div class="skill-card">
+          <i class="fas fa-robot skill-icon"></i>
+          <h3>Artificial Intelligence</h3>
+          <p>Machine Learning, Deep Learning, NLP, GitHub Copilot</p>
+          <div class="skill-progress">
+            <div class="skill-progress-bar" style="width: 75%"></div>
+          </div>
+        </div>
+        <div class="skill-card">
+          <i class="fas fa-search skill-icon"></i>
+          <h3>SEO Optimization</h3>
+          <p>SEO Best Practices, Responsive Websites</p>
+          <div class="skill-progress">
+            <div class="skill-progress-bar" style="width: 70%"></div>
+          </div>
+        </div>
+        <div class="skill-card">
+          <i class="fas fa-cube skill-icon"></i>
+          <h3>Containerization</h3>
+          <p>Docker, Container Orchestration</p>
+          <div class="skill-progress">
+            <div class="skill-progress-bar" style="width: 60%"></div>
+          </div>
+        </div>
+      </div>
+      <div id="skillsChart"></div> 
+    </div>
+</section>
+  <section id="education">
+  <div class="section-container">
+    <h2 class="fade-in-up">Education <span class="emoji emoji-education">🎓</span></h2>
+    <div class="education-grid">
+      <div class="education-card fade-in-up-delay">
+        <a href="https://hitms.edu.pk/" target="_blank">
+          <img src="https://hitms.edu.pk/wp-content/uploads/2024/07/WhatsApp-Image-2024-10-10-at-16.43.48_ff2d2aec-1024x986.jpg" class="education-image" />
+        </a>
+        <div class="education-content">
+          <h3 class="education-title">Hyderabad Institute for Technology and Management Sciences</h3>
+          <p>BS in Software Engineering • <br> 2024 - 2028</p>
+          <p>Current GPA: 3.4/4.0 (Expected)</p>
+          <div class="button-group">
+            <button type="button" class="cta-button open-modal" data-target="modal-marksheet1">View Marksheet</button>
+          </div>
+        </div>
+      </div>
+      <div class="education-card fade-in-up-delay-2">
+        <a href="https://scs.smartpupils.com/web/home/" target="_blank">
+          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSVSfmV92OGO65_zURLF4HI0EbbiEdLQsn1pA&s" class="education-image" />
+        </a>
+        <div class="education-content">
+          <h3 class="education-title">Superior College of Science</h3>
+          <p>Intermediate in Pre-Engineering • <br>2022 - 2024</p>
+          <p>Grade: A</p>
+          <div class="button-group">
+            <button type="button" class="cta-button open-modal" data-target="modal-marksheet2">View Marksheet</button>
+          </div>
+        </div>
+      </div>
+      <div class="education-card fade-in-up-delay-3">
+        <a href="https://www.facebook.com/sbhscity/" target="_blank">
+          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRs7X8AilhCVUnziR4ph1K7DE84-wKaeYYzTg&s" class="education-image" />
+        </a>
+        <div class="education-content">
+          <h3 class="education-title">St Bonaventure High School - City Branch</h3>
+          <p>Matriculation in Computer Science • <br>2012 - 2022</p>
+          <p>Grade: A+</p>
+          <div class="button-group">
+            <button type="button" class="cta-button open-modal" data-target="modal-marksheet3">View Marksheet</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+  <section id="review">
+  <div class="section-container">
+    <h2 class="fade-in-up">Testimonials <span class="emoji emoji-review">💬</span></h2>
+    <div class="review-slider">
+      <div class="review-card fade-in-up-delay">
+        <img src="https://randomuser.me/api/portraits/men/1.jpg" alt="Client 1" class="review-image" />
+        <h3>John Doe</h3>
+        <p>Software Engineer</p>
+        <p>"Excellent work! Highly recommend for AI projects."</p>
+      </div>
+      <div class="review-card fade-in-up-delay-2">
+        <img src="https://randomuser.me/api/portraits/women/2.jpg" alt="Client 2" class="review-image" />
+        <h3>Jane Smith</h3>
+        <p>Product Manager</p>
+        <p>"Professional and timely delivery. Great experience."</p>
+      </div>
+      <div class="review-card fade-in-up-delay-3">
+        <img src="https://randomuser.me/api/portraits/men/3.jpg" alt="Client 3" class="review-image" />
+        <h3>Michael Johnson</h3>
+        <p>Data Scientist</p>
+        <p>"Outstanding skills in NLP and computer vision."</p>
+      </div>
+      <div class="review-card fade-in-up-delay-4">
+        <img src="https://randomuser.me/api/portraits/women/4.jpg" alt="Client 4" class="review-image" />
+        <h3>Emily Davis</h3>
+        <p>UX Designer</p>
+        <p>"Creative and innovative design solutions."</p>
+      </div>
+      <div class="review-card fade-in-up-delay-5">
+        <img src="https://randomuser.me/api/portraits/men/5.jpg" alt="Client 5" class="review-image" />
+        <h3>Chris Brown</h3>
+        <p>Project Manager</p>
+        <p>"Efficient project management and timely delivery."</p>
+      </div>
+    </div>
+    <div class="pagination-dots">
+      <span class="dot active"></span>
+      <span class="dot"></span>
+      <span class="dot"></span>
+      <span class="dot"></span>
+      <span class="dot"></span>
+    </div>
+  </div>
+</section>
+<section id="blog">
+  <div class="section-container">
+    <h2 class="fade-in-up">Latest Blog <span class="emoji emoji-blog">📖</span></h2>
+    <div class="blog-container">
+      <a href="#" class="blog-card fade-in-up-delay open-blog-modal">
+        <img src="https://rejolut.com/wp-content/uploads/2024/02/unnamed-20.jpg" alt="Blog 1" class="blog-image" />
+        <h3>The Uncharted Frontier: Exploring the Synergy of Generative AI and Ethical Boundaries</h3>
+        <p>2025</p>
+        <p>Explore the ethical implications and potential of generative AI in various industries.</p>
+      </a>
+      <a href="#" class="blog-card fade-in-up-delay-2 open-blog-modal">
+        <img src="https://miro.medium.com/v2/resize:fit:1010/1*eUmii7O0Bt6teDMREVZJsA.png" alt="Blog 2" class="blog-image" />
+        <h3>The Future of Data Science: Shaping the World with Insights</h3>
+        <p>2025</p>
+        <p>Discover how data science is transforming industries and driving innovation.</p>
+      </a>
+      <a href="#" class="blog-card fade-in-up-delay-3 open-blog-modal">
+        <img src="https://media.licdn.com/dms/image/D4D12AQFByCcbc68k-w/article-cover_image-shrink_600_2000/0/1716205796483?e=2147483647&v=beta&t=OITEQZCS2zz7ak_lb2kfbfUJ_Txx2pAC8xLKfazDZ6U" alt="Blog 3" class="blog-image" />
+        <h3>Exploring the Future of Computer Vision, LLMs, and NLP – University of Birmingham Dubai</h3>
+        <p>2025</p>
+        <p>An in-depth look at the advancements in computer vision, large language models, and natural language processing.</p>
+      </a>
+      <a href="#" class="blog-card fade-in-up-delay-4 open-blog-modal">
+        <img src="https://res.cloudinary.com/jerrick/image/upload/d_642250b563292b35f27461a7.png,f_jpg,fl_progressive,q_auto,w_1024/67396d61eb6906001dadcb58.jpg" alt="Blog 4" class="blog-image" />
+        <h3>AI in Healthcare: Revolutionizing Patient Care and Diagnosis</h3>
+        <p>2025</p>
+        <p>How AI is transforming the healthcare industry by improving patient care and diagnosis.</p>
+      </a>
+      <a href="#" class="blog-card fade-in-up-delay-5 open-blog-modal">
+        <img src="https://miro.medium.com/v2/resize:fit:624/1*WVgbO4clqXdeT8C19VhFPA.png" alt="Blog 5" class="blog-image" />
+        <h3>Blockchain Beyond Cryptocurrency: Real-World Applications</h3>
+        <p>2025</p>
+        <p>Explore the various real-world applications of blockchain technology beyond cryptocurrency.</p>
+      </a>
+      <a href="#" class="blog-card fade-in-up-delay-6 open-blog-modal">
+        <img src="https://upes-production-cvb3e7frghdda0a4.z01.azurefd.net/drupal-data/2024-09/Cybersecurity-in-the-Digital-Age.webp" alt="Blog 6" class="blog-image" />
+        <h3>Cybersecurity Trends: Protecting Data in the Digital Age</h3>
+        <p>2025</p>
+        <p>Stay updated on the latest trends in cybersecurity and how to protect data in the digital age.</p>
+      </a>
+    </div>
+  </div>
+</section>
+
+<div id="blog-modal" class="modal">
+  <div class="modal-content">
+    <h2>Coming Soon</h2>
+    <p>Our blogs are coming soon. Stay tuned for updates!</p>
+    <button class="cta-button modal-close">Close</button>
+  </div>
+</div>
+  <section id="contact">
+    <div class="section-container">
+      <h2 class="fade-in-up">Contact Me <span class="emoji emoji-contact">✉️</span></h2>
+      <div class="contact-container">
+        <div class="contact-info fade-in-up-delay">
+          <i class="fas fa-map-marker-alt contact-icon"></i>
+          <h3>Location</h3>
+          <p>Hyderabad, Pakistan</p>
+        </div>
+        <div class="contact-info fade-in-up-delay-2">
+          <i class="fas fa-envelope contact-icon"></i>
+          <h3>Email</h3>
+          <p>ahmarshah170@gmail.com</p>
+        </div>
+        <div class="contact-info fade-in-up-delay-3">
+          <i class="fas fa-phone contact-icon"></i>
+          <h3>Phone</h3>
+          <p>+92 331 4413874</p>
+        </div>
+      </div>
+      <form class="contact-form fade-in-up-delay-4" id="contactForm" action="https://formspree.io/f/mzzepnke" method="POST">
+        <div class="form-group">
+          <input type="text" id="name" name="name" placeholder="Name" required autocomplete="name" />
+        </div>
+        <div class="form-group">
+          <input type="email" id="email" name="email" placeholder="Email" required autocomplete="email" />
+        </div>
+        <div class="form-group">
+          <textarea rows="5" id="message" name="message" placeholder="Message" required autocomplete="message"></textarea>
+        </div>
+        <input type="hidden" name="_replyto" value="ahmarshah170@gmail.com" />
+        <input type="hidden" name="_body" value="Thank you for your message! I will get back to you shortly." />
+        <button type="submit" class="cta-button">Send Message</button>
+        <div class="loading-dots">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </form>
+    </div>
+  </section>
+  <footer>
+    <div class="footer-container">
+      <p>&copy; 2025 Syed Ahmer Shah. All rights reserved.</p>
+      <div class="footer-social-media">
+        <a href="https://www.linkedin.com/in/ahmer-shah" target="_blank"><i class="fab fa-linkedin"></i></a>
+        <a href="https://www.github.com/in/ahmershah29" target="_blank"><i class="fab fa-github"></i></a>
+        <a href="https://www.facebook.com/ahmershah29" target="_blank"><i class="fab fa-facebook"></i></a>
+        <a href="https://wa.me/03314413874" target="_blank"><i class="fab fa-whatsapp"></i></a>
+        <a href="mailto:ahmarshah170@gmail.com"><i class="fas fa-envelope"></i></a>
+        <a href="tel:+923314413874"><i class="fas fa-phone"></i></a>
+      </div>
+    </div>
+  </footer>
+  
+  <div id="modal-rpsls" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>Rock Paper Scissors Lizard Spock: AI-Powered Gesture Recognition Game</h2>
+      </div>
+      <div class="modal-body">
+        <div class="modal-image-container">
+          <img src="https://media.licdn.com/dms/image/v2/D4D22AQGv43TjoOH-aw/feedshare-shrink_2048_1536/B4DZXrBwO2G8Ak-/0/1743404896981?e=1746662400&v=beta&t=D0r_5fVBiRAXdsnWAkxltdyj9Ms4dDNaLGus8uPB7cE" alt="Rock Paper Scissors Lizard Spock: AI-Powered Gesture Recognition Game Project" class="modal-image" />
+        </div>
+        <div class="modal-info">
+          <div class="info-section">
+            <span class="info-label"><i class="fas fa-info-circle"></i> Description</span>
+            <p>Built a next-level AI-powered hand gesture game that takes Rock Paper Scissors Lizard Spock to a whole new level—fully AI-driven, running right in the browser, no extra hardware needed.
+
+            Picture this: real-time hand tracking with MediaPipe, a custom neural network trained using TensorFlow.js, and a JavaScript-powered game logic that makes every move feel smooth and responsive. Whether it's regular mode, speed challenge, or multiplayer, this game adapts on the fly.
+            
+            Gesture recognition? Lightning-fast.
+            Custom model training? Handled in-browser.
+            Neon UI? Aesthetic on point.
+            
+            "Innovation isn't about following trends; it's about pushing boundaries and creating something that feels like the future."</p>
+          </div>
+          <div class="info-section">
+            <span class="info-label"><i class="fas fa-code"></i> Technologies Used</span>
+            <div class="tech-tags">
+              <span class="tech-tag">TensorFlow.js</span>
+              <span class="tech-tag">MediaPipe</span>
+              <span class="tech-tag">JavaScript</span>
+              <span class="tech-tag">HTML5</span>
+              <span class="tech-tag">CSS3</span>
+              <span class="tech-tag">WebGL</span>
+            </div>
+          </div>
+          <div class="info-section">
+            <span class="info-label"><i class="fas fa-list-ul"></i> Key Features</span>
+            <ul class="feature-list">
+              <li>Real-time Hand Gesture Recognition</li>
+              <li>Custom Neural Network Model</li>
+              <li>Multiple Game Modes</li>
+              <li>Responsive Design</li>
+              <li>Browser-based AI Processing</li>
+            </ul>
+          </div>
+          <div class="info-section">
+            <span class="info-label"><i class="fas fa-link"></i> Project Links</span>
+            <div class="project-links">
+              <a href="https://github.com/ahmershah29/Rock-Paper-Scissor.git" target="_blank" class="link-button">
+                <i class="fab fa-github"></i> View on GitHub
+              </a>
+              <a href="https://www.linkedin.com/posts/ahmer-shah_machinelearning-computervision-tensorflowjs-activity-7312370335876636673-_VmE?utm_source=share&utm_medium=member_desktop&rcm=ACoAAFYGSTEBdXhu5Nct7g5el39jRpHn5c_RuQ8" target="_blank" class="link-button">
+                <i class="fab fa-linkedin"></i> Watch Demo
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="cta-button modal-close">Close</button>
+      </div>
+    </div>
+  </div>
+  
+  <div id="modal-cert1" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>Certified Software Developer</h2>
+      </div>
+      <div class="modal-body">
+        <div class="modal-image-container">
+          <img src="https://media.licdn.com/dms/image/v2/D4D22AQGB_9J25BWrsw/feedshare-shrink_1280/B4DZVZWoeaGkAk-/0/1740960860315?e=2147483647&v=beta&t=nLDoMPnxDbyfEAZ3qrBVHu29S6eaOUPIYnt2Rdx3BjI" alt="Software Developer Certificate" class="modal-image" />
+        </div>
+        <div class="modal-info">
+          <div class="info-section">
+            <span class="info-label"><i class="fas fa-certificate"></i> Issuing Organization</span>
+            <p>LinkedIn Learning</p>
+          </div>
+          <div class="info-section">
+            <span class="info-label"><i class="fas fa-calendar-alt"></i> Date Issued</span>
+            <p>2025</p>
+          </div>
+          <div class="info-section">
+            <span class="info-label"><i class="fas fa-info-circle"></i> Description</span>
+            <p>Elite certification program covering advanced software development concepts and practical implementation. Mastered modern development methodologies, architectural patterns, and full-stack development using cutting-edge technologies. Completed hands-on projects in web development, microservices, and cloud integration.</p>
+          </div>
+          <div class="info-section">
+            <span class="info-label"><i class="fas fa-tools"></i> Skills Acquired</span>
+            <div class="skill-tags">
+              <span class="skill-tag">HTML</span>
+              <span class="skill-tag">CSS</span>
+              <span class="skill-tag">JavaScript</span>
+              <span class="skill-tag">C++</span>
+              <span class="skill-tag">Python</span>
+              <span class="skill-tag">Java</span>
+              <span class="skill-tag">Git</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="cta-button modal-close">Close</button>
+      </div>
+    </div>
+  </div>
+  <div id="modal-cert2" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>Certified Frontend Developer</h2>
+      </div>
+      <div class="modal-body">
+        <div class="modal-image-container">
+          <img src="https://certificates.simplicdn.net/share/7941723_82541961740161111147.png" alt="Certified Introduction to Front End Development Certificate" class="modal-image" />
+        </div>
+        <div class="modal-info">
+          <div class="info-section">
+            <span class="info-label"><i class="fas fa-certificate"></i> Issuing Organization</span>
+            <p>Simplilearn</p>
+          </div>
+          <div class="info-section">
+            <span class="info-label"><i class="fas fa-calendar-alt"></i> Date Issued</span>
+            <p>2025</p>
+          </div>
+          <div class="info-section">
+            <span class="info-label"><i class="fas fa-info-circle"></i> Description</span>
+            <p>Intensive frontend development certification focusing on building responsive, accessible, and performant web applications. Mastered modern CSS frameworks, JavaScript tooling, and progressive web app development. Implemented real-world projects using React, Vue.js, and modern build tools.</p>
+          </div>
+          <div class="info-section">
+            <span class="info-label"><i class="fas fa-tools"></i> Skills Acquired</span>
+            <div class="skill-tags">
+              <span class="skill-tag">HTML</span>
+              <span class="skill-tag">CSS</span>
+              <span class="skill-tag">JavaScript</span>
+              <span class="skill-tag">Bootstrap</span>
+              <span class="skill-tag">Responsive Design</span>
+              <span class="skill-tag">UX/UI Principles</span>
+              <span class="skill-tag">Figma</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="cta-button modal-close">Close</button>
+      </div>
+    </div>
+  </div>
+  <div id="modal-cert3" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>Certified RESTful API Developer</h2>
+      </div>
+      <div class="modal-body">
+        <div class="modal-image-container">
+          <img src="https://media.licdn.com/dms/image/v2/D5622AQEoHu1iHn62mA/feedshare-shrink_1280/B56ZVc38DnHEAk-/0/1741019922937?e=2147483647&v=beta&t=nSx_2s5ipuC-Vz_WwrMqCAfL7RzJ0cQLs6CcOZKFoXo" alt="Certified Become a RESTful API Developer Certificate" class="modal-image" />
+        </div>
+        <div class="modal-info">
+          <div class="info-section">
+            <span class="info-label"><i class="fas fa-certificate"></i> Issuing Organization</span>
+            <p>LinkedIn Learning</p>
+          </div>
+          <div class="info-section">
+            <span class="info-label"><i class="fas fa-calendar-alt"></i> Date Issued</span>
+            <p>2025</p>
+          </div>
+          <div class="info-section">
+            <span class="info-label"><i class="fas fa-info-circle"></i> Description</span>
+            <p>Advanced REST API development certification covering API design principles, authentication, security, and performance optimization. Built scalable APIs using industry best practices, implemented OAuth 2.0, and created comprehensive API documentation.</p>
+          </div>
+          <div class="info-section">
+            <span class="info-label"><i class="fas fa-tools"></i> Skills Acquired</span>
+            <div class="skill-tags">
+              <span class="skill-tag">RESTful APIs</span>
+              <span class="skill-tag">HTTP requests</span>
+              <span class="skill-tag">Test and validate APIs</span>
+              <span class="skill-tag">REST APIs</span>
+              <span class="skill-tag">API Testing and Validation</span>
+              <span class="skill-tag">Web Security: OAuth and OpenID Connect</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="cta-button modal-close">Close</button>
+      </div>
+    </div>
+  </div>
+  <div id="modal-cert4" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>Certified in AI & ML</h2>
+      </div>
+      <div class="modal-body">
+        <div class="modal-image-container">
+          <img src="https://media.licdn.com/dms/image/v2/D4D22AQERAbXlWzAsQw/feedshare-shrink_1280/B4DZVJMOwfHIAk-/0/1740689698105?e=2147483647&v=beta&t=RWHfVruUCTd48JHDtCbMArhxPpKUvpdCJ9Y3mpBTCCE" alt="Certified AI & ML Certificate" class="modal-image" />
+        </div>
+        <div class="modal-info">
+          <div class="info-section">
+            <span class="info-label"><i class="fas fa-certificate"></i> Issuing Organization</span>
+            <p>LinkedIn Learning</p>
+          </div>
+          <div class="info-section">
+            <span class="info-label"><i class="fas fa-calendar-alt"></i> Date Issued</span>
+            <p>2025</p>
+          </div>
+          <div class="info-section">
+            <span class="info-label"><i class="fas fa-info-circle"></i> Description</span>
+            <p>Comprehensive AI/ML certification covering deep learning, neural networks, and machine learning algorithms. Implemented real-world AI solutions using TensorFlow and PyTorch, with focus on computer vision and natural language processing applications.</p>
+          </div>
+          <div class="info-section">
+            <span class="info-label"><i class="fas fa-tools"></i> Skills Acquired</span>
+            <div class="skill-tags">
+              <span class="skill-tag">Machine Learning</span>
+              <span class="skill-tag">Deep Learning</span>
+              <span class="skill-tag">Python</span>
+              <span class="skill-tag">TensorFlow</span>
+              <span class="skill-tag">Artificial Intelligence</span>
+              <span class="skill-tag">Reinforcement Learning</span>
+              <span class="skill-tag">Hands-On PyTorch Machine Learning</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="cta-button modal-close">Close</button>
+      </div>
+    </div>
+  </div>
+  <div id="modal-cert5" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>Certified in AI For Everyone</h2>
+      </div>
+      <div class="modal-body">
+        <div class="modal-image-container">
+          <img src="https://s3.amazonaws.com/coursera_assets/meta_images/generated/CERTIFICATE_LANDING_PAGE/CERTIFICATE_LANDING_PAGE~KPHXRZMXZJR5/CERTIFICATE_LANDING_PAGE~KPHXRZMXZJR5.jpeg" alt="Certified AI For Everyone Certificate" class="modal-image" />
+        </div>
+        <div class="modal-info">
+          <div class="info-section">
+            <span class="info-label"><i class="fas fa-certificate"></i> Issuing Organization</span>
+            <p>DeepLearning.AI</p>
+          </div>
+          <div class="info-section">
+            <span class="info-label"><i class="fas fa-calendar-alt"></i> Date Issued</span>
+            <p>2025</p>
+          </div>
+          <div class="info-section">
+            <span class="info-label"><i class="fas fa-info-circle"></i> Description</span>
+            <p>Foundational AI course by DeepLearning.AI focused on understanding AI capabilities, limitations, and real-world applications. Learned AI strategy, workflow optimization, and ethical considerations in AI implementation.</p>
+          </div>
+          <div class="info-section">
+            <span class="info-label"><i class="fas fa-tools"></i> Skills Acquired</span>
+            <div class="skill-tags">
+              <span class="skill-tag">Workflow of Machine Learning projects</span>
+              <span class="skill-tag">Workflow of Data Science projects</span>
+              <span class="skill-tag">AI terminology</span>
+              <span class="skill-tag">AI strategy</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="cta-button modal-close">Close</button>
+      </div>
+    </div>
+  </div>
+  <div id="modal-cert6" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>Certified Machine Learning Specialist</h2>
+      </div>
+      <div class "modal-body">
+        <div class="modal-image-container">
+          <img src="https://s3.amazonaws.com/coursera_assets/meta_images/generated/CERTIFICATE_LANDING_PAGE/CERTIFICATE_LANDING_PAGE~BRBRBJ502Y24/CERTIFICATE_LANDING_PAGE~BRBRBJ502Y24.jpeg" alt="Certified Machine Learning Specialist Certificate" class="modal-image" />
+        </div>
+        <div class="modal-info">
+          <div class="info-section">
+            <span class="info-label"><i class="fas fa-certificate"></i> Issuing Organization</span>
+            <p>IBM</p>
+          </div>
+          <div class="info-section">
+            <span class="info-label"><i class="fas fa-calendar-alt"></i> Date Issued</span>
+            <p>2025</p>
+          </div>
+          <div class="info-section">
+            <span class="info-label"><i class="fas fa-info-circle"></i> Description</span>
+            <p>Advanced machine learning specialization by IBM covering supervised/unsupervised learning, neural networks, and deep learning. Implemented complex ML models using scikit-learn and TensorFlow, with focus on real-world applications.</p>
+          </div>
+          <div class="info-section">
+            <span class="info-label"><i class="fas fa-tools"></i> Skills Acquired</span>
+            <div class="skill-tags">
+              <span class="skill-tag">SciPy and Scikit-learn</span>
+              <span class="skill-tag">Machine Learning</span>
+              <span class="skill-tag">Clustering</span>
+              <span class="skill-tag">Regression</span>
+              <span class="skill-tag">Classification</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="cta-button modal-close">Close</button>
+      </div>
+    </div>
+  </div>
+  <div id="modal-cert7" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>Certified in Introduction to Artificial Intelligence (AI)</h2>
+      </div>
+      <div class="modal-body">
+        <div class="modal-image-container">
+          <img src="https://s3.amazonaws.com/coursera_assets/meta_images/generated/CERTIFICATE_LANDING_PAGE/CERTIFICATE_LANDING_PAGE~RIBECK9H9GNM/CERTIFICATE_LANDING_PAGE~RIBECK9H9GNM.jpeg" alt="Certified Cybersecurity Expert Certificate" class="modal-image" />
+        </div>
+        <div class "modal-info">
+          <div class="info-section">
+            <span class="info-label"><i class="fas fa-certificate"></i> Issuing Organization</span>
+            <p>IBM</p>
+          </div>
+          <div class="info-section">
+            <span class="info-label"><i class="fas fa-calendar-alt"></i> Date Issued</span>
+            <p>2025</p>
+          </div>
+          <div class="info-section">
+            <span class="info-label"><i class="fas fa-info-circle"></i> Description</span>
+            <p>This certification verifies that the holder has successfully completed the Introduction to Artificial Intelligence (AI) course, demonstrating proficiency in AI.</p>
+          </div>
+          <div class="info-section">
+            <span class="info-label"><i class="fas fa-tools"></i> Skills Acquired</span>
+            <div class="skill-tags">
+              <span class="skill-tag">Generative AI</span>
+              <span class="skill-tag">AI Ethics</span>
+              <span class="skill-tag">Natural Language Processing</span>
+              <span class="skill-tag">Machine Learning</span>
+              <span class="skill-tag">Artificial Intelligence</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="cta-button modal-close">Close</button>
+      </div>
+    </div>
+  </div>
+  <div id="modal-cert8" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>Certified in GitHub Copilot Fundamentals</h2>
+      </div>
+      <div class="modal-body">
+        <div class="modal-image-container">
+          <img src="https://certificates.simplicdn.net/share/7920252_82541961739822272295.png" alt="Certified in GitHub Copilot Fundamentals Certificate" class="modal-image" />
+        </div>
+        <div class="modal-info">
+          <div class="info-section">
+            <span class="info-label"><i class="fas fa-certificate"></i> Issuing Organization</span>
+            <p>Simplilearn</p>
+          </div>
+          <div class="info-section">
+            <span class="info-label"><i class="fas fa-calendar-alt"></i> Date Issued</span>
+            <p>2025</p>
+          </div>
+          <div class="info-section">
+            <span class="info-label"><i class="fas fa-info-circle"></i> Description</span>
+            <p>This certification verifies that the holder has successfully completed the GitHub Copilot Fundamentals course, demonstrating proficiency in GitHub Copilot and Problem-solving.</p>
+          </div>
+          <div class="info-section">
+            <span class="info-label"><i class="fas fa-tools"></i> Skills Acquired</span>
+            <div class="skill-tags">
+              <span class="skill-tag">GitHub Copilot</span>
+              <span class="skill-tag">AI-Powered Coding</span>
+              <span class="skill-tag">Code Suggestions</span>
+              <span class="skill-tag">Code Completion</span>
+              <span class="skill-tag">Problem Solving</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="cta-button modal-close">Close</button>
+      </div>
+    </div>
+  </div>
+  <div id="modal-cert9" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>Certified Full Stack Web Developer</h2>
+      </div>
+      <div class="modal-body">
+        <div class="modal-image-container">
+          <img src="https://s3.amazonaws.com/coursera_assets/meta_images/generated/CERTIFICATE_LANDING_PAGE/CERTIFICATE_LANDING_PAGE~7GGU5A4WMN5H/CERTIFICATE_LANDING_PAGE~7GGU5A4WMN5H.jpeg" alt="Certified Full Stack Web Development Certificate" class="modal-image" />
+        </div>
+        <div class="modal-info">
+          <div class="info-section">
+            <span class="info-label"><i class="fas fa-certificate"></i> Issuing Organization</span>
+            <p>Amazon</p>
+          </div>
+          <div class="info-section">
+            <span class="info-label"><i class="fas fa-calendar-alt"></i> Date Issued</span>
+            <p>2025</p>
+          </div>
+          <div class="info-section">
+            <span class="info-label"><i class="fas fa-info-circle"></i> Description</span>
+            <p>This certification verifies that the holder has successfully completed the Full Stack Web Development program, demonstrating proficiency in Web Development.</p>
+          </div>
+          <div class="info-section">
+            <span class="info-label"><i class="fas fa-tools"></i> Skills Acquired</span>
+            <div class="skill-tags">
+              <span class="skill-tag">Frontend Development</span>
+              <span class="skill-tag">Backend Systems</span>
+              <span class="skill-tag">Full-Stack Development</span>
+              <span class="skill-tag">JavaScript</span>
+              <span class="skill-tag">Web APIs</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="cta-button modal-close">Close</button>
+      </div>
+    </div>
+  </div>
+  <div id="modal-cert10" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>Certified Front End Web Developer</h2>
+      </div>
+      <div class="modal-body">
+        <div class="modal-image-container">
+          <img src="https://s3.amazonaws.com/coursera_assets/meta_images/generated/CERTIFICATE_LANDING_PAGE/CERTIFICATE_LANDING_PAGE~LLW4BJT0K2RI/CERTIFICATE_LANDING_PAGE~LLW4BJT0K2RI.jpeg" alt="Certified Web Developer Certificate" class="modal-image" />
+        </div>
+        <div class="modal-info">
+          <div class="info-section">
+            <span class="info-label"><i class="fas fa-certificate"></i> Issuing Organization</span>
+            <p>IBM</p>
+          </div>
+          <div class="info-section">
+            <span class="info-label"><i class="fas fa-calendar-alt"></i> Date Issued</span>
+            <p>2025</p>
+          </div>
+          <div class="info-section">
+            <span class="info-label"><i class="fas fa-info-circle"></i> Description</span>
+            <p>This certification verifies that the holder has successfully completed the AI Engineer program, demonstrating proficiency in artificial intelligence and machine learning technologies.</p>
+          </div>
+          <div class="info-section">
+            <span class="info-label"><i class="fas fa-tools"></i> Skills Acquired</span>
+            <div class="skill-tags">
+              <span class="skill-tag">Web Development</span>
+              <span class="skill-tag">Wordpress</span>
+              <span class="skill-tag">Front-End Web Development</span>
+              <span class="skill-tag">UI/UX Designer</span>
+              <span class="skill-tag">No-code</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="cta-button modal-close">Close</button>
+      </div>
+    </div>
+  </div>
+  <div id="modal-cert11" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>Mastered the Fundamentals of Software Development</h2>
+      </div>
+      <div class="modal-body">
+        <div class="modal-image-container">
+          <img src="https://s3.amazonaws.com/coursera_assets/meta_images/generated/CERTIFICATE_LANDING_PAGE/CERTIFICATE_LANDING_PAGE~NWRLH5P524PQ/CERTIFICATE_LANDING_PAGE~NWRLH5P524PQ.jpeg" alt="Certified Introduction to Software Development Certificate" class="modal-image" />
+        </div>
+        <div class="modal-info">
+          <div class="info-section">
+            <span class="info-label"><i class="fas fa-certificate"></i> Issuing Organization</span>
+            <p>Amazon</p>
+          </div>
+          <div class="info-section">
+            <span class="info-label"><i class="fas fa-calendar-alt"></i> Date Issued</span>
+            <p>2025</p>
+          </div>
+          <div class="info-section">
+            <span class="info-label"><i class="fas fa-info-circle"></i> Description</span>
+            <p>This certification verifies that the holder has successfully completed the Introduction to Software Development course, demonstrating proficiency in Software Development/p>
+          </div>
+          <div class="info-section">
+            <span class="info-label"><i class="fas fa-tools"></i> Skills Acquired</span>
+            <div class="skill-tags">
+              <span class="skill-tag">Executing Java Code</span>
+              <span class="skill-tag">Java Programming</span>
+              <span class="skill-tag">Java Development Environment</span>
+              <span class="skill-tag">Software Development Lifecycle</span>
+              <span class="skill-tag">Object-Oriented Programming</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="cta-button modal-close">Close</button>
+      </div>
+    </div>
+  </div>
+  <div id="modal-cert12" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>Mastered the Fundamentals of Front-End Development</h2>
+      </div>
+      <div class="modal-body">
+        <div class="modal-image-container">
+          <img src="https://s3.amazonaws.com/coursera_assets/meta_images/generated/CERTIFICATE_LANDING_PAGE/CERTIFICATE_LANDING_PAGE~81FYH2SPL62P/CERTIFICATE_LANDING_PAGE~81FYH2SPL62P.jpeg" alt="Certified Introduction to Front-End Development Certificate" class="modal-image" />
+        </div>
+        <div class="modal-info">
+          <div class="info-section">
+            <span class="info-label"><i class="fas fa-certificate"></i> Issuing Organization</span>
+            <p>Meta</p>
+          </div>
+          <div class="info-section">
+            <span class="info-label"><i class="fas fa-calendar-alt"></i> Date Issued</span>
+            <p>2025</p>
+          </div>
+          <div class="info-section">
+            <span class="info-label"><i class="fas fa-info-circle"></i> Description</span>
+            <p>This certification verifies that the holder has successfully completed the Introduction to Front-End Development course.</p>
+          </div>
+          <div class="info-section">
+            <span class="info-label"><i class="fas fa-tools"></i> Skills Acquired</span>
+            <div class="skill-tags">
+              <span class="skill-tag">Web Development Tools</span>
+              <span class="skill-tag">HTML and CSS</span>
+              <span class="skill-tag">Responsive Web Design</span>
+              <span class="skill-tag">Front-End Web Development</span>
+              <span class="skill-tag">User Interface</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="cta-button modal-close">Close</button>
+      </div>
+    </div>
+  </div>
+  
+  <div id="modal-marksheet1" class="modal">
+    <div class="modal-content">
+      <h2>Marksheet Information</h2>
+      <p>I am currently an undergraduate student. The marksheet/degree will be available upon graduation.</p>
+      <button class="cta-button modal-close">Close</button>
+    </div>
+  </div>
+  <div id="modal-marksheet2" class="modal">
+    <div class="modal-content">
+      <h2>Marksheet Verification</h2>
+      <p>You can verify the marksheet from the official website. Please enter the seat number "108984"</p>
+      <img src="Images/Marksheets/Intermediate.webp" alt="Marksheet Image" class="certification-image-large" />
+      <a href="https://biseh.result.pk/12th-results/" target="_blank" class="cta-button">Verify Marksheet</a>
+      <button class="cta-button modal-close">Close</button>
+    </div>
+  </div>
+  <div id="modal-marksheet3" class="modal">
+    <div class="modal-content">
+      <h2>Marksheet Verification</h2>
+      <p>You can verify the marksheet from the official website. Please enter the seat number "84711"</p>
+      <img src="Images/Marksheets/Matriculation.webp" alt="Marksheet Image" class="certification-image-large" />
+      <a href="https://biseh.result.pk/10th-results/" target="_blank" class="cta-button">Verify Marksheet</a>
+      <button class="cta-button modal-close">Close</button>
+    </div>
+  </div>
+  <button class="scroll-to-top" id="scrollToTopBtn"><i class="fas fa-chevron-up"></i></button>
+  <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
