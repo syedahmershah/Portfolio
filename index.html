@@ -73,6 +73,10 @@
       pointer-events: none;
       opacity: 0;
       transition: opacity 0.5s ease;
+      overflow: visible; /* Ensure overflow is visible */
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
     
     .circular-sidebar.active {
@@ -92,12 +96,10 @@
     }
     
     .sidebar-content {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%) scale(0) rotate(0deg);
-      width: 320px;
-      height: 320px;
+      position: relative;
+      transform: scale(0) rotate(0deg);
+      width: 280px; /* Slightly smaller to ensure it fits */
+      height: 280px; /* Slightly smaller to ensure it fits */
       border-radius: 50%;
       background: linear-gradient(135deg, var(--dark-color), var(--rich-bg));
       box-shadow: 
@@ -109,12 +111,31 @@
       align-items: center;
       transition: transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
       border: 2px solid var(--accent-color);
-      overflow: hidden;
-      position: relative;
+      overflow: visible; /* Ensure overflow is visible */
+      z-index: 9999; /* Higher z-index */
     }
     
     .circular-sidebar.active .sidebar-content {
-      transform: translate(-50%, -50%) scale(1) rotate(360deg);
+      transform: scale(1) rotate(360deg);
+    }
+    
+    /* Media query to hide on laptops/desktops */
+    @media (min-width: 992px) {
+      #sidebar-trigger {
+        cursor: default;
+        pointer-events: none;
+      }
+      
+      .circular-sidebar {
+        display: none;
+      }
+    }
+    
+    /* Make sure it's visible on mobile */
+    @media (max-width: 991px) {
+      #sidebar-trigger {
+        cursor: pointer;
+      }
     }
     
     /* Glowing ring animation */
@@ -156,13 +177,14 @@
     }
     
     .circular-nav {
-      width: 240px;
-      height: 240px;
+      width: 220px; /* Slightly smaller to ensure buttons are contained */
+      height: 220px; /* Slightly smaller to ensure buttons are contained */
       position: relative;
       border-radius: 50%;
       display: flex;
       justify-content: center;
       align-items: center;
+      overflow: visible; /* Ensure overflow is visible */
     }
     
     /* Orbital paths for buttons */
@@ -186,8 +208,8 @@
       background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
       color: var(--light-color);
       border-radius: 50%;
-      width: 60px;
-      height: 60px;
+      width: 50px; /* Slightly smaller buttons */
+      height: 50px; /* Slightly smaller buttons */
       display: flex;
       justify-content: center;
       align-items: center;
@@ -244,43 +266,51 @@
     }
     
     /* Position tooltips relative to buttons */
-    .circular-menu-button[style*="top: 20px"]::after {
+    .circular-menu-button[style*="top: 20px"]::after,
+    .circular-menu-button[style*="top: 15px"]::after {
       top: 100%;
       left: 50%;
       transform: translateX(-50%) translateY(10px);
     }
     
-    .circular-menu-button[style*="top: 20px"]:hover::after {
+    .circular-menu-button[style*="top: 20px"]:hover::after,
+    .circular-menu-button[style*="top: 15px"]:hover::after {
       transform: translateX(-50%) translateY(5px);
     }
     
-    .circular-menu-button[style*="bottom: 20px"]::after {
+    .circular-menu-button[style*="bottom: 20px"]::after,
+    .circular-menu-button[style*="bottom: 15px"]::after {
       bottom: 100%;
       left: 50%;
       transform: translateX(-50%) translateY(-10px);
     }
     
-    .circular-menu-button[style*="bottom: 20px"]:hover::after {
+    .circular-menu-button[style*="bottom: 20px"]:hover::after,
+    .circular-menu-button[style*="bottom: 15px"]:hover::after {
       transform: translateX(-50%) translateY(-5px);
     }
     
-    .circular-menu-button[style*="right: 75px"]::after {
+    .circular-menu-button[style*="right: 75px"]::after,
+    .circular-menu-button[style*="right: 60px"]::after {
       right: 100%;
       top: 50%;
       transform: translateY(-50%) translateX(-10px);
     }
     
-    .circular-menu-button[style*="right: 75px"]:hover::after {
+    .circular-menu-button[style*="right: 75px"]:hover::after,
+    .circular-menu-button[style*="right: 60px"]:hover::after {
       transform: translateY(-50%) translateX(-5px);
     }
     
-    .circular-menu-button[style*="left: 75px"]::after {
+    .circular-menu-button[style*="left: 75px"]::after,
+    .circular-menu-button[style*="left: 60px"]::after {
       left: 100%;
       top: 50%;
       transform: translateY(-50%) translateX(10px);
     }
     
-    .circular-menu-button[style*="left: 75px"]:hover::after {
+    .circular-menu-button[style*="left: 75px"]:hover::after,
+    .circular-menu-button[style*="left: 60px"]:hover::after {
       transform: translateY(-50%) translateX(5px);
     }
     
@@ -444,32 +474,32 @@
           <img src="Images/Logo/Character.webp" alt="Ahmer Shah">
         </div>
         <!-- Home button at 0 degrees (top) -->
-        <a href="#home" class="circular-menu-button" style="top: 20px; left: 50%; transform: translateX(-50%);" data-label="Home">
+        <a href="#home" class="circular-menu-button" style="top: 15px; left: 50%; transform: translateX(-50%);" data-label="Home">
           <i class="fas fa-home"></i>
         </a>
         
         <!-- About button at 60 degrees -->
-        <a href="#about" class="circular-menu-button" style="top: 75px; right: 75px;" data-label="About">
+        <a href="#about" class="circular-menu-button" style="top: 60px; right: 60px;" data-label="About">
           <i class="fas fa-user"></i>
         </a>
         
         <!-- Projects button at 120 degrees -->
-        <a href="#projects" class="circular-menu-button" style="bottom: 75px; right: 75px;" data-label="Projects">
+        <a href="#projects" class="circular-menu-button" style="bottom: 60px; right: 60px;" data-label="Projects">
           <i class="fas fa-briefcase"></i>
         </a>
         
         <!-- Skills button at 180 degrees (bottom) -->
-        <a href="#skills" class="circular-menu-button" style="bottom: 20px; left: 50%; transform: translateX(-50%);" data-label="Skills">
+        <a href="#skills" class="circular-menu-button" style="bottom: 15px; left: 50%; transform: translateX(-50%);" data-label="Skills">
           <i class="fas fa-code"></i>
         </a>
         
         <!-- Education button at 240 degrees -->
-        <a href="#education" class="circular-menu-button" style="bottom: 75px; left: 75px;" data-label="Education">
+        <a href="#education" class="circular-menu-button" style="bottom: 60px; left: 60px;" data-label="Education">
           <i class="fas fa-graduation-cap"></i>
         </a>
         
         <!-- Contact button at 300 degrees -->
-        <a href="#contact" class="circular-menu-button" style="top: 75px; left: 75px;" data-label="Contact">
+        <a href="#contact" class="circular-menu-button" style="top: 60px; left: 60px;" data-label="Contact">
           <i class="fas fa-envelope"></i>
         </a>
       </div>

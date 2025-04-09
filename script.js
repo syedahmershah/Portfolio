@@ -20,8 +20,18 @@ function initCircularSidebar() {
     // Define button positions (in degrees) for animation
     const buttonPositions = [0, 60, 120, 180, 240, 300];
     
+    // Function to check if viewport is mobile size
+    function isMobileView() {
+        return window.innerWidth < 992;
+    }
+    
     // Open sidebar when trigger is clicked
     sidebarTrigger.addEventListener('click', function(e) {
+        // Only activate on mobile devices
+        if (!isMobileView()) {
+            return;
+        }
+        
         e.preventDefault();
         circularSidebar.classList.add('active');
         
@@ -52,7 +62,7 @@ function initCircularSidebar() {
                 const angle = buttonPositions[index] * (Math.PI / 180); // Convert to radians
                 
                 // Calculate the position based on the angle
-                const radius = 110; // Distance from center
+                const radius = 95; // Smaller radius to fit the new dimensions
                 const startX = 0;
                 const startY = 0;
                 const endX = radius * Math.sin(angle);
@@ -95,6 +105,14 @@ function initCircularSidebar() {
                     button.style.transform = 'scale(1)';
                 }, 100 * index);
             });
+        }
+    });
+    
+    // Update sidebar visibility on resize
+    window.addEventListener('resize', function() {
+        // If we're on desktop and sidebar is active, close it
+        if (!isMobileView() && circularSidebar.classList.contains('active')) {
+            closeCircularSidebar();
         }
     });
     
