@@ -160,13 +160,80 @@
   width: 100%;
 }
 
+/* About Header and Expand Button Styles */
+.about-header {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.about-expand-btn {
+  position: absolute;
+  bottom: -1.5rem;
+  background: linear-gradient(135deg, var(--neon-purple), var(--primary-color));
+  border: none;
+  padding: 1rem 2rem;
+  border-radius: 3rem;
+  color: var(--light-color);
+  font-size: 1.1rem;
+  font-weight: 500;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 15px rgba(138, 43, 226, 0.3);
+  z-index: 2;
+  backdrop-filter: blur(5px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.about-expand-btn:hover {
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 8px 25px rgba(138, 43, 226, 0.4);
+  background: linear-gradient(135deg, var(--primary-color), var(--neon-purple));
+}
+
+.about-expand-btn .btn-icon {
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  font-size: 1.2rem;
+}
+
+.about-expand-btn:hover .btn-icon {
+  transform: translateY(3px) rotate(180deg);
+}
+
+.about-expand-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: 0.6s;
+}
+
+.about-expand-btn:hover::before {
+  left: 100%;
+}
+
+/* Update profile image styles */
 .profile-img {
-  transition: transform 0.5s ease, box-shadow 0.5s ease;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid var(--neon-purple);
+  box-shadow: 0 0 20px rgba(138, 43, 226, 0.3);
+  transition: all 0.3s ease;
 }
 
 .profile-img:hover {
-  transform: scale(1.05) rotate(2deg);
-  box-shadow: 0 0 20px rgba(138, 43, 226, 0.6);
+  transform: scale(1.05);
+  box-shadow: 0 0 30px rgba(138, 43, 226, 0.5);
 }
 
 @keyframes fadeInUp {

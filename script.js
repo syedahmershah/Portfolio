@@ -143,12 +143,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const interval = setInterval(() => {
         const elapsedTime = Date.now() - startTime;
         
-
         if (elapsedTime < minLoadTime) {
-
             progress = (elapsedTime / minLoadTime) * 70;
         } else {
-
             progress += (100 - progress) * 0.05;
         }
 
@@ -156,7 +153,6 @@ document.addEventListener('DOMContentLoaded', () => {
             progress = 100;
             clearInterval(interval);
             
-
             setTimeout(() => {
                 loadingPage.classList.add('fade-out');
                 setTimeout(() => {
@@ -165,11 +161,8 @@ document.addEventListener('DOMContentLoaded', () => {
             }, 500);
         }
 
-
         progressBar.style.width = `${progress}%`;
-        
-    }, 100); // Update every 100ms for smoother animation
-
+    }, 100);
 
     createParticles();
     
@@ -181,48 +174,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }, 500);
 
-
-    document.addEventListener('click', (e) => {
-        if (!menuToggle.contains(e.target) && 
-            !navLinksContainer.contains(e.target) && 
-            navLinksContainer.classList.contains('active')) {
-            navLinksContainer.classList.remove('active');
-            menuToggle.classList.remove('active');
-            document.body.style.overflow = '';
-            menuToggle.setAttribute('aria-expanded', 'false');
-        }
-    }, { passive: true });
-
-
-    document.querySelectorAll('.nav-links a').forEach(link => {
-        link.addEventListener('click', () => {
-            if (window.innerWidth <= 768) {
-                navLinksContainer.classList.remove('active');
-                menuToggle.classList.remove('active');
-                document.body.style.overflow = '';
-                menuToggle.setAttribute('aria-expanded', 'false');
-            }
-        });
-    });
-
-    const navMenu = document.querySelector('nav ul');
-    const header = document.querySelector('header');
-
-
-    const dropbtn = document.querySelector('.dropbtn');
-    const dropdownContent = document.querySelector('.dropdown-content');
-    dropbtn.addEventListener('click', (e) => {
-        e.preventDefault();
-        dropdownContent.classList.toggle('show');
-    });
-
-    document.addEventListener('click', (e) => {
-        if (!dropbtn.contains(e.target) && !dropdownContent.contains(e.target)) {
-            dropdownContent.classList.remove('show');
-        }
-    });
-
-
+    // Smooth scroll functionality
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
             if (!this.classList.contains('dropbtn') && this.getAttribute('href') !== '#') {
@@ -235,13 +187,11 @@ document.addEventListener('DOMContentLoaded', () => {
                     top: offsetPosition,
                     behavior: 'smooth'
                 });
-                if (window.innerWidth <= 768) {
-                    navMenu.classList.remove('active');
-                }
             }
         });
     });
 
+    // Intersection Observer for fade-in animations
     const observer = new IntersectionObserver(
         (entries) => {
             entries.forEach(entry => {
@@ -258,28 +208,25 @@ document.addEventListener('DOMContentLoaded', () => {
         observer.observe(section);
     });
 
-
+    // Notification container setup
     if (!document.querySelector('.notification-container')) {
         const notificationContainer = document.createElement('div');
         notificationContainer.className = 'notification-container';
         document.body.appendChild(notificationContainer);
     }
 
-
+    // Contact form handling
     const contactForm = document.querySelector('.contact-form');
     if (contactForm._submitHandler) {
         contactForm.removeEventListener('submit', contactForm._submitHandler);
     }
     
-
     contactForm._submitHandler = async function(e) {
         e.preventDefault();
         
-
         const loadingDots = this.querySelector('.loading-dots');
         const submitButton = this.querySelector('button[type="submit"]');
         
-
         if (loadingDots) {
             loadingDots.classList.add('show'); // Use classList instead of style
             submitButton.disabled = true;
@@ -294,18 +241,15 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             });
 
-
             if (loadingDots) {
                 loadingDots.classList.remove('show'); // Use classList instead of style
                 submitButton.disabled = false;
             }
             
-
             const notificationContainer = document.querySelector('.notification-container');
             while (notificationContainer.firstChild) {
                 notificationContainer.removeChild(notificationContainer.firstChild);
             }
-
 
             const notification = document.createElement('div');
             notification.className = `notification ${response.ok ? 'success' : 'error'}`;
@@ -320,7 +264,6 @@ document.addEventListener('DOMContentLoaded', () => {
             `;
 
             notificationContainer.appendChild(notification);
-
 
             anime.timeline({
                 targets: notification,
@@ -348,13 +291,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 this.reset();
             }
         } catch (error) {
-
             if (loadingDots) {
                 loadingDots.classList.remove('show'); // Use classList instead of style
                 submitButton.disabled = false;
             }
             
-
             const notification = document.createElement('div');
             notification.className = 'notification error';
             notification.innerHTML = `
@@ -367,10 +308,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 </div>
             `;
 
-
             notificationContainer.innerHTML = '';
             notificationContainer.appendChild(notification);
-
 
             anime.timeline({
                 targets: notification,
@@ -389,16 +328,13 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
     
-
     contactForm.addEventListener('submit', contactForm._submitHandler);
-
 
     document.querySelectorAll('.open-modal, .dropbtn').forEach(button => {
         button.addEventListener('click', function(e) {
             e.preventDefault();
             e.stopPropagation();
             if (this.classList.contains('dropbtn')) {
-
                 const dropdownContent = this.nextElementSibling;
                 dropdownContent.classList.toggle('show');
 
@@ -408,7 +344,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     }
                 });
             } else {
-
                 const modalId = this.getAttribute('data-target');
                 const modal = document.getElementById(modalId);
                 if (modal) {
@@ -430,7 +365,6 @@ document.addEventListener('DOMContentLoaded', () => {
             e.target.style.display = 'none';
         }
     });
-
 
     const reviews = document.querySelectorAll('.review-card');
     const dots = document.querySelectorAll('.dot');
@@ -465,17 +399,13 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-
     showSlide(currentIndex);
-
 
     const skillsChart = document.querySelector("#skillsChart");
     if (skillsChart && !skillsChart.hasChildNodes()) {
-
         const skillMetersContainer = document.createElement('div');
         skillMetersContainer.className = 'skill-meters-container';
     
-
         const skills = [
             { name: 'Frontend Development', level: 90, category: 'Development', color: '#00ff88' },
             { name: 'UI/UX Design', level: 85, category: 'Design', color: '#00ffff' },
@@ -483,10 +413,9 @@ document.addEventListener('DOMContentLoaded', () => {
             { name: 'AI/ML', level: 75, category: 'Technology', color: '#B026FF' },
             { name: 'Problem Solving', level: 80, category: 'Core', color: '#ff6700' },
             { name: 'SEO Optimization', level: 70, category: 'Marketing', color: '#ff037A' },
-            { name: 'Containerization', level: 60, category: 'DevOps', color: '#4169E1' } // Add this line
+            { name: 'Containerization', level: 60, category: 'DevOps', color: '#4169E1' }
         ];
     
-
         skills.forEach(skill => {
             const meterContainer = document.createElement('div');
             meterContainer.className = 'skill-meter-container';
@@ -507,7 +436,6 @@ document.addEventListener('DOMContentLoaded', () => {
             const meterFill = meter.querySelector('.skill-meter-fill');
             meterFill.style.width = '0%';
     
-
             meterFill.dataset.level = skill.level;
     
             meterContainer.appendChild(meterLabel);
@@ -517,7 +445,6 @@ document.addEventListener('DOMContentLoaded', () => {
     
         skillsChart.appendChild(skillMetersContainer);
     
-
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -526,7 +453,6 @@ document.addEventListener('DOMContentLoaded', () => {
                         const targetLevel = meter.dataset.level;
                         const label = meter.closest('.skill-meter-container').querySelector('.skill-percentage');
                         
-
                         let currentLevel = 0;
                         const animation = setInterval(() => {
                             if (currentLevel >= targetLevel) {
@@ -538,7 +464,6 @@ document.addEventListener('DOMContentLoaded', () => {
                             label.textContent = `${currentLevel}%`;
                         }, 20);
     
-
                         meter.style.boxShadow = '0 0 10px var(--neon-purple)';
                     });
                 }
@@ -563,15 +488,13 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-
     window.addEventListener('scroll', () => {
         if (window.scrollY > 50) {
-            header.classList.add('scrolled');
+            document.body.classList.add('scrolled');
         } else {
-            header.classList.remove('scrolled');
+            document.body.classList.remove('scrolled');
         }
     });
-
 
     const parallaxLayers = document.querySelectorAll('.parallax__layer');
     window.addEventListener('scroll', () => {
@@ -583,7 +506,6 @@ document.addEventListener('DOMContentLoaded', () => {
             layer.style.transform = translate3d;
         });
     });
-
 
     document.querySelectorAll('.open-modal').forEach(button => {
         button.addEventListener('click', function() {
@@ -614,13 +536,11 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-
     document.querySelectorAll('.certification-image').forEach(image => {
         image.removeEventListener('click', function() {
             this.classList.toggle('zoomed');
         });
     });
-
 
     document.querySelectorAll('.open-blog-modal').forEach(button => {
         button.addEventListener('click', function(e) {
@@ -644,25 +564,20 @@ document.addEventListener('DOMContentLoaded', () => {
     let scene, camera, renderer, particles, particleSystem, controls;
 
     function init() {
-
         scene = new THREE.Scene();
         scene.background = new THREE.Color(0x000000);
 
-
         camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
         camera.position.z = 5;
-
 
         renderer = new THREE.WebGLRenderer({ 
             antialias: true
         });
         const homeSection = document.getElementById('home');
         if (homeSection) {
-
             renderer.setSize(homeSection.offsetWidth, homeSection.offsetHeight);
             homeSection.appendChild(renderer.domElement);
             
-
             renderer.domElement.style.position = 'absolute';
             renderer.domElement.style.top = '0';
             renderer.domElement.style.left = '0';
@@ -673,7 +588,6 @@ document.addEventListener('DOMContentLoaded', () => {
             console.error('Home section not found');
             return;
         }
-
 
         const particleCount = 1000;
         particles = new THREE.BufferGeometry();
@@ -699,7 +613,6 @@ document.addEventListener('DOMContentLoaded', () => {
         particleSystem = new THREE.Points(particles, particleMaterial);
         scene.add(particleSystem);
 
-
         const ambientLight = new THREE.AmbientLight(0x9D4EDD, 0.5);
         scene.add(ambientLight);
 
@@ -707,24 +620,20 @@ document.addEventListener('DOMContentLoaded', () => {
         pointLight.position.set(5, 5, 5);
         scene.add(pointLight);
 
-
         controls = new THREE.TrackballControls(camera, renderer.domElement);
         controls.noPan = true;
         controls.noZoom = true;
         controls.staticMoving = true;
         controls.dynamicDampingFactor = 0.3;
         
-
         renderer.domElement.addEventListener('touchstart', () => {}, { passive: true });
         renderer.domElement.addEventListener('touchmove', () => {}, { passive: true });
         
-
         renderer.domElement.addEventListener('touchstart', (e) => {
             if (e.touches.length > 1) {
                 e.preventDefault();
             }
         }, { passive: false });
-
 
         window.addEventListener('resize', onWindowResize, false);
 
@@ -743,7 +652,6 @@ document.addEventListener('DOMContentLoaded', () => {
     function animate() {
         requestAnimationFrame(animate);
         
-
         const time = Date.now() * 0.001;
         particleSystem.material.opacity = 0.6 + Math.sin(time) * 0.2;
         
@@ -756,17 +664,13 @@ document.addEventListener('DOMContentLoaded', () => {
     init();
     initResponsive();
 
-
     function initResponsive() {
-
         const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
         const isTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
         
-
         document.body.classList.toggle('is-mobile', isMobile);
         document.body.classList.toggle('is-touch', isTouch);
         
-
         const modals = document.querySelectorAll('.modal');
         if(isMobile) {
           modals.forEach(modal => {
@@ -776,7 +680,6 @@ document.addEventListener('DOMContentLoaded', () => {
           });
         }
         
-
         const images = document.querySelectorAll('img[data-src]');
         const loadImage = (img) => {
           const src = img.getAttribute('data-src');
@@ -795,7 +698,6 @@ document.addEventListener('DOMContentLoaded', () => {
         
         images.forEach(img => imageObserver.observe(img));
         
-
         const resizeChart = () => {
           if(window.ApexCharts) {
             const chart = document.querySelector('#skillsChart');
@@ -809,7 +711,6 @@ document.addEventListener('DOMContentLoaded', () => {
         resizeChart();
       }
       
-
       function debounce(func, wait) {
         let timeout;
         return function executedFunction(...args) {
@@ -821,7 +722,6 @@ document.addEventListener('DOMContentLoaded', () => {
           timeout = setTimeout(later, wait);
         };
       }
-
 
     const homeImage = document.querySelector('.profile-header-image');
     let lastScrollY = window.scrollY;
@@ -842,26 +742,20 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-
     window.addEventListener('scroll', () => {
-
         requestAnimationFrame(handleParallax);
     }, { passive: true });
-
 
     document.querySelectorAll('.open-modal').forEach(button => {
         button.addEventListener('click', async function() {
             const modalId = this.getAttribute('data-target');
             const modal = document.getElementById(modalId);
             if (modal) {
-
                 modal.style.display = 'block';
                 modal.classList.add('loading');
                 
-
                 await new Promise(resolve => setTimeout(resolve, 100));
                 
-
                 const images = modal.querySelectorAll('img');
                 if (images.length) {
                     await Promise.all([...images].map(img => {
@@ -875,22 +769,18 @@ document.addEventListener('DOMContentLoaded', () => {
                     }));
                 }
                 
-
                 modal.classList.remove('loading');
                 modal.querySelector('.modal-content').classList.add('rotate-in');
                 
-
                 const modalContent = modal.querySelector('.modal-content');
                 if (modalContent) {
                     modalContent.scrollTop = 0;
                 }
                 
-
                 document.body.style.overflow = 'hidden';
             }
         });
     });
-
 
     document.querySelectorAll('.modal-close').forEach(button => {
         button.addEventListener('click', function() {
@@ -902,14 +792,12 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-
     window.addEventListener('click', function(e) {
         if (e.target.classList.contains('modal')) {
             e.target.style.display = 'none';
             document.body.style.overflow = '';
         }
     });
-
 
     let resizeTimeout;
     window.addEventListener('resize', function() {
@@ -919,14 +807,12 @@ document.addEventListener('DOMContentLoaded', () => {
             if (openModal) {
                 const modalContent = openModal.querySelector('.modal-content');
                 if (modalContent) {
-
                     modalContent.style.maxHeight = '90vh';
                     modalContent.style.margin = '2vh auto';
                 }
             }
         }, 250);
     });
-
 
     const blogLinks = document.querySelectorAll('.open-blog-modal');
     const blogModal = document.getElementById('blog-modal');
@@ -945,7 +831,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-
     document.querySelectorAll('.modal-close').forEach(button => {
         button.addEventListener('click', function() {
             const modal = this.closest('.modal');
@@ -961,7 +846,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-
     window.addEventListener('click', function(e) {
         if (e.target.classList.contains('modal')) {
             const modalContent = e.target.querySelector('.modal-content');
@@ -974,14 +858,12 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-
     const createSkillMeters = () => {
         const skillsChart = document.querySelector("#skillsChart");
         if (!skillsChart || skillsChart.hasChildNodes()) return;
 
         const skillMetersContainer = document.createElement('div');
         skillMetersContainer.className = 'skill-meters-container';
-
 
         const skills = [
             { 
@@ -1035,7 +917,6 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         ];
 
-
         skills.forEach(skill => {
             const meterContainer = document.createElement('div');
             meterContainer.className = 'skill-meter-container';
@@ -1054,7 +935,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         skillsChart.appendChild(skillMetersContainer);
-
 
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
@@ -1085,10 +965,8 @@ document.addEventListener('DOMContentLoaded', () => {
         observer.observe(skillMetersContainer);
     };
 
-
     document.addEventListener('DOMContentLoaded', createSkillMeters);
 });
-
 
 document.querySelectorAll('.open-modal').forEach(button => {
     button.addEventListener('click', async function() {
@@ -1096,35 +974,28 @@ document.querySelectorAll('.open-modal').forEach(button => {
         const modal = document.getElementById(modalId);
         
         if (modal) {
-
             modal.style.display = 'block';
             modal.classList.add('loading');
             
-
             const images = modal.querySelectorAll('img');
             
             try {
-
                 if (images.length) {
                     await Promise.all([...images].map(img => {
                         return new Promise((resolve) => {
-
                             if (img.complete) {
                                 img.classList.add('loaded');
                                 resolve();
                             } else {
-
                                 img.onload = () => {
                                     img.classList.add('loaded');
                                     resolve();
                                 };
-
                                 img.onerror = () => {
                                     console.error('Failed to load image:', img.src);
                                     img.classList.add('error');
                                     resolve();
                                 };
-
                                 const currentSrc = img.src;
                                 img.src = '';
                                 img.src = currentSrc;
@@ -1133,7 +1004,6 @@ document.querySelectorAll('.open-modal').forEach(button => {
                     }));
                 }
                 
-
                 modal.classList.remove('loading');
                 const modalContent = modal.querySelector('.modal-content');
                 if (modalContent) {
@@ -1142,7 +1012,6 @@ document.querySelectorAll('.open-modal').forEach(button => {
                     modalContent.scrollTop = 0;
                 }
                 
-
                 document.body.style.overflow = 'hidden';
                 
             } catch (error) {
@@ -1154,8 +1023,6 @@ document.querySelectorAll('.open-modal').forEach(button => {
 });
 
 document.addEventListener('DOMContentLoaded', () => {
-    
-
     function smoothScroll(target, duration = 500) {
         const targetPosition = target.getBoundingClientRect().top;
         const startPosition = window.pageYOffset;
@@ -1171,7 +1038,6 @@ document.addEventListener('DOMContentLoaded', () => {
             if (timeElapsed < duration) requestAnimationFrame(animation);
         }
 
-
         function ease(t, b, c, d) {
             t /= d / 2;
             if (t < 1) return c / 2 * t * t + b;
@@ -1182,7 +1048,6 @@ document.addEventListener('DOMContentLoaded', () => {
         requestAnimationFrame(animation);
     }
 
-
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function(e) {
             if (!this.classList.contains('dropbtn') && this.getAttribute('href') !== '#') {
@@ -1192,14 +1057,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 
                 if (targetElement) {
                     smoothScroll(targetElement, 400); // Faster duration of 400ms
-
-
-                    const navLinksContainer = document.querySelector('.nav-links-container');
-                    if (navLinksContainer.classList.contains('active')) {
-                        navLinksContainer.classList.remove('active');
-                        document.querySelector('.menu-toggle').classList.remove('active');
-                        document.body.style.overflow = '';
-                    }
                 }
             }
         });
@@ -1215,7 +1072,6 @@ document.addEventListener('DOMContentLoaded', () => {
             const timeElapsed = currentTime - startTime;
             const progress = Math.min(timeElapsed / duration, 1);
             
-
             const easing = t => t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
             
             window.scrollTo(0, start * (1 - easing(progress)));
@@ -1227,10 +1083,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         requestAnimationFrame(scrollAnimation);
     });
-
-
 });
-
 
 window.addEventListener('load', () => {
     const progressBar = document.querySelector('.progress-bar');
@@ -1249,7 +1102,6 @@ window.addEventListener('load', () => {
     }
 });
 
-
 setInterval(() => {
     const cursor = document.querySelector('.cursor');
     if (cursor) {
@@ -1264,7 +1116,6 @@ function createParticles() {
         const particle = document.createElement('div');
         particle.className = 'particle';
         
-
         particle.style.left = Math.random() * 100 + '%';
         particle.style.animationDuration = (Math.random() * 2 + 1) + 's';
         particle.style.animationDelay = Math.random() + 's';
