@@ -3,6 +3,9 @@ if (typeof window.typingAnimationRunning === 'undefined') {
     window.typingAnimationRunning = false;
 }
 
+// Three.js Particle Animation
+let scene, camera, renderer, particles, particleSystem;
+
 // COMPLETELY REWRITTEN TYPING ANIMATION
 function setupTypingAnimation() {
     // Prevent multiple instances
@@ -1044,3 +1047,100 @@ function initSkillsTyping() {
     // Start the animation
     requestAnimationFrame(typeSkill);
 }
+
+function initParticles() {
+    if (typeof THREE === 'undefined') {
+        console.error('Three.js is not loaded');
+        return;
+    }
+
+    scene = new THREE.Scene();
+    scene.background = new THREE.Color(0x000000);
+
+    camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+    camera.position.z = 5;
+
+    renderer = new THREE.WebGLRenderer({ 
+        antialias: true,
+        alpha: true
+    });
+    
+    const homeSection = document.getElementById('home');
+    if (homeSection) {
+        renderer.setSize(homeSection.offsetWidth, homeSection.offsetHeight);
+        homeSection.appendChild(renderer.domElement);
+        
+        renderer.domElement.style.position = 'absolute';
+        renderer.domElement.style.top = '0';
+        renderer.domElement.style.left = '0';
+        renderer.domElement.style.width = '100%';
+        renderer.domElement.style.height = '100%';
+        renderer.domElement.style.zIndex = '-1';
+        renderer.domElement.style.pointerEvents = 'none';
+    }
+
+    const particleCount = 1000;
+    particles = new THREE.BufferGeometry();
+    const positions = new Float32Array(particleCount * 3);
+
+    for (let i = 0; i < particleCount; i++) {
+        positions[i * 3] = (Math.random() - 0.5) * 10;
+        positions[i * 3 + 1] = (Math.random() - 0.5) * 10;
+        positions[i * 3 + 2] = (Math.random() - 0.5) * 10;
+    }
+
+    particles.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+
+    const particleMaterial = new THREE.PointsMaterial({
+        color: 0x8A2BE2,
+        size: 0.1,
+        transparent: true,
+        opacity: 0.8,
+        blending: THREE.AdditiveBlending,
+        vertexColors: false
+    });
+
+    particleSystem = new THREE.Points(particles, particleMaterial);
+    scene.add(particleSystem);
+
+    const ambientLight = new THREE.AmbientLight(0x9D4EDD, 0.5);
+    scene.add(ambientLight);
+
+    const pointLight = new THREE.PointLight(0x8A2BE2, 1);
+    pointLight.position.set(5, 5, 5);
+    scene.add(pointLight);
+
+    // Handle window resize
+    window.addEventListener('resize', () => {
+        if (homeSection) {
+            camera.aspect = homeSection.offsetWidth / homeSection.offsetHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(homeSection.offsetWidth, homeSection.offsetHeight);
+        }
+    }, { passive: true });
+
+    animateParticles();
+}
+
+function animateParticles() {
+    requestAnimationFrame(animateParticles);
+    
+    if (particleSystem) {
+        const time = Date.now() * 0.001;
+        particleSystem.material.opacity = 0.6 + Math.sin(time) * 0.2;
+        particleSystem.rotation.y += 0.001;
+    }
+    
+    if (renderer && scene && camera) {
+        renderer.render(scene, camera);
+    }
+}
+
+// Initialize particles when the page loads
+window.addEventListener('load', () => {
+    if (typeof THREE !== 'undefined') {
+        initParticles();
+    } else {
+        console.error('Three.js is not loaded');
+    }
+});
