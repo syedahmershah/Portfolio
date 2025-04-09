@@ -1129,57 +1129,95 @@ function createParticles() {
 // Skills typing effect function
 function initSkillsTyping() {
     const skillsText = document.querySelector('.skills-typing-text');
-    if (!skillsText) return;
+    const skillsContainer = document.querySelector('.skills-typing');
     
+    if (!skillsText || !skillsContainer) return;
+    
+    // Add a slight gap between "I'm skilled in" and skills
+    skillsContainer.style.margin = '0';
+    skillsContainer.style.padding = '0';
+    skillsContainer.style.display = 'inline-flex';
+    skillsContainer.style.alignItems = 'center';
+    skillsContainer.style.gap = '0.5rem';
+    
+    // Shorter skill names to prevent line breaks
     const skills = [
-        "HTML/CSS",
-        "JavaScript",
-        "React.js",
-        "Node.js",
-        "Python",
         "C++",
         "AI/ML",
-        "UI/UX Design",
-        "Responsive Design",
-        "API Development"
+        "React",
+        "Node.js",
+        "Python",
+        "UI/UX",
+        "DevOps",
+        "Cloud"
     ];
     
     let currentSkillIndex = 0;
     let currentCharIndex = 0;
     let isDeleting = false;
-    let typingSpeed = 100;
+    let typingSpeed = 300; // Much slower typing speed
     
-    function typeSkill() {
-        const currentSkill = skills[currentSkillIndex];
+    // Pre-calculate the maximum width to prevent layout shifts
+    const tempSpan = document.createElement('span');
+    tempSpan.style.visibility = 'hidden';
+    tempSpan.style.position = 'absolute';
+    tempSpan.style.whiteSpace = 'nowrap';
+    tempSpan.style.font = window.getComputedStyle(skillsText).font;
+    document.body.appendChild(tempSpan);
+    
+    const maxWidth = Math.max(...skills.map(skill => {
+        tempSpan.textContent = skill;
+        return tempSpan.offsetWidth;
+    }));
+    
+    document.body.removeChild(tempSpan);
+    
+    // Set a fixed width and prevent line breaks
+    skillsText.style.minWidth = `${maxWidth}px`;
+    skillsText.style.display = 'inline-block';
+    skillsText.style.whiteSpace = 'nowrap';
+    skillsText.style.margin = '0';
+    skillsText.style.padding = '0';
+    
+    // Use a more efficient animation approach
+    let lastTime = 0;
+    const minTypingInterval = 120; // Much slower minimum time between updates
+    
+    function typeSkill(timestamp) {
+        if (!lastTime) lastTime = timestamp;
+        const elapsed = timestamp - lastTime;
         
-        if (isDeleting) {
-            // Deleting text
-            skillsText.textContent = currentSkill.substring(0, currentCharIndex - 1);
-            currentCharIndex--;
-            typingSpeed = 50; // Faster when deleting
-        } else {
-            // Typing text
-            skillsText.textContent = currentSkill.substring(0, currentCharIndex + 1);
-            currentCharIndex++;
-            typingSpeed = 100; // Normal speed when typing
+        if (elapsed >= 150) {
+            const currentSkill = skills[currentSkillIndex];
+            
+            if (isDeleting) {
+                skillsText.textContent = currentSkill.substring(0, currentCharIndex - 1);
+                currentCharIndex--;
+                typingSpeed = 100;
+            } else {
+                skillsText.textContent = currentSkill.substring(0, currentCharIndex + 1);
+                currentCharIndex++;
+                typingSpeed = 150;
+            }
+            
+            // If word is complete
+            if (!isDeleting && currentCharIndex === currentSkill.length) {
+                isDeleting = true;
+                typingSpeed = 1500;
+            } 
+            // If deletion is complete
+            else if (isDeleting && currentCharIndex === 0) {
+                isDeleting = false;
+                currentSkillIndex = (currentSkillIndex + 1) % skills.length;
+                typingSpeed = 800;
+            }
+            
+            lastTime = timestamp;
         }
         
-        // If word is complete
-        if (!isDeleting && currentCharIndex === currentSkill.length) {
-            // Pause at the end of typing
-            isDeleting = true;
-            typingSpeed = 1000; // Wait before deleting
-        } 
-        // If deletion is complete
-        else if (isDeleting && currentCharIndex === 0) {
-            isDeleting = false;
-            currentSkillIndex = (currentSkillIndex + 1) % skills.length;
-            typingSpeed = 500; // Pause before typing next word
-        }
-        
-        setTimeout(typeSkill, typingSpeed);
+        requestAnimationFrame(typeSkill);
     }
     
-    // Start the typing animation
-    setTimeout(typeSkill, 1000);
+    // Start the animation
+    requestAnimationFrame(typeSkill);
 }
