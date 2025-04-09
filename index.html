@@ -433,6 +433,45 @@
     #sidebar-trigger:hover::after {
       width: 100%;
     }
+    
+    /* Add styles to center the CTA buttons */
+    .home-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+    
+    .home-content .cta-button {
+      margin: 10px auto;
+      display: inline-block;
+    }
+    
+    /* Container for CTA buttons to ensure they're centered */
+    .cta-buttons-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      margin: 0 auto;
+      padding: 0;
+    }
+    
+    /* Responsive adjustments for mobile */
+    @media (max-width: 768px) {
+      .cta-buttons-container {
+        flex-direction: column;
+        width: 100%;
+      }
+      
+      .home-content .cta-button {
+        width: 80%;
+        max-width: 300px;
+        margin: 8px auto;
+      }
+    }
   </style>
 </head>
 <body>
@@ -530,6 +569,7 @@
         </p>
       </div>
      
+      <div class="cta-buttons-container">
         <a href="#contact" class="cta-button">
           <i class="fas fa-paper-plane"></i>
           Get in Touch
