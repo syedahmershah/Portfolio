@@ -174,19 +174,33 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }, 500);
 
-    // Smooth scroll functionality
+    // Update scroll event handling
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 50) {
+            document.body.classList.add('scrolled');
+        } else {
+            document.body.classList.remove('scrolled');
+        }
+    }, { passive: true });
+
+    // Update smooth scroll functionality
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
+        anchor.addEventListener('click', function(e) {
             if (!this.classList.contains('dropbtn') && this.getAttribute('href') !== '#') {
                 e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                const headerOffset = 80;
-                const elementPosition = target.getBoundingClientRect().top;
-                const offsetPosition = elementPosition - headerOffset;
-                window.scrollBy({
-                    top: offsetPosition,
-                    behavior: 'smooth'
-                });
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    const headerOffset = 80;
+                    const elementPosition = targetElement.getBoundingClientRect().top;
+                    const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+                    window.scrollTo({
+                        top: offsetPosition,
+                        behavior: 'smooth'
+                    });
+                }
             }
         });
     });
@@ -473,28 +487,16 @@ document.addEventListener('DOMContentLoaded', () => {
         observer.observe(skillMetersContainer);
     }
 
+    // Update scroll to top functionality
     const scrollToTopBtn = document.getElementById('scrollToTopBtn');
-    window.addEventListener('scroll', () => {
-        if (window.scrollY > 300) {
-            scrollToTopBtn.classList.add('show');
-        } else {
-            scrollToTopBtn.classList.remove('show');
-        }
-    });
-    scrollToTopBtn.addEventListener('click', () => {
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
+    if (scrollToTopBtn) {
+        scrollToTopBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
         });
-    });
-
-    window.addEventListener('scroll', () => {
-        if (window.scrollY > 50) {
-            document.body.classList.add('scrolled');
-        } else {
-            document.body.classList.remove('scrolled');
-        }
-    });
+    }
 
     const parallaxLayers = document.querySelectorAll('.parallax__layer');
     window.addEventListener('scroll', () => {
