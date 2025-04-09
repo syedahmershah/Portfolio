@@ -510,294 +510,117 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     document.querySelectorAll('.open-modal').forEach(button => {
-        button.addEventListener('click', function() {
-            const modalId = this.getAttribute('data-target');
-            const modal = document.getElementById(modalId);
-            modal.style.display = 'block';
-            modal.querySelector('.modal-content').classList.add('rotate-in');
-        });
-    });
-
-    document.querySelectorAll('.modal-close').forEach(span => {
-        span.addEventListener('click', function() {
-            const modal = this.closest('.modal');
-            modal.querySelector('.modal-content').classList.remove('rotate-in');
-            setTimeout(() => {
-                modal.style.display = 'none';
-            }, 300);
-        });
-    });
-
-    window.addEventListener('click', function(e) {
-        if (e.target.classList.contains('modal')) {
-            const modal = e.target;
-            modal.querySelector('.modal-content').classList.remove('rotate-in');
-            setTimeout(() => {
-                modal.style.display = 'none';
-            }, 300);
-        }
-    });
-
-    document.querySelectorAll('.certification-image').forEach(image => {
-        image.removeEventListener('click', function() {
-            this.classList.toggle('zoomed');
-        });
-    });
-
-    document.querySelectorAll('.open-blog-modal').forEach(button => {
-        button.addEventListener('click', function(e) {
-            e.preventDefault();
-            document.getElementById('blog-modal').style.display = 'block';
-        });
-    });
-
-    document.querySelectorAll('.modal-close').forEach(button => {
-        button.addEventListener('click', function() {
-            this.closest('.modal').style.display = 'none';
-        });
-    });
-
-    window.addEventListener('click', function(e) {
-        if (e.target.classList.contains('modal')) {
-            e.target.style.display = 'none';
-        }
-    });
-
-    let scene, camera, renderer, particles, particleSystem, controls;
-
-    function init() {
-        scene = new THREE.Scene();
-        scene.background = new THREE.Color(0x000000);
-
-        camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-        camera.position.z = 5;
-
-        renderer = new THREE.WebGLRenderer({ 
-            antialias: true
-        });
-        const homeSection = document.getElementById('home');
-        if (homeSection) {
-            renderer.setSize(homeSection.offsetWidth, homeSection.offsetHeight);
-            homeSection.appendChild(renderer.domElement);
-            
-            renderer.domElement.style.position = 'absolute';
-            renderer.domElement.style.top = '0';
-            renderer.domElement.style.left = '0';
-            renderer.domElement.style.width = '100%';
-            renderer.domElement.style.height = '100%';
-            renderer.domElement.style.zIndex = '-1';
-        } else {
-            console.error('Home section not found');
-            return;
-        }
-
-        const particleCount = 1000;
-        particles = new THREE.BufferGeometry();
-        const positions = new Float32Array(particleCount * 3);
-
-        for (let i = 0; i < particleCount; i++) {
-            positions[i * 3] = (Math.random() - 0.5) * 10;
-            positions[i * 3 + 1] = (Math.random() - 0.5) * 10;
-            positions[i * 3 + 2] = (Math.random() - 0.5) * 10;
-        }
-
-        particles.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-
-        const particleMaterial = new THREE.PointsMaterial({
-            color: 0x8A2BE2, // Purple color
-            size: 0.1,
-            transparent: true,
-            opacity: 0.8,
-            blending: THREE.AdditiveBlending,
-            vertexColors: false
-        });
-
-        particleSystem = new THREE.Points(particles, particleMaterial);
-        scene.add(particleSystem);
-
-        const ambientLight = new THREE.AmbientLight(0x9D4EDD, 0.5);
-        scene.add(ambientLight);
-
-        const pointLight = new THREE.PointLight(0x8A2BE2, 1);
-        pointLight.position.set(5, 5, 5);
-        scene.add(pointLight);
-
-        controls = new THREE.TrackballControls(camera, renderer.domElement);
-        controls.noPan = true;
-        controls.noZoom = true;
-        controls.staticMoving = true;
-        controls.dynamicDampingFactor = 0.3;
-        
-        renderer.domElement.addEventListener('touchstart', () => {}, { passive: true });
-        renderer.domElement.addEventListener('touchmove', () => {}, { passive: true });
-        
-        renderer.domElement.addEventListener('touchstart', (e) => {
-            if (e.touches.length > 1) {
-                e.preventDefault();
-            }
-        }, { passive: false });
-
-        window.addEventListener('resize', onWindowResize, false);
-
-        animate();
-    }
-
-    function onWindowResize() {
-        const homeSection = document.getElementById('home');
-        if (homeSection) {
-            camera.aspect = homeSection.offsetWidth / homeSection.offsetHeight;
-            camera.updateProjectionMatrix();
-            renderer.setSize(homeSection.offsetWidth, homeSection.offsetHeight);
-        }
-    }
-
-    function animate() {
-        requestAnimationFrame(animate);
-        
-        const time = Date.now() * 0.001;
-        particleSystem.material.opacity = 0.6 + Math.sin(time) * 0.2;
-        
-        particleSystem.rotation.y += 0.001;
-
-        controls.update();
-        renderer.render(scene, camera);
-    }
-
-    init();
-    initResponsive();
-
-    function initResponsive() {
-        const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-        const isTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
-        
-        document.body.classList.toggle('is-mobile', isMobile);
-        document.body.classList.toggle('is-touch', isTouch);
-        
-        const modals = document.querySelectorAll('.modal');
-        if(isMobile) {
-          modals.forEach(modal => {
-            modal.addEventListener('touchmove', e => {
-              e.preventDefault();
-            }, { passive: false });
-          });
-        }
-        
-        const images = document.querySelectorAll('img[data-src]');
-        const loadImage = (img) => {
-          const src = img.getAttribute('data-src');
-          if(!src) return;
-          img.src = src;
-        };
-        
-        const imageObserver = new IntersectionObserver((entries) => {
-          entries.forEach(entry => {
-            if(entry.isIntersecting) {
-              loadImage(entry.target);
-              imageObserver.unobserve(entry.target);
-            }
-          });
-        });
-        
-        images.forEach(img => imageObserver.observe(img));
-        
-        const resizeChart = () => {
-          if(window.ApexCharts) {
-            const chart = document.querySelector('#skillsChart');
-            if(chart) {
-              chart.style.height = window.innerWidth < 768 ? '300px' : '350px';
-            }
-          }
-        };
-        
-        window.addEventListener('resize', debounce(resizeChart, 250));
-        resizeChart();
-      }
-      
-      function debounce(func, wait) {
-        let timeout;
-        return function executedFunction(...args) {
-          const later = () => {
-            clearTimeout(timeout);
-            func(...args);
-          };
-          clearTimeout(timeout);
-          timeout = setTimeout(later, wait);
-        };
-      }
-
-    const homeImage = document.querySelector('.profile-header-image');
-    let lastScrollY = window.scrollY;
-    
-    function handleParallax() {
-        if (homeImage) {
-            const scrollY = window.scrollY;
-            const speed = 0.5; // Adjust this value to change parallax intensity
-            const offset = (scrollY - lastScrollY) * speed;
-            const currentTransform = getComputedStyle(homeImage).transform;
-            const matrix = new DOMMatrix(currentTransform);
-            const currentY = matrix.m42;
-            
-            homeImage.style.transform = `perspective(1000px) rotateY(0deg) translateY(${currentY + offset}px)`;
-            homeImage.style.transition = 'transform 0.3s ease-out';
-            
-            lastScrollY = scrollY;
-        }
-    }
-
-    window.addEventListener('scroll', () => {
-        requestAnimationFrame(handleParallax);
-    }, { passive: true });
-
-    document.querySelectorAll('.open-modal').forEach(button => {
         button.addEventListener('click', async function() {
             const modalId = this.getAttribute('data-target');
             const modal = document.getElementById(modalId);
+            
             if (modal) {
                 modal.style.display = 'block';
                 modal.classList.add('loading');
                 
-                await new Promise(resolve => setTimeout(resolve, 100));
-                
-                const images = modal.querySelectorAll('img');
-                if (images.length) {
-                    await Promise.all([...images].map(img => {
-                        return new Promise((resolve) => {
-                            if (img.complete) resolve();
-                            else {
-                                img.onload = resolve;
-                                img.onerror = resolve;
-                            }
-                        });
-                    }));
-                }
-                
-                modal.classList.remove('loading');
-                modal.querySelector('.modal-content').classList.add('rotate-in');
-                
+                // Enable scrolling on the modal content
                 const modalContent = modal.querySelector('.modal-content');
                 if (modalContent) {
-                    modalContent.scrollTop = 0;
+                    modalContent.style.overflowY = 'auto';
+                    modalContent.style.webkitOverflowScrolling = 'touch'; // Enable smooth scrolling on iOS
+                    modalContent.style.maxHeight = '90vh';
+                    modalContent.style.margin = '5vh auto';
                 }
                 
-                document.body.style.overflow = 'hidden';
+                const images = modal.querySelectorAll('img');
+                
+                try {
+                    if (images.length) {
+                        await Promise.all([...images].map(img => {
+                            return new Promise((resolve) => {
+                                if (img.complete) {
+                                    img.classList.add('loaded');
+                                    resolve();
+                                } else {
+                                    img.onload = () => {
+                                        img.classList.add('loaded');
+                                        resolve();
+                                    };
+                                    img.onerror = () => {
+                                        console.error('Failed to load image:', img.src);
+                                        img.classList.add('error');
+                                        resolve();
+                                    };
+                                    const currentSrc = img.src;
+                                    img.src = '';
+                                    img.src = currentSrc;
+                                }
+                            });
+                        }));
+                    }
+                    
+                    modal.classList.remove('loading');
+                    if (modalContent) {
+                        modalContent.classList.add('rotate-in');
+                        modalContent.style.opacity = '1';
+                    }
+                    
+                } catch (error) {
+                    console.error('Error loading modal images:', error);
+                    modal.classList.remove('loading');
+                }
             }
         });
     });
 
+    // Update modal close handlers
     document.querySelectorAll('.modal-close').forEach(button => {
         button.addEventListener('click', function() {
             const modal = this.closest('.modal');
             if (modal) {
-                modal.style.display = 'none';
-                document.body.style.overflow = '';
+                const modalContent = modal.querySelector('.modal-content');
+                if (modalContent) {
+                    modalContent.classList.remove('rotate-in');
+                }
+                setTimeout(() => {
+                    modal.style.display = 'none';
+                }, 300);
             }
         });
     });
 
+    // Handle modal background click
     window.addEventListener('click', function(e) {
         if (e.target.classList.contains('modal')) {
-            e.target.style.display = 'none';
-            document.body.style.overflow = '';
+            const modalContent = e.target.querySelector('.modal-content');
+            if (modalContent) {
+                modalContent.classList.remove('rotate-in');
+            }
+            setTimeout(() => {
+                e.target.style.display = 'none';
+            }, 300);
+        }
+    });
+
+    // Add touch event handling for modals
+    document.querySelectorAll('.modal').forEach(modal => {
+        const modalContent = modal.querySelector('.modal-content');
+        if (modalContent) {
+            let startY;
+            let startScrollTop;
+
+            modalContent.addEventListener('touchstart', (e) => {
+                startY = e.touches[0].pageY;
+                startScrollTop = modalContent.scrollTop;
+            }, { passive: true });
+
+            modalContent.addEventListener('touchmove', (e) => {
+                if (!startY) return;
+                
+                const y = e.touches[0].pageY;
+                const walk = (startY - y);
+                modalContent.scrollTop = startScrollTop + walk;
+            }, { passive: true });
+
+            modalContent.addEventListener('touchend', () => {
+                startY = null;
+                startScrollTop = null;
+            });
         }
     });
 
