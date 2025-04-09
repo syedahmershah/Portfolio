@@ -3,9 +3,6 @@ if (typeof window.typingAnimationRunning === 'undefined') {
     window.typingAnimationRunning = false;
 }
 
-// Three.js Particle Animation
-let scene, camera, renderer, particles, particleSystem;
-
 // COMPLETELY REWRITTEN TYPING ANIMATION
 function setupTypingAnimation() {
     // Prevent multiple instances
@@ -1047,6 +1044,9 @@ function initSkillsTyping() {
     // Start the animation
     requestAnimationFrame(typeSkill);
 }
+
+// Three.js Particle Animation
+let scene, camera, renderer, particles, particleSystem;
 
 function initParticles() {
     if (typeof THREE === 'undefined') {
