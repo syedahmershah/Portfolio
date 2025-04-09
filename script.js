@@ -3,6 +3,235 @@ if (typeof window.typingAnimationRunning === 'undefined') {
     window.typingAnimationRunning = false;
 }
 
+// Circular Sidebar functionality
+function initCircularSidebar() {
+    const sidebarTrigger = document.getElementById('sidebar-trigger');
+    const circularSidebar = document.getElementById('circular-sidebar');
+    const closeSidebar = document.getElementById('close-sidebar');
+    const menuButtons = document.querySelectorAll('.circular-menu-button');
+    const sidebarContent = document.querySelector('.sidebar-content');
+    const profileCenter = document.querySelector('.profile-center');
+    
+    if (!sidebarTrigger || !circularSidebar || !closeSidebar) {
+        console.error('Circular sidebar elements not found');
+        return;
+    }
+    
+    // Define button positions (in degrees) for animation
+    const buttonPositions = [0, 60, 120, 180, 240, 300];
+    
+    // Open sidebar when trigger is clicked
+    sidebarTrigger.addEventListener('click', function(e) {
+        e.preventDefault();
+        circularSidebar.classList.add('active');
+        
+        // Use anime.js for advanced animations if available
+        if (typeof anime !== 'undefined') {
+            // Initial rotation of the sidebar content
+            anime({
+                targets: sidebarContent,
+                rotate: [{ value: '1turn', duration: 1200 }],
+                scale: [0, 1],
+                opacity: [0, 1],
+                easing: 'easeOutExpo'
+            });
+            
+            // Center profile animation
+            anime({
+                targets: profileCenter,
+                scale: [0, 1],
+                opacity: [0, 1],
+                delay: 300,
+                duration: 800,
+                easing: 'easeOutElastic(1, .5)'
+            });
+            
+            // Animate each button with a path-based animation
+            menuButtons.forEach((button, index) => {
+                const delay = 400 + (index * 100);
+                const angle = buttonPositions[index] * (Math.PI / 180); // Convert to radians
+                
+                // Calculate the position based on the angle
+                const radius = 110; // Distance from center
+                const startX = 0;
+                const startY = 0;
+                const endX = radius * Math.sin(angle);
+                const endY = -radius * Math.cos(angle);
+                
+                anime({
+                    targets: button,
+                    translateX: [startX, endX],
+                    translateY: [startY, endY],
+                    scale: [0, 1],
+                    opacity: [0, 1],
+                    delay: delay,
+                    duration: 900,
+                    easing: 'easeOutElastic(1, .5)'
+                });
+            });
+            
+            // Animate close button
+            anime({
+                targets: closeSidebar,
+                scale: [0, 1],
+                rotate: ['0deg', '360deg'],
+                opacity: [0, 1],
+                delay: 300,
+                duration: 800,
+                easing: 'easeOutElastic(1, .5)'
+            });
+            
+            // Background fade in
+            anime({
+                targets: '.sidebar-background',
+                opacity: [0, 1],
+                duration: 800,
+                easing: 'easeOutQuad'
+            });
+        } else {
+            // Fallback without anime.js
+            menuButtons.forEach((button, index) => {
+                setTimeout(() => {
+                    button.style.transform = 'scale(1)';
+                }, 100 * index);
+            });
+        }
+    });
+    
+    // Close sidebar when close button or background is clicked
+    closeSidebar.addEventListener('click', closeCircularSidebar);
+    document.querySelector('.sidebar-background').addEventListener('click', closeCircularSidebar);
+    
+    // Close sidebar when a menu item is clicked
+    menuButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            // Small delay to allow for the visual effect before closing
+            setTimeout(() => {
+                closeCircularSidebar();
+            }, 300);
+        });
+    });
+    
+    function closeCircularSidebar() {
+        if (typeof anime !== 'undefined') {
+            // Animate buttons back to center
+            menuButtons.forEach((button, index) => {
+                anime({
+                    targets: button,
+                    translateX: 0,
+                    translateY: 0,
+                    scale: 0,
+                    opacity: 0,
+                    duration: 600,
+                    easing: 'easeInBack',
+                    delay: 50 * index
+                });
+            });
+            
+            // Collapse the sidebar with rotation
+            anime({
+                targets: sidebarContent,
+                scale: 0,
+                rotate: '360deg',
+                opacity: 0,
+                duration: 800,
+                delay: 300,
+                easing: 'easeInQuad',
+                complete: function() {
+                    circularSidebar.classList.remove('active');
+                }
+            });
+            
+            // Fade out background
+            anime({
+                targets: '.sidebar-background',
+                opacity: 0,
+                duration: 800,
+                easing: 'easeInQuad'
+            });
+            
+            // Animate close button
+            anime({
+                targets: closeSidebar,
+                scale: 0,
+                rotate: '90deg',
+                opacity: 0,
+                duration: 400,
+                easing: 'easeInBack'
+            });
+            
+            // Center profile animation
+            anime({
+                targets: profileCenter,
+                scale: 0,
+                opacity: 0,
+                duration: 600,
+                easing: 'easeInBack'
+            });
+        } else {
+            // Fallback without anime.js
+            menuButtons.forEach((button, index) => {
+                setTimeout(() => {
+                    button.style.transform = 'scale(0)';
+                }, 50 * index);
+            });
+            
+            setTimeout(() => {
+                circularSidebar.classList.remove('active');
+            }, 500);
+        }
+    }
+    
+    // Add hover effects using anime.js
+    if (typeof anime !== 'undefined') {
+        menuButtons.forEach(button => {
+            button.addEventListener('mouseenter', function() {
+                anime({
+                    targets: this.querySelector('i'),
+                    scale: 1.2,
+                    rotate: '15deg',
+                    duration: 400,
+                    easing: 'easeOutElastic(1, .5)'
+                });
+            });
+            
+            button.addEventListener('mouseleave', function() {
+                anime({
+                    targets: this.querySelector('i'),
+                    scale: 1,
+                    rotate: '0deg',
+                    duration: 300,
+                    easing: 'easeOutQuad'
+                });
+            });
+        });
+        
+        // Hover effect for profile center
+        if (profileCenter) {
+            profileCenter.addEventListener('mouseenter', function() {
+                anime({
+                    targets: this,
+                    boxShadow: [
+                        '0 0 20px rgba(176, 38, 255, 0.7)',
+                        '0 0 30px rgba(0, 255, 209, 0.8)'
+                    ],
+                    duration: 500,
+                    easing: 'easeOutQuad'
+                });
+            });
+            
+            profileCenter.addEventListener('mouseleave', function() {
+                anime({
+                    targets: this,
+                    boxShadow: '0 0 20px rgba(176, 38, 255, 0.7)',
+                    duration: 500,
+                    easing: 'easeOutQuad'
+                });
+            });
+        }
+    }
+}
+
 // COMPLETELY REWRITTEN TYPING ANIMATION
 function setupTypingAnimation() {
     // Prevent multiple instances
@@ -124,6 +353,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const loadingPage = document.querySelector('.loading-page');
     const progressBar = document.querySelector('.progress-bar');
     const loadingQuote = document.querySelector('.loading-quote');
+    
+    // Initialize circular sidebar
+    initCircularSidebar();
     
     // Call the setupTypingAnimation function
     setupTypingAnimation();
