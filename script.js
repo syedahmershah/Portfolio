@@ -17,8 +17,40 @@ function initCircularSidebar() {
         return;
     }
     
-    // Define button positions (in degrees) for animation
-    const buttonPositions = [0, 60, 120, 180, 240, 300];
+    // Position buttons in a perfect circle based on their data-angle attributes
+    function positionButtons() {
+        const radius = 110; // Increased radius to place buttons at the edge of the circle
+        
+        // Ensure the profile center is perfectly centered
+        if (profileCenter) {
+            profileCenter.style.position = 'absolute';
+            profileCenter.style.top = '50%';
+            profileCenter.style.left = '50%';
+            profileCenter.style.transform = 'translate(-50%, -50%)';
+            profileCenter.style.zIndex = '20';
+            profileCenter.style.margin = '0';
+            profileCenter.style.padding = '0';
+        }
+        
+        menuButtons.forEach(button => {
+            const angle = parseInt(button.getAttribute('data-angle')) || 0;
+            const radians = angle * (Math.PI / 180); // Convert to radians
+            
+            // Calculate x and y coordinates based on angle
+            const x = radius * Math.sin(radians);
+            const y = -radius * Math.cos(radians);
+            
+            // Apply position
+            button.style.transform = 'scale(0)';
+            button.style.transformOrigin = 'center center';
+            button.style.left = `calc(50% + ${x}px)`;
+            button.style.top = `calc(50% + ${y}px)`;
+            button.style.margin = '-27px 0 0 -27px'; // Half of button width/height (54px/2)
+        });
+    }
+    
+    // Position buttons initially
+    positionButtons();
     
     // Function to check if viewport is mobile size
     function isMobileView() {
@@ -37,13 +69,13 @@ function initCircularSidebar() {
         
         // Use anime.js for advanced animations if available
         if (typeof anime !== 'undefined') {
-            // Initial rotation of the sidebar content
+            // Initial animation of the sidebar content
             anime({
                 targets: sidebarContent,
-                rotate: [{ value: '1turn', duration: 1200 }],
                 scale: [0, 1],
                 opacity: [0, 1],
-                easing: 'easeOutExpo'
+                easing: 'easeOutExpo',
+                duration: 800
             });
             
             // Center profile animation
@@ -56,26 +88,17 @@ function initCircularSidebar() {
                 easing: 'easeOutElastic(1, .5)'
             });
             
-            // Animate each button with a path-based animation
-            menuButtons.forEach((button, index) => {
-                const delay = 400 + (index * 100);
-                const angle = buttonPositions[index] * (Math.PI / 180); // Convert to radians
-                
-                // Calculate the position based on the angle
-                const radius = 95; // Smaller radius to fit the new dimensions
-                const startX = 0;
-                const startY = 0;
-                const endX = radius * Math.sin(angle);
-                const endY = -radius * Math.cos(angle);
+            // Animate each button with a delay based on its angle
+            menuButtons.forEach(button => {
+                const angle = parseInt(button.getAttribute('data-angle')) || 0;
+                const delay = 400 + (angle / 360 * 600); // Distribute delays based on angle
                 
                 anime({
                     targets: button,
-                    translateX: [startX, endX],
-                    translateY: [startY, endY],
                     scale: [0, 1],
                     opacity: [0, 1],
                     delay: delay,
-                    duration: 900,
+                    duration: 800,
                     easing: 'easeOutElastic(1, .5)'
                 });
             });
@@ -114,6 +137,9 @@ function initCircularSidebar() {
         if (!isMobileView() && circularSidebar.classList.contains('active')) {
             closeCircularSidebar();
         }
+        
+        // Reposition buttons when window is resized
+        positionButtons();
     });
     
     // Close sidebar when close button or background is clicked
@@ -133,24 +159,24 @@ function initCircularSidebar() {
     function closeCircularSidebar() {
         if (typeof anime !== 'undefined') {
             // Animate buttons back to center
-            menuButtons.forEach((button, index) => {
+            menuButtons.forEach(button => {
+                const angle = parseInt(button.getAttribute('data-angle')) || 0;
+                const delay = (angle / 360 * 300); // Distribute delays based on angle
+                
                 anime({
                     targets: button,
-                    translateX: 0,
-                    translateY: 0,
                     scale: 0,
                     opacity: 0,
                     duration: 600,
                     easing: 'easeInBack',
-                    delay: 50 * index
+                    delay: delay
                 });
             });
             
-            // Collapse the sidebar with rotation
+            // Collapse the sidebar
             anime({
                 targets: sidebarContent,
                 scale: 0,
-                rotate: '360deg',
                 opacity: 0,
                 duration: 800,
                 delay: 300,
