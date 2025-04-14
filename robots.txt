@@ -1,0 +1,31 @@
+# Allow all crawlers
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://syedahmershah.github.io/Portfolio/sitemap.xml
+
+# Disallow access to private directories
+Disallow: /private/
+Disallow: /admin/
+Disallow: /temp/
+
+# Allow access to important assets
+Allow: /Images/
+Allow: /styles.css
+Allow: /script.js
+Allow: /custom-styles.css
+
+# Allow access to all sections
+Allow: /#home
+Allow: /#about
+Allow: /#projects
+Allow: /#skills
+Allow: /#certifications
+Allow: /#education
+Allow: /#review
+Allow: /#blog
+Allow: /#contact
+
+# Crawl-delay to prevent overloading
+Crawl-delay: 10 
