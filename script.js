@@ -1,21 +1,65 @@
-// Single global variable to prevent multiple instances
+if (typeof window.AppState === 'undefined') {
+    window.AppState = {
+        typingAnimationRunning: false,
+        DOMCache: {
+            elements: {},
+            get: function(selector) {
+                if (!this.elements[selector]) {
+                    this.elements[selector] = document.querySelector(selector);
+                }
+                return this.elements[selector];
+            }
+        }
+    };
+}
+
+if (typeof window.Utils === 'undefined') {
+    window.Utils = {
+        debounce: function(func, wait) {
+            let timeout;
+            return function executedFunction(...args) {
+                const later = () => {
+                    clearTimeout(timeout);
+                    func(...args);
+                };
+                clearTimeout(timeout);
+                timeout = setTimeout(later, wait);
+            };
+        },
+
+        getElement: function(selector, required = true) {
+            const element = AppState.DOMCache.get(selector);
+            if (required && !element) {
+                console.error(`Element not found: ${selector}`);
+                return null;
+            }
+            return element;
+        },
+
+        addSafeEventListener: function(element, event, handler) {
+            if (!element) return;
+            element.addEventListener(event, handler);
+        },
+
+        isMobileView: function() {
+            return window.innerWidth < 992;
+        }
+    };
+}
+
 if (typeof window.typingAnimationRunning === 'undefined') {
     window.typingAnimationRunning = false;
 }
 
-// Loading page functionality
 function handleLoading() {
     const loadingPage = document.querySelector('.loading-page');
     
-    // Ensure loading page stays for at least 5 seconds
     setTimeout(() => {
         loadingPage.classList.add('hidden');
         document.body.classList.remove('loading');
         
-        // Remove loading page after fade out
         setTimeout(() => {
             loadingPage.style.display = 'none';
-            // Initialize home section animations after loading
             const homeContent = document.querySelector('.home-content');
             if (homeContent) {
                 requestAnimationFrame(() => {
@@ -26,11 +70,9 @@ function handleLoading() {
     }, 5000);
 }
 
-// Initialize everything when the page loads
 window.addEventListener('load', () => {
     handleLoading();
     
-    // Handle section animations
     const sections = document.querySelectorAll('.section-container');
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
@@ -49,7 +91,6 @@ window.addEventListener('load', () => {
         observer.observe(section);
     });
 
-    // Optimize scroll performance
     let ticking = false;
     const scrollToTopBtn = document.getElementById('scrollToTopBtn');
     
@@ -78,7 +119,6 @@ window.addEventListener('load', () => {
     });
 });
 
-// Optimize image loading
 document.addEventListener('DOMContentLoaded', () => {
     const images = document.querySelectorAll('img');
     images.forEach(img => {
@@ -106,11 +146,9 @@ function initCircularSidebar() {
         return;
     }
     
-    // Position buttons in a perfect circle based on their data-angle attributes
     function positionButtons() {
-        const radius = 110; // Increased radius to place buttons at the edge of the circle
+        const radius = 110;
         
-        // Ensure the profile center is perfectly centered
         if (profileCenter) {
             profileCenter.style.position = 'absolute';
             profileCenter.style.top = '50%';
@@ -123,32 +161,26 @@ function initCircularSidebar() {
         
         menuButtons.forEach(button => {
             const angle = parseInt(button.getAttribute('data-angle')) || 0;
-            const radians = angle * (Math.PI / 180); // Convert to radians
+            const radians = angle * (Math.PI / 180);
             
-            // Calculate x and y coordinates based on angle
             const x = radius * Math.sin(radians);
             const y = -radius * Math.cos(radians);
             
-            // Apply position
             button.style.transform = 'scale(0)';
             button.style.transformOrigin = 'center center';
             button.style.left = `calc(50% + ${x}px)`;
             button.style.top = `calc(50% + ${y}px)`;
-            button.style.margin = '-27px 0 0 -27px'; // Half of button width/height (54px/2)
+            button.style.margin = '-27px 0 0 -27px';
         });
     }
     
-    // Position buttons initially
     positionButtons();
     
-    // Function to check if viewport is mobile size
     function isMobileView() {
         return window.innerWidth < 992;
     }
     
-    // Open sidebar when trigger is clicked
     sidebarTrigger.addEventListener('click', function(e) {
-        // Only activate on mobile devices
         if (!isMobileView()) {
             return;
         }
@@ -156,9 +188,7 @@ function initCircularSidebar() {
         e.preventDefault();
         circularSidebar.classList.add('active');
         
-        // Use anime.js for advanced animations if available
         if (typeof anime !== 'undefined') {
-            // Initial animation of the sidebar content
             anime({
                 targets: sidebarContent,
                 scale: [0, 1],
@@ -167,7 +197,6 @@ function initCircularSidebar() {
                 duration: 800
             });
             
-            // Center profile animation
             anime({
                 targets: profileCenter,
                 scale: [0, 1],
@@ -177,10 +206,9 @@ function initCircularSidebar() {
                 easing: 'easeOutElastic(1, .5)'
             });
             
-            // Animate each button with a delay based on its angle
             menuButtons.forEach(button => {
                 const angle = parseInt(button.getAttribute('data-angle')) || 0;
-                const delay = 400 + (angle / 360 * 600); // Distribute delays based on angle
+                const delay = 400 + (angle / 360 * 600);
                 
                 anime({
                     targets: button,
@@ -192,7 +220,6 @@ function initCircularSidebar() {
                 });
             });
             
-            // Animate close button
             anime({
                 targets: closeSidebar,
                 scale: [0, 1],
@@ -203,7 +230,6 @@ function initCircularSidebar() {
                 easing: 'easeOutElastic(1, .5)'
             });
             
-            // Background fade in
             anime({
                 targets: '.sidebar-background',
                 opacity: [0, 1],
@@ -211,7 +237,6 @@ function initCircularSidebar() {
                 easing: 'easeOutQuad'
             });
         } else {
-            // Fallback without anime.js
             menuButtons.forEach((button, index) => {
                 setTimeout(() => {
                     button.style.transform = 'scale(1)';
@@ -220,25 +245,19 @@ function initCircularSidebar() {
         }
     });
     
-    // Update sidebar visibility on resize
     window.addEventListener('resize', function() {
-        // If we're on desktop and sidebar is active, close it
         if (!isMobileView() && circularSidebar.classList.contains('active')) {
             closeCircularSidebar();
         }
         
-        // Reposition buttons when window is resized
         positionButtons();
     });
     
-    // Close sidebar when close button or background is clicked
     closeSidebar.addEventListener('click', closeCircularSidebar);
     document.querySelector('.sidebar-background').addEventListener('click', closeCircularSidebar);
     
-    // Close sidebar when a menu item is clicked
     menuButtons.forEach(button => {
         button.addEventListener('click', function() {
-            // Small delay to allow for the visual effect before closing
             setTimeout(() => {
                 closeCircularSidebar();
             }, 300);
@@ -247,10 +266,9 @@ function initCircularSidebar() {
     
     function closeCircularSidebar() {
         if (typeof anime !== 'undefined') {
-            // Animate buttons back to center
             menuButtons.forEach(button => {
                 const angle = parseInt(button.getAttribute('data-angle')) || 0;
-                const delay = (angle / 360 * 300); // Distribute delays based on angle
+                const delay = (angle / 360 * 300);
                 
                 anime({
                     targets: button,
@@ -262,7 +280,6 @@ function initCircularSidebar() {
                 });
             });
             
-            // Collapse the sidebar
             anime({
                 targets: sidebarContent,
                 scale: 0,
@@ -275,7 +292,6 @@ function initCircularSidebar() {
                 }
             });
             
-            // Fade out background
             anime({
                 targets: '.sidebar-background',
                 opacity: 0,
@@ -283,7 +299,6 @@ function initCircularSidebar() {
                 easing: 'easeInQuad'
             });
             
-            // Animate close button
             anime({
                 targets: closeSidebar,
                 scale: 0,
@@ -293,7 +308,6 @@ function initCircularSidebar() {
                 easing: 'easeInBack'
             });
             
-            // Center profile animation
             anime({
                 targets: profileCenter,
                 scale: 0,
@@ -302,7 +316,6 @@ function initCircularSidebar() {
                 easing: 'easeInBack'
             });
         } else {
-            // Fallback without anime.js
             menuButtons.forEach((button, index) => {
                 setTimeout(() => {
                     button.style.transform = 'scale(0)';
@@ -315,7 +328,6 @@ function initCircularSidebar() {
         }
     }
     
-    // Add hover effects using anime.js
     if (typeof anime !== 'undefined') {
         menuButtons.forEach(button => {
             button.addEventListener('mouseenter', function() {
@@ -349,18 +361,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // COMPLETELY REWRITTEN TYPING ANIMATION
 function setupTypingAnimation() {
-    // Prevent multiple instances
     if (window.typingAnimationRunning) {
         console.log('Typing animation already running');
         return;
     }
     
-    // Get elements
     const greetingEl = document.getElementById('greeting-text');
     const nameEl = document.getElementById('name-text');
     const roleEl = document.getElementById('role-text');
     
-    // Verify elements exist
     if (!greetingEl || !nameEl || !roleEl) {
         console.error('Typing elements not found');
         return;
@@ -369,12 +378,10 @@ function setupTypingAnimation() {
     console.log('Setting up typing animation');
     window.typingAnimationRunning = true;
     
-    // Empty all elements
     greetingEl.textContent = '';
     nameEl.textContent = '';
     roleEl.textContent = '';
     
-    // Text to type
     const greeting = "Hi, I'm ";
     const name = "Ahmer";
     const roles = [
@@ -385,7 +392,6 @@ function setupTypingAnimation() {
         "C++ Programmer"
     ];
     
-    // Style the name element
     nameEl.style.color = '#8A2BE2';
     nameEl.style.fontWeight = 'bold';
     nameEl.style.backgroundImage = 'linear-gradient(45deg, #8A2BE2, #9D4EDD, #B026FF)';
@@ -394,7 +400,6 @@ function setupTypingAnimation() {
     nameEl.style.color = 'transparent';
     nameEl.style.textShadow = '0 0 10px #9D4EDD, 0 0 20px #B026FF';
     
-    // Add pulse animation
     if (!document.getElementById('pulse-animation-style')) {
         const style = document.createElement('style');
         style.id = 'pulse-animation-style';
@@ -408,7 +413,6 @@ function setupTypingAnimation() {
     }
     nameEl.style.animation = 'pulse 2s infinite';
     
-    // Helper functions
     let currentRoleIndex = 0;
     
     function typeWriter(element, text, i, callback) {
@@ -430,13 +434,9 @@ function setupTypingAnimation() {
         }
     }
     
-    // Animation sequence
     function startAnimation() {
-        // First type greeting
         typeWriter(greetingEl, greeting, 0, () => {
-            // Then type name
             typeWriter(nameEl, name, 0, () => {
-                // Then start typing roles
                 typingRoles();
             });
         });
@@ -445,22 +445,16 @@ function setupTypingAnimation() {
     function typingRoles() {
         const currentRole = roles[currentRoleIndex];
         
-        // Type current role
         typeWriter(roleEl, currentRole, 0, () => {
-            // Wait before erasing
             setTimeout(() => {
-                // Erase current role
                 eraseText(roleEl, () => {
-                    // Move to next role
                     currentRoleIndex = (currentRoleIndex + 1) % roles.length;
-                    // Wait before typing next role
                     setTimeout(typingRoles, 500);
                 });
             }, 2000);
         });
     }
     
-    // Start the animation
     setTimeout(startAnimation, 1000);
 }
 
@@ -469,22 +463,16 @@ document.addEventListener('DOMContentLoaded', () => {
     const progressBar = document.querySelector('.progress-bar');
     const loadingQuote = document.querySelector('.loading-quote');
     
-    // Initialize circular sidebar
     initCircularSidebar();
-    
-    // Call the setupTypingAnimation function
     setupTypingAnimation();
-    
-    // Initialize skills typing effect
     initSkillsTyping();
     
-    // Original loading animation code
     setTimeout(() => {
         loadingQuote.style.opacity = '1';
     }, 500);
 
     let progress = 0;
-    const minLoadTime = 4000; // Minimum loading time of 4 seconds
+    const minLoadTime = 4000;
     const startTime = Date.now();
     
     const interval = setInterval(() => {
@@ -513,7 +501,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     createParticles();
     
-    // Cursor blink
     setInterval(() => {
         const cursor = document.querySelector('.cursor');
         if (cursor) {
@@ -521,7 +508,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }, 500);
 
-    // Update scroll event handling
     window.addEventListener('scroll', () => {
         if (window.scrollY > 50) {
             document.body.classList.add('scrolled');
@@ -530,7 +516,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }, { passive: true });
 
-    // Update smooth scroll functionality
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function(e) {
             if (!this.classList.contains('dropbtn') && this.getAttribute('href') !== '#') {
@@ -552,7 +537,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Intersection Observer for fade-in animations
     const observer = new IntersectionObserver(
         (entries) => {
             entries.forEach(entry => {
@@ -569,16 +553,14 @@ document.addEventListener('DOMContentLoaded', () => {
         observer.observe(section);
     });
 
-    // Notification container setup
     if (!document.querySelector('.notification-container')) {
         const notificationContainer = document.createElement('div');
         notificationContainer.className = 'notification-container';
         document.body.appendChild(notificationContainer);
     }
 
-    // Contact form handling
     const contactForm = document.querySelector('.contact-form');
-    if (contactForm._submitHandler) {
+    if (contactForm && contactForm._submitHandler) {
         contactForm.removeEventListener('submit', contactForm._submitHandler);
     }
     
@@ -589,7 +571,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const submitButton = this.querySelector('button[type="submit"]');
         
         if (loadingDots) {
-            loadingDots.classList.add('show'); // Use classList instead of style
+            loadingDots.classList.add('show');
             submitButton.disabled = true;
         }
         
@@ -603,7 +585,7 @@ document.addEventListener('DOMContentLoaded', () => {
             });
 
             if (loadingDots) {
-                loadingDots.classList.remove('show'); // Use classList instead of style
+                loadingDots.classList.remove('show');
                 submitButton.disabled = false;
             }
             
@@ -653,7 +635,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         } catch (error) {
             if (loadingDots) {
-                loadingDots.classList.remove('show'); // Use classList instead of style
+                loadingDots.classList.remove('show');
                 submitButton.disabled = false;
             }
             
@@ -669,6 +651,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 </div>
             `;
 
+            const notificationContainer = document.querySelector('.notification-container');
             notificationContainer.innerHTML = '';
             notificationContainer.appendChild(notification);
 
@@ -689,7 +672,9 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
     
-    contactForm.addEventListener('submit', contactForm._submitHandler);
+    if (contactForm) {
+        contactForm.addEventListener('submit', contactForm._submitHandler);
+    }
 
     document.querySelectorAll('.open-modal, .dropbtn').forEach(button => {
         button.addEventListener('click', function(e) {
@@ -834,7 +819,6 @@ document.addEventListener('DOMContentLoaded', () => {
         observer.observe(skillMetersContainer);
     }
 
-    // Update scroll to top functionality
     const scrollToTopBtn = document.getElementById('scrollToTopBtn');
     if (scrollToTopBtn) {
         scrollToTopBtn.addEventListener('click', () => {
@@ -865,11 +849,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 modal.style.display = 'block';
                 modal.classList.add('loading');
                 
-                // Enable scrolling on the modal content
                 const modalContent = modal.querySelector('.modal-content');
                 if (modalContent) {
                     modalContent.style.overflowY = 'auto';
-                    modalContent.style.webkitOverflowScrolling = 'touch'; // Enable smooth scrolling on iOS
+                    modalContent.style.webkitOverflowScrolling = 'touch';
                     modalContent.style.maxHeight = '90vh';
                     modalContent.style.margin = '5vh auto';
                 }
@@ -915,7 +898,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Update modal close handlers
     document.querySelectorAll('.modal-close').forEach(button => {
         button.addEventListener('click', function() {
             const modal = this.closest('.modal');
@@ -931,7 +913,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Handle modal background click
     window.addEventListener('click', function(e) {
         if (e.target.classList.contains('modal')) {
             const modalContent = e.target.querySelector('.modal-content');
@@ -944,7 +925,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Add touch event handling for modals
     document.querySelectorAll('.modal').forEach(modal => {
         const modalContent = modal.querySelector('.modal-content');
         if (modalContent) {
@@ -1149,6 +1129,14 @@ document.querySelectorAll('.open-modal').forEach(button => {
             modal.style.display = 'block';
             modal.classList.add('loading');
             
+            const modalContent = modal.querySelector('.modal-content');
+            if (modalContent) {
+                modalContent.style.overflowY = 'auto';
+                modalContent.style.webkitOverflowScrolling = 'touch';
+                modalContent.style.maxHeight = '90vh';
+                modalContent.style.margin = '5vh auto';
+            }
+            
             const images = modal.querySelectorAll('img');
             
             try {
@@ -1177,14 +1165,10 @@ document.querySelectorAll('.open-modal').forEach(button => {
                 }
                 
                 modal.classList.remove('loading');
-                const modalContent = modal.querySelector('.modal-content');
                 if (modalContent) {
                     modalContent.classList.add('rotate-in');
                     modalContent.style.opacity = '1';
-                    modalContent.scrollTop = 0;
                 }
-                
-                document.body.style.overflow = 'hidden';
                 
             } catch (error) {
                 console.error('Error loading modal images:', error);
