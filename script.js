@@ -3,6 +3,95 @@ if (typeof window.typingAnimationRunning === 'undefined') {
     window.typingAnimationRunning = false;
 }
 
+// Loading page functionality
+function handleLoading() {
+    const loadingPage = document.querySelector('.loading-page');
+    
+    // Ensure loading page stays for at least 5 seconds
+    setTimeout(() => {
+        loadingPage.classList.add('hidden');
+        document.body.classList.remove('loading');
+        
+        // Remove loading page after fade out
+        setTimeout(() => {
+            loadingPage.style.display = 'none';
+            // Initialize home section animations after loading
+            const homeContent = document.querySelector('.home-content');
+            if (homeContent) {
+                requestAnimationFrame(() => {
+                    homeContent.classList.add('visible');
+                });
+            }
+        }, 1000);
+    }, 5000);
+}
+
+// Initialize everything when the page loads
+window.addEventListener('load', () => {
+    handleLoading();
+    
+    // Handle section animations
+    const sections = document.querySelectorAll('.section-container');
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                requestAnimationFrame(() => {
+                    entry.target.classList.add('visible');
+                });
+            }
+        });
+    }, {
+        threshold: 0.1,
+        rootMargin: '50px'
+    });
+
+    sections.forEach(section => {
+        observer.observe(section);
+    });
+
+    // Optimize scroll performance
+    let ticking = false;
+    const scrollToTopBtn = document.getElementById('scrollToTopBtn');
+    
+    window.addEventListener('scroll', () => {
+        if (!ticking) {
+            window.requestAnimationFrame(() => {
+                if (window.scrollY > 300) {
+                    scrollToTopBtn.style.opacity = '1';
+                    scrollToTopBtn.style.visibility = 'visible';
+                } else {
+                    scrollToTopBtn.style.opacity = '0';
+                    scrollToTopBtn.style.visibility = 'hidden';
+                }
+                ticking = false;
+            });
+            ticking = true;
+        }
+    });
+
+    scrollToTopBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    });
+});
+
+// Optimize image loading
+document.addEventListener('DOMContentLoaded', () => {
+    const images = document.querySelectorAll('img');
+    images.forEach(img => {
+        if (img.complete) {
+            img.classList.add('loaded');
+        } else {
+            img.addEventListener('load', () => {
+                img.classList.add('loaded');
+            });
+        }
+    });
+});
+
 // Circular Sidebar functionality
 function initCircularSidebar() {
     const sidebarTrigger = document.getElementById('sidebar-trigger');
@@ -249,32 +338,14 @@ function initCircularSidebar() {
                 });
             });
         });
-        
-        // Hover effect for profile center
-        if (profileCenter) {
-            profileCenter.addEventListener('mouseenter', function() {
-                anime({
-                    targets: this,
-                    boxShadow: [
-                        '0 0 20px rgba(176, 38, 255, 0.7)',
-                        '0 0 30px rgba(0, 255, 209, 0.8)'
-                    ],
-                    duration: 500,
-                    easing: 'easeOutQuad'
-                });
-            });
-            
-            profileCenter.addEventListener('mouseleave', function() {
-                anime({
-                    targets: this,
-                    boxShadow: '0 0 20px rgba(176, 38, 255, 0.7)',
-                    duration: 500,
-                    easing: 'easeOutQuad'
-                });
-            });
-        }
     }
 }
+
+// Initialize all functionality when DOM is loaded
+document.addEventListener('DOMContentLoaded', () => {
+    initCircularSidebar();
+    // Add other initialization functions here
+});
 
 // COMPLETELY REWRITTEN TYPING ANIMATION
 function setupTypingAnimation() {
