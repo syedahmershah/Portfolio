@@ -1524,3 +1524,150 @@ window.addEventListener('load', () => {
         console.error('Three.js is not loaded');
     }
 });
+
+// Contact Form Validation and Error Handling
+document.addEventListener('DOMContentLoaded', function() {
+  const contactForm = document.getElementById('contactForm');
+  const nameInput = document.getElementById('name');
+  const emailInput = document.getElementById('email');
+  const messageInput = document.getElementById('message');
+  const nameError = document.getElementById('name-error');
+  const emailError = document.getElementById('email-error');
+  const messageError = document.getElementById('message-error');
+  const formStatus = document.querySelector('.form-status');
+  const loadingDots = document.querySelector('.loading-dots');
+
+  if (contactForm) {
+    // Validate name
+    nameInput.addEventListener('blur', function() {
+      if (nameInput.value.trim() === '') {
+        nameError.textContent = 'Please enter your name';
+        nameInput.classList.add('error');
+      } else {
+        nameError.textContent = '';
+        nameInput.classList.remove('error');
+      }
+    });
+
+    // Validate email
+    emailInput.addEventListener('blur', function() {
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (emailInput.value.trim() === '') {
+        emailError.textContent = 'Please enter your email';
+        emailInput.classList.add('error');
+      } else if (!emailRegex.test(emailInput.value)) {
+        emailError.textContent = 'Please enter a valid email address';
+        emailInput.classList.add('error');
+      } else {
+        emailError.textContent = '';
+        emailInput.classList.remove('error');
+      }
+    });
+
+    // Validate message
+    messageInput.addEventListener('blur', function() {
+      if (messageInput.value.trim() === '') {
+        messageError.textContent = 'Please enter your message';
+        messageInput.classList.add('error');
+      } else if (messageInput.value.trim().length < 10) {
+        messageError.textContent = 'Message must be at least 10 characters';
+        messageInput.classList.add('error');
+      } else {
+        messageError.textContent = '';
+        messageInput.classList.remove('error');
+      }
+    });
+
+    // Form submission
+    contactForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      // Validate all fields
+      let isValid = true;
+      
+      if (nameInput.value.trim() === '') {
+        nameError.textContent = 'Please enter your name';
+        nameInput.classList.add('error');
+        isValid = false;
+      }
+      
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (emailInput.value.trim() === '') {
+        emailError.textContent = 'Please enter your email';
+        emailInput.classList.add('error');
+        isValid = false;
+      } else if (!emailRegex.test(emailInput.value)) {
+        emailError.textContent = 'Please enter a valid email address';
+        emailInput.classList.add('error');
+        isValid = false;
+      }
+      
+      if (messageInput.value.trim() === '') {
+        messageError.textContent = 'Please enter your message';
+        messageInput.classList.add('error');
+        isValid = false;
+      } else if (messageInput.value.trim().length < 10) {
+        messageError.textContent = 'Message must be at least 10 characters';
+        messageInput.classList.add('error');
+        isValid = false;
+      }
+      
+      if (!isValid) {
+        formStatus.textContent = 'Please correct the errors above';
+        formStatus.classList.add('error-status');
+        return;
+      }
+      
+      // Show loading animation
+      loadingDots.style.display = 'flex';
+      formStatus.textContent = 'Sending...';
+      formStatus.classList.remove('error-status');
+      formStatus.classList.add('sending-status');
+      
+      // Submit form using fetch
+      fetch(contactForm.action, {
+        method: 'POST',
+        body: new FormData(contactForm),
+        headers: {
+          'Accept': 'application/json'
+        }
+      })
+      .then(response => {
+        if (response.ok) {
+          return response.json();
+        } else {
+          throw new Error('Network response was not ok');
+        }
+      })
+      .then(data => {
+        // Hide loading animation
+        loadingDots.style.display = 'none';
+        
+        // Show success message
+        formStatus.textContent = 'Message sent successfully! Thank you for reaching out.';
+        formStatus.classList.remove('sending-status');
+        formStatus.classList.add('success-status');
+        
+        // Reset form
+        contactForm.reset();
+        
+        // Clear status after 5 seconds
+        setTimeout(() => {
+          formStatus.textContent = '';
+          formStatus.classList.remove('success-status');
+        }, 5000);
+      })
+      .catch(error => {
+        // Hide loading animation
+        loadingDots.style.display = 'none';
+        
+        // Show error message
+        formStatus.textContent = 'There was a problem sending your message. Please try again later.';
+        formStatus.classList.remove('sending-status');
+        formStatus.classList.add('error-status');
+        
+        console.error('Error:', error);
+      });
+    });
+  }
+});
