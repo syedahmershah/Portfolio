@@ -43,6 +43,41 @@ if (typeof window.Utils === 'undefined') {
 
         isMobileView: function() {
             return window.innerWidth < 992;
+        },
+        
+        disableScroll: function() {
+            // Save current scroll position
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            const scrollLeft = window.pageXOffset || document.documentElement.scrollLeft;
+            
+            // Add styles to prevent scrolling
+            document.body.style.overflow = 'hidden';
+            document.body.style.position = 'fixed';
+            document.body.style.top = `-${scrollTop}px`;
+            document.body.style.left = `-${scrollLeft}px`;
+            document.body.style.width = '100%';
+            document.body.dataset.scrollTop = scrollTop;
+            document.body.dataset.scrollLeft = scrollLeft;
+        },
+        
+        enableScroll: function() {
+            // Restore scroll position
+            const scrollTop = parseInt(document.body.dataset.scrollTop || '0', 10);
+            const scrollLeft = parseInt(document.body.dataset.scrollLeft || '0', 10);
+            
+            // Remove styles that prevented scrolling
+            document.body.style.overflow = '';
+            document.body.style.position = '';
+            document.body.style.top = '';
+            document.body.style.left = '';
+            document.body.style.width = '';
+            
+            // Restore the scroll position
+            window.scrollTo(scrollLeft, scrollTop);
+            
+            // Clean up data attributes
+            delete document.body.dataset.scrollTop;
+            delete document.body.dataset.scrollLeft;
         }
     };
 }
@@ -54,9 +89,15 @@ if (typeof window.typingAnimationRunning === 'undefined') {
 function handleLoading() {
     const loadingPage = document.querySelector('.loading-page');
     
+    // Disable scrolling while loading
+    Utils.disableScroll();
+    
     setTimeout(() => {
         loadingPage.classList.add('hidden');
         document.body.classList.remove('loading');
+        
+        // Enable scrolling when loading is complete
+        Utils.enableScroll();
         
         setTimeout(() => {
             loadingPage.style.display = 'none';
@@ -132,7 +173,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
-// Circular Sidebar functionality
+
 function initCircularSidebar() {
     const sidebarTrigger = document.getElementById('sidebar-trigger');
     const circularSidebar = document.getElementById('circular-sidebar');
@@ -353,13 +394,13 @@ function initCircularSidebar() {
     }
 }
 
-// Initialize all functionality when DOM is loaded
+
 document.addEventListener('DOMContentLoaded', () => {
     initCircularSidebar();
-    // Add other initialization functions here
+
 });
 
-// COMPLETELY REWRITTEN TYPING ANIMATION
+
 function setupTypingAnimation() {
     if (window.typingAnimationRunning) {
         console.log('Typing animation already running');
@@ -1252,7 +1293,7 @@ window.addEventListener('load', () => {
         }, 1500);
     }
     
-    // Only call setupTypingAnimation if it hasn't already been started
+
     if (typeof setupTypingAnimation === 'function' && !window.typingAnimationRunning) {
         setupTypingAnimation();
     }
@@ -1280,21 +1321,21 @@ function createParticles() {
     }
 }
 
-// Skills typing effect function
+
 function initSkillsTyping() {
     const skillsText = document.querySelector('.skills-typing-text');
     const skillsContainer = document.querySelector('.skills-typing');
     
     if (!skillsText || !skillsContainer) return;
     
-    // Add a slight gap between "I'm skilled in" and skills
+
     skillsContainer.style.margin = '0';
     skillsContainer.style.padding = '0';
     skillsContainer.style.display = 'inline-flex';
     skillsContainer.style.alignItems = 'center';
     skillsContainer.style.gap = '0.5rem';
     
-    // Shorter skill names to prevent line breaks
+
     const skills = [
         "C++",
         "AI/ML",
@@ -1311,7 +1352,7 @@ function initSkillsTyping() {
     let isDeleting = false;
     let typingSpeed = 300; // Much slower typing speed
     
-    // Pre-calculate the maximum width to prevent layout shifts
+
     const tempSpan = document.createElement('span');
     tempSpan.style.visibility = 'hidden';
     tempSpan.style.position = 'absolute';
@@ -1326,14 +1367,14 @@ function initSkillsTyping() {
     
     document.body.removeChild(tempSpan);
     
-    // Set a fixed width and prevent line breaks
+
     skillsText.style.minWidth = `${maxWidth}px`;
     skillsText.style.display = 'inline-block';
     skillsText.style.whiteSpace = 'nowrap';
     skillsText.style.margin = '0';
     skillsText.style.padding = '0';
     
-    // Use a more efficient animation approach
+
     let lastTime = 0;
     const minTypingInterval = 120; // Much slower minimum time between updates
     
@@ -1354,12 +1395,12 @@ function initSkillsTyping() {
                 typingSpeed = 150;
             }
             
-            // If word is complete
+
             if (!isDeleting && currentCharIndex === currentSkill.length) {
                 isDeleting = true;
                 typingSpeed = 1500;
             } 
-            // If deletion is complete
+
             else if (isDeleting && currentCharIndex === 0) {
                 isDeleting = false;
                 currentSkillIndex = (currentSkillIndex + 1) % skills.length;
@@ -1372,11 +1413,11 @@ function initSkillsTyping() {
         requestAnimationFrame(typeSkill);
     }
     
-    // Start the animation
+
     requestAnimationFrame(typeSkill);
 }
 
-// Three.js Particle Animation
+
 if (typeof window.ParticleSystem === 'undefined') {
     window.ParticleSystem = {
         scene: null,
@@ -1447,7 +1488,7 @@ if (typeof window.ParticleSystem === 'undefined') {
             pointLight.position.set(5, 5, 5);
             this.scene.add(pointLight);
 
-            // Handle window resize
+
             window.addEventListener('resize', () => {
                 if (homeSection) {
                     this.camera.aspect = homeSection.offsetWidth / homeSection.offsetHeight;
@@ -1475,7 +1516,7 @@ if (typeof window.ParticleSystem === 'undefined') {
     };
 }
 
-// Initialize particles when the page loads
+
 window.addEventListener('load', () => {
     if (typeof THREE !== 'undefined') {
         window.ParticleSystem.init();
