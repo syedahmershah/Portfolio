@@ -51,9 +51,7 @@
 
   <!-- Fonts and Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Orbitron:wght@400;500;600;700;800;900&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&family=Orbitron:wght@400;500;600;700;800;900&family=Outfit:wght@300;400;500;600;700&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   
   <!-- Schema.org Markup -->
   <script type="application/ld+json">
@@ -110,6 +108,19 @@
     .loading-page.hidden {
       opacity: 0;
       pointer-events: none;
+    }
+
+    /* Screen reader only - accessibility */
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
     }
 
     .loading-container {
@@ -773,7 +784,7 @@
   <header>
     <div class="nav-container">
       <div class="logo-container">
-        <img src="Images/Logo/Character.webp" alt="Syed Ahmer Shah" class="logo" />
+        <img src="Images/Logo/Character.webp" alt="Syed Ahmer Shah - Logo" class="logo" />
         <span class="logo-text" id="sidebar-trigger">Ahmer Shah</span>
       </div>
       <nav class="nav-links-container">
@@ -840,7 +851,7 @@
   <section id="home" style="position: relative; overflow: hidden;">
     <div class="section-container home-content">
       <div id="home-logo-3d"></div> 
-      <img src="Images/Logo/Character.webp" alt="Syed Ahmer Shah - Profile Image" class="profile-header-image" />
+      <img src="Images/Logo/Character.webp" alt="Syed Ahmer Shah - Software Engineer Profile Photo" class="profile-header-image" />
       <h1 class="name-heading">
         <span id="greeting-text"></span>
         <span id="name-text"></span>
@@ -856,7 +867,7 @@
           <i class="fas fa-paper-plane"></i>
           Get in Touch
         </a>
-        <a href="https://drive.google.com/drive/folders/1xYwejSXki_-rTO2SS7_wnvMzAdJdzRY6?usp=drive_link" target="_blank" class="cta-button resume-button">
+        <a href="https://drive.google.com/drive/folders/1xYwejSXki_-rTO2SS7_wnvMzAdJdzRY6?usp=drive_link" target="_blank" rel="noopener noreferrer" class="cta-button resume-button">
           <i class="fas fa-download"></i>
           Download My Resume/CV
         </a>
@@ -868,7 +879,7 @@
     <h2>About Me <span class="emoji emoji-about">🌍</span></h2>
     <div class="about-container">
       <div class="about-header">
-        <img src="Images/Logo/About me.webp" alt="Syed Ahmer Shah - About Me Image" class="profile-img" />
+        <img src="Images/Logo/About me.webp" alt="Syed Ahmer Shah - Software Engineer and Developer Portrait" class="profile-img" />
         <button type="button" class="about-expand-btn open-modal" data-target="modal-know-more">
           <span class="btn-text">Discover More</span>
           <span class="btn-icon"><i class="fas fa-chevron-down"></i></span>
@@ -911,159 +922,119 @@
             <button type="button" class="cta-button open-modal" data-target="modal-rpsls">View Details</button>
           </div>
         </div>
-        <!-- <div class="project-card">
-          <img src="https://repository-images.githubusercontent.com/636382929/7f38c0b4-4ced-441b-a342-5fcfa79ea89b" alt="Task Management App Project" class="project-image" />
-          <div class="project-info">
-            <h3>Spotify Clone</h3>
-            <p>Built a fully functional Spotify clone with a modern, user-friendly interface</p>
-            <button type="button" class="cta-button open-modal" data-target="modal-task">View Details</button>
-          </div>
-        </div>
-        <div class="project-card">
-          <img src="https://repository-images.githubusercontent.com/529567024/9041af7b-8621-4abc-80ce-7b628707510b" alt="Banking App Redesign Project" class="project-image" />
-          <div class="project-info">
-            <h3>Amazon Clone</h3>
-            <p>Developed a feature-packed Amazon clone with seamless functionality</p>
-            <button type="button" class="cta-button open-modal" data-target="modal-banking">View Details</button>
-          </div>
-        </div>
-        <div class="project-card">
-          <img src="https://mir-s3-cdn-cf.behance.net/projects/404/bf1e68214791583.Y3JvcCwzMDY4LDI0MDAsNjgsMA.jpg" alt=" Personal Portfolio Website" class="project-image" />
-          <div class="project-info">
-            <h3>Portfolio Website</h3>
-            <p>Crafted a fully responsive personal portfolio using HTML, CSS, Bootstrap, JavaScript, Three.js and Anime.js</p>
-            <button type="button" class="cta-button open-modal" data-target="modal-portfolio">View Details</button>
-          </div>
-        </div>
-        <div class="project-card">
-          <img src="https://i.ytimg.com/vi/Tgat3-prVv4/maxresdefault.jpg" alt="Weather App Project" class="project-image" />
-          <div class="project-info">
-            <h3>Netflix Clone</h3>
-            <p>Created a fully functional Netflix clone with dynamic media streaming features & account-creation page</p>
-            <button type="button" class="cta-button open-modal" data-target="modal-weather">View Details</button>
-          </div>
-        </div>
-        <div class="project-card">
-          <img src="https://tanzaniaconsultant.com/wp-content/uploads/2023/06/Tanzania-Banks-and-Banking-System.png" alt="Chat Application Project" class="project-image" />
-          <div class="project-info">
-            <h3>Bank Management System</h3>
-            <p>Developed a secure and efficient bank management system with user account features</p>
-            <button type="button" class="cta-button open-modal" data-target="modal-chat">View Details</button>
-          </div>
-        </div>
       </div>
-    </div> -->
+    </div>
   </section>
   <section id="certifications">
     <div class="section-container">
       <h2>Certifications <span class="emoji emoji-certifications">📜</span></h2>
       <div class="certifications-grid">
         <div class="certification-card">
-          <img src="https://media.licdn.com/dms/image/v2/D4D22AQGB_9J25BWrsw/feedshare-shrink_1280/B4DZVZWoeaGkAk-/0/1740960860315?e=2147483647&v=beta&t=nLDoMPnxDbyfEAZ3qrBVHu29S6eaOUPIYnt2Rdx3BjI" alt="Certified Become a Software Developer Certificate" class="certification-image" />
+          <img src="https://media.licdn.com/dms/image/v2/D4D22AQGB_9J25BWrsw/feedshare-shrink_1280/B4DZVZWoeaGkAk-/0/1740960860315?e=2147483647&v=beta&t=nLDoMPnxDbyfEAZ3qrBVHu29S6eaOUPIYnt2Rdx3BjI" alt="Certified Become a Software Developer Certificate" class="certification-image" loading="lazy" />
           <h3>Certified Software Developer</h3>
           <p>Issued by Linkedln Learning • <br> 2025</p>
           <div class="button-group">
             <button type="button" class="cta-button open-modal" data-target="modal-cert1">Show Details</button>
-            <a href="https://www.linkedin.com/learning/certificates/59c5bd7f8949c26268fea7e3bd9c4321f52f0c0bb6757edd8f3c06518b0d80b5" target="_blank" class="cta-button">Show Credential</a>
+            <a href="https://www.linkedin.com/learning/certificates/59c5bd7f8949c26268fea7e3bd9c4321f52f0c0bb6757edd8f3c06518b0d80b5" target="_blank" rel="noopener noreferrer" class="cta-button">Show Credential</a>
           </div>
         </div>
         <div class="certification-card">
-          <img src="https://certificates.simplicdn.net/share/7941723_82541961740161111147.png" alt="Certified Introduction to Front End Development Certificate" class="certification-image" />
+          <img src="https://certificates.simplicdn.net/share/7941723_82541961740161111147.png" alt="Certified Introduction to Front End Development Certificate" class="certification-image" loading="lazy" />
           <h3>Certified Frontend Developer</h3>
           <p>Issued by Simplilearn • <br> 2025</p>
           <div class="button-group">
             <button type="button" class="cta-button open-modal" data-target="modal-cert2">Show Details</button>
-            <a href="https://www.simplilearn.com/skillup-certificate-landing?token=eyJjb3Vyc2VfaWQiOiIxOTMzIiwiY2VydGlmaWNhdGVfdXJsIjoiaHR0cHM6XC9cL2NlcnRpZmljYXRlcy5zaW1wbGljZG4ubmV0XC9zaGFyZVwvNzk0MTcyM184MjU0MTk2MTc0MDE2MTExMTE0Ny5wbmciLCJ1c2VybmFtZSI6IlN5ZWQgQWhtZXIgU2hhaCJ9&utm_source=shared-certificate&utm_medium=app_lms&utm_campaign=shared-certificate-promotion&referrer=https%3A%2F%2Fcertificates.simplicdn.net%2Fshare%2F7941723_82541961740161111147.png&_branch_match_id=1427465688532051026&_branch_referrer=H4sIAAAAAAAAA8soKSkottLXL87MLcjJ1EssKNDLyczL1g8sSTb3LysNSgxKsq8rSk1LLSrKzEuPTyrKLy9OLbJ1zijKz00FAPr80bU9AAAA" target="_blank" class="cta-button">Show Credential</a>
+            <a href="https://www.simplilearn.com/skillup-certificate-landing?token=eyJjb3Vyc2VfaWQiOiIxOTMzIiwiY2VydGlmaWNhdGVfdXJsIjoiaHR0cHM6XC9cL2NlcnRpZmljYXRlcy5zaW1wbGljZG4ubmV0XC9zaGFyZVwvNzk0MTcyM184MjU0MTk2MTc0MDE2MTExMTE0Ny5wbmciLCJ1c2VybmFtZSI6IlN5ZWQgQWhtZXIgU2hhaCJ9&utm_source=shared-certificate&utm_medium=app_lms&utm_campaign=shared-certificate-promotion&referrer=https%3A%2F%2Fcertificates.simplicdn.net%2Fshare%2F7941723_82541961740161111147.png&_branch_match_id=1427465688532051026&_branch_referrer=H4sIAAAAAAAAA8soKSkottLXL87MLcjJ1EssKNDLyczL1g8sSTb3LysNSgxKsq8rSk1LLSrKzEuPTyrKLy9OLbJ1zijKz00FAPr80bU9AAAA" target="_blank" rel="noopener noreferrer" class="cta-button">Show Credential</a>
           </div>
         </div>
         <div class="certification-card">
-          <img src="https://media.licdn.com/dms/image/v2/D5622AQEoHu1iHn62mA/feedshare-shrink_1280/B56ZVc38DnHEAk-/0/1741019922937?e=2147483647&v=beta&t=nSx_2s5ipuC-Vz_WwrMqCAfL7RzJ0cQLs6CcOZKFoXo" alt="Certified Become a RESTful API Developer Certificate" class="certification-image" />
+          <img src="https://media.licdn.com/dms/image/v2/D5622AQEoHu1iHn62mA/feedshare-shrink_1280/B56ZVc38DnHEAk-/0/1741019922937?e=2147483647&v=beta&t=nSx_2s5ipuC-Vz_WwrMqCAfL7RzJ0cQLs6CcOZKFoXo" alt="Certified Become a RESTful API Developer Certificate" class="certification-image" loading="lazy" />
           <h3>Certified RESTful API Developer</h3>
           <p>Issued by Linkedln Learning • <br> 2025</p>
           <div class="button-group">
             <button type="button" class="cta-button open-modal" data-target="modal-cert3">Show Details</button>
-            <a href="https://www.linkedin.com/learning/certificates/c60229019d115db34e252f305fa83f486403be4bb722372a403fcdd746ecc794" target="_blank" class="cta-button">Show Credential</a>
+            <a href="https://www.linkedin.com/learning/certificates/c60229019d115db34e252f305fa83f486403be4bb722372a403fcdd746ecc794" target="_blank" rel="noopener noreferrer" class="cta-button">Show Credential</a>
           </div>
         </div>
         <div class="certification-card">
-          <img src="https://media.licdn.com/dms/image/v2/D4D22AQERAbXlWzAsQw/feedshare-shrink_1280/B4DZVJMOwfHIAk-/0/1740689698105?e=2147483647&v=beta&t=RWHfVruUCTd48JHDtCbMArhxPpKUvpdCJ9Y3mpBTCCE" alt="Certified Artificial Intelligence & Machine Learning Certificate" class="certification-image" />
+          <img src="https://media.licdn.com/dms/image/v2/D4D22AQERAbXlWzAsQw/feedshare-shrink_1280/B4DZVJMOwfHIAk-/0/1740689698105?e=2147483647&v=beta&t=RWHfVruUCTd48JHDtCbMArhxPpKUvpdCJ9Y3mpBTCCE" alt="Certified Artificial Intelligence & Machine Learning Certificate" class="certification-image" loading="lazy" />
           <h3>Certified in AI & ML</h3>
           <p>Issued by Linkedln Learning • <br> 2025</p>
           <div class="button-group">
             <button type="button" class="cta-button open-modal" data-target="modal-cert4">Show Details</button>
-            <a href="https://www.linkedin.com/learning/certificates/bd18e234aa6c68e673ddbc5bc66018fca430ca9fa964cdc4a75f59e21d2101b9" target="_blank" class="cta-button">Show Credential</a>
+            <a href="https://www.linkedin.com/learning/certificates/bd18e234aa6c68e673ddbc5bc66018fca430ca9fa964cdc4a75f59e21d2101b9" target="_blank" rel="noopener noreferrer" class="cta-button">Show Credential</a>
           </div>
         </div>
         <div class="certification-card">
-          <img src="https://s3.amazonaws.com/coursera_assets/meta_images/generated/CERTIFICATE_LANDING_PAGE/CERTIFICATE_LANDING_PAGE~KPHXRZMXZJR5/CERTIFICATE_LANDING_PAGE~KPHXRZMXZJR5.jpeg" alt="Certified AI For Everyone Certificate" class="certification-image" />
+          <img src="https://s3.amazonaws.com/coursera_assets/meta_images/generated/CERTIFICATE_LANDING_PAGE/CERTIFICATE_LANDING_PAGE~KPHXRZMXZJR5/CERTIFICATE_LANDING_PAGE~KPHXRZMXZJR5.jpeg" alt="Certified AI For Everyone Certificate" class="certification-image" loading="lazy" />
           <h3>Certified in AI For Everyone</h3>
           <p>Issued by DeepLearning.AI • <br>2025</p>
           <div class="button-group">
             <button type="button" class="cta-button open-modal" data-target="modal-cert5">Show Details</button>
-            <a href="https://www.coursera.org/account/accomplishments/records/KPHXRZMXZJR5" target="_blank" class="cta-button">Show Credential</a>
+            <a href="https://www.coursera.org/account/accomplishments/records/KPHXRZMXZJR5" target="_blank" rel="noopener noreferrer" class="cta-button">Show Credential</a>
           </div>
         </div>
         <div class="certification-card">
-          <img src="https://s3.amazonaws.com/coursera_assets/meta_images/generated/CERTIFICATE_LANDING_PAGE/CERTIFICATE_LANDING_PAGE~BRBRBJ502Y24/CERTIFICATE_LANDING_PAGE~BRBRBJ502Y24.jpeg" alt="Certified Machine Learning Specialist Certificate" class="certification-image" />
+          <img src="https://s3.amazonaws.com/coursera_assets/meta_images/generated/CERTIFICATE_LANDING_PAGE/CERTIFICATE_LANDING_PAGE~BRBRBJ502Y24/CERTIFICATE_LANDING_PAGE~BRBRBJ502Y24.jpeg" alt="Certified Machine Learning Specialist Certificate" class="certification-image" loading="lazy" />
           <h3>Certified Machine Learning Specialist</h3>
           <p>Issued by IBM •<br> 2025</p>
           <div class="button-group">
             <button type="button" class="cta-button open-modal" data-target="modal-cert6">Show Details</button>
-            <a href="https://www.coursera.org/account/accomplishments/verify/BRBRBJ502Y24?utm_source=mobile&utm_medium=certificate&utm_content=cert_image&utm_campaign=sharing_cta&utm_product=course" target="_blank" class="cta-button">Show Credential</a>
+            <a href="https://www.coursera.org/account/accomplishments/verify/BRBRBJ502Y24?utm_source=mobile&utm_medium=certificate&utm_content=cert_image&utm_campaign=sharing_cta&utm_product=course" target="_blank" rel="noopener noreferrer" class="cta-button">Show Credential</a>
           </div>
         </div>
         <div class="certification-card">
-          <img src="https://s3.amazonaws.com/coursera_assets/meta_images/generated/CERTIFICATE_LANDING_PAGE/CERTIFICATE_LANDING_PAGE~RIBECK9H9GNM/CERTIFICATE_LANDING_PAGE~RIBECK9H9GNM.jpeg" alt="Certified Introduction to Artificial Intelligence (AI) Certificate" class="certification-image" />
+          <img src="https://s3.amazonaws.com/coursera_assets/meta_images/generated/CERTIFICATE_LANDING_PAGE/CERTIFICATE_LANDING_PAGE~RIBECK9H9GNM/CERTIFICATE_LANDING_PAGE~RIBECK9H9GNM.jpeg" alt="Certified Introduction to Artificial Intelligence (AI) Certificate" class="certification-image" loading="lazy" />
           <h3>Certified in Introduction to Artificial Intelligence </h3>
           <p>Issued by IBM • <br>2025</p>
           <div class="button-group">
             <button type="button" class="cta-button open-modal" data-target="modal-cert7">Show Details</button>
-            <a href="https://coursera.org/share/dbbc9f66b26bc15289c8daa9134ea11e" target="_blank" class="cta-button">Show Credential</a>
+            <a href="https://coursera.org/share/dbbc9f66b26bc15289c8daa9134ea11e" target="_blank" rel="noopener noreferrer" class="cta-button">Show Credential</a>
           </div>
         </div>
         <div class="certification-card">
-          <img src="https://certificates.simplicdn.net/share/7920252_82541961739822272295.png" alt="Certified in GitHub Copilot Fundamentals Certificate" class="certification-image" />
+          <img src="https://certificates.simplicdn.net/share/7920252_82541961739822272295.png" alt="Certified in GitHub Copilot Fundamentals Certificate" class="certification-image" loading="lazy" />
           <h3>Certified in GitHub Copilot Fundamentals</h3>
           <p>Issued by Simplilearn •<br> 2025</p>
           <div class="button-group">
             <button type="button" class="cta-button open-modal" data-target="modal-cert8">Show Details</button>
-            <a href="https://www.simplilearn.com/skillup-certificate-landing?token=eyJjb3Vyc2VfaWQiOiI0ODc2IiwiY2VydGlmaWNhdGVfdXJsIjoiaHR0cHM6XC9cL2NlcnRpZmljYXRlcy5zaW1wbGljZG4ubmV0XC9zaGFyZVwvNzkyMDI1Ml84MjU0MTk2MTczOTgyMjI3MjI5NS5wbmciLCJ1c2VybmFtZSI6IlN5ZWQgQWhtZXIgU2hhaCJ9&utm_source=shared-certificate&utm_medium=app_lms&utm_campaign=shared-certificate-promotion&referrer=https%3A%2F%2Fcertificates.simplicdn.net%2Fshare%2F7920252_82541961739822272295.png&_branch_match_id=1427470255385736877&_branch_referrer=H4sIAAAAAAAAA8soKSkottLXL87MLcjJ1EssKNDLyczL1nf1yIgqLnLNMQlMsq8rSk1LLSrKzEuPTyrKLy9OLbJ1zijKz00FAMO7g6Q9AAAA" target="_blank" class="cta-button">Show Credential</a>
+            <a href="https://www.simplilearn.com/skillup-certificate-landing?token=eyJjb3Vyc2VfaWQiOiI0ODc2IiwiY2VydGlmaWNhdGVfdXJsIjoiaHR0cHM6XC9cL2NlcnRpZmljYXRlcy5zaW1wbGljZG4ubmV0XC9zaGFyZVwvNzkyMDI1Ml84MjU0MTk2MTczOTgyMjI3MjI5NS5wbmciLCJ1c2VybmFtZSI6IlN5ZWQgQWhtZXIgU2hhaCJ9&utm_source=shared-certificate&utm_medium=app_lms&utm_campaign=shared-certificate-promotion&referrer=https%3A%2F%2Fcertificates.simplicdn.net%2Fshare%2F7920252_82541961739822272295.png&_branch_match_id=1427470255385736877&_branch_referrer=H4sIAAAAAAAAA8soKSkottLXL87MLcjJ1EssKNDLyczL1nf1yIgqLnLNMQlMsq8rSk1LLSrKzEuPTyrKLy9OLbJ1zijKz00FAMO7g6Q9AAAA" target="_blank" rel="noopener noreferrer" class="cta-button">Show Credential</a>
           </div>
         </div>
         <div class="certification-card">
-          <img src="https://s3.amazonaws.com/coursera_assets/meta_images/generated/CERTIFICATE_LANDING_PAGE/CERTIFICATE_LANDING_PAGE~7GGU5A4WMN5H/CERTIFICATE_LANDING_PAGE~7GGU5A4WMN5H.jpeg" alt="Certified Full Stack Web Development Certificate" class="certification-image" />
+          <img src="https://s3.amazonaws.com/coursera_assets/meta_images/generated/CERTIFICATE_LANDING_PAGE/CERTIFICATE_LANDING_PAGE~7GGU5A4WMN5H/CERTIFICATE_LANDING_PAGE~7GGU5A4WMN5H.jpeg" alt="Certified Full Stack Web Development Certificate" class="certification-image" loading="lazy" />
           <h3>Certified Full Stack Web Developer</h3>
           <p>Issued by Amazon • <br>2025</p>
           <div class="button-group">
             <button type="button" class="cta-button open-modal" data-target="modal-cert9">Show Details</button>
-            <a href="https://coursera.org/share/59624e50daaebda212d556f2f40ae45b" target="_blank" class="cta-button">Show Credential</a>
+            <a href="https://coursera.org/share/59624e50daaebda212d556f2f40ae45b" target="_blank" rel="noopener noreferrer" class="cta-button">Show Credential</a>
           </div>
         </div>
         <div class="certification-card">
-          <img src="https://s3.amazonaws.com/coursera_assets/meta_images/generated/CERTIFICATE_LANDING_PAGE/CERTIFICATE_LANDING_PAGE~LLW4BJT0K2RI/CERTIFICATE_LANDING_PAGE~LLW4BJT0K2RI.jpeg" alt="Certified Getting Started with Front-End and Web Development Certificate" class="certification-image" />
+          <img src="https://s3.amazonaws.com/coursera_assets/meta_images/generated/CERTIFICATE_LANDING_PAGE/CERTIFICATE_LANDING_PAGE~LLW4BJT0K2RI/CERTIFICATE_LANDING_PAGE~LLW4BJT0K2RI.jpeg" alt="Certified Getting Started with Front-End and Web Development Certificate" class="certification-image" loading="lazy" />
           <h3>Certified Front End Web Developer</h3>
           <p>Issued by IBM •<br> 2025</p>
           <div class="button-group">
             <button type="button" class="cta-button open-modal" data-target="modal-cert10">Show Details</button>
-            <a href="https://coursera.org/share/fab6bb6f3b9661bd0e4e0b6a97e8a0f7" target="_blank" class="cta-button">Show Credential</a>
+            <a href="https://coursera.org/share/fab6bb6f3b9661bd0e4e0b6a97e8a0f7" target="_blank" rel="noopener noreferrer" class="cta-button">Show Credential</a>
           </div>
         </div>
         <div class="certification-card">
-          <img src="https://s3.amazonaws.com/coursera_assets/meta_images/generated/CERTIFICATE_LANDING_PAGE/CERTIFICATE_LANDING_PAGE~NWRLH5P524PQ/CERTIFICATE_LANDING_PAGE~NWRLH5P524PQ.jpeg" alt="Certified Introduction to Software Development Certificate" class="certification-image" />
+          <img src="https://s3.amazonaws.com/coursera_assets/meta_images/generated/CERTIFICATE_LANDING_PAGE/CERTIFICATE_LANDING_PAGE~NWRLH5P524PQ/CERTIFICATE_LANDING_PAGE~NWRLH5P524PQ.jpeg" alt="Certified Introduction to Software Development Certificate" class="certification-image" loading="lazy" />
           <h3>Mastered the Fundamentals of Software Development</h3>
           <p>Issued by Amazon •<br> 2025</p>
           <div class="button-group">
             <button type="button" class="cta-button open-modal" data-target="modal-cert11">Show Details</button>
-            <a href="https://coursera.org/share/a77817bfcee79382be71bbc29201211b" target="_blank" class="cta-button">Show Credential</a>
+            <a href="https://coursera.org/share/a77817bfcee79382be71bbc29201211b" target="_blank" rel="noopener noreferrer" class="cta-button">Show Credential</a>
           </div>
         </div>
         <div class="certification-card">
-          <img src="https://s3.amazonaws.com/coursera_assets/meta_images/generated/CERTIFICATE_LANDING_PAGE/CERTIFICATE_LANDING_PAGE~81FYH2SPL62P/CERTIFICATE_LANDING_PAGE~81FYH2SPL62P.jpeg" alt="Certified Introduction to Front-End Development Certificate" class="certification-image" />
+          <img src="https://s3.amazonaws.com/coursera_assets/meta_images/generated/CERTIFICATE_LANDING_PAGE/CERTIFICATE_LANDING_PAGE~81FYH2SPL62P/CERTIFICATE_LANDING_PAGE~81FYH2SPL62P.jpeg" alt="Certified Introduction to Front-End Development Certificate" class="certification-image" loading="lazy" />
           <h3>Mastered the Fundamentals of Front-End Development</h3>
           <p>Issued by Meta • <br>2025</p>
           <div class="button-group">
             <button type="button" class="cta-button open-modal" data-target="modal-cert12">Show Details</button>
-            <a href="https://coursera.org/share/d09512c135d50e327d4b69f6e9193e6e" target="_blank" class="cta-button">Show Credential</a>
+            <a href="https://coursera.org/share/d09512c135d50e327d4b69f6e9193e6e" target="_blank" rel="noopener noreferrer" class="cta-button">Show Credential</a>
           </div>
         </div>
       </div>
@@ -1087,7 +1058,7 @@
           <p>Node.js, Python, Java, C++, REST APIs</p>
           <div class="skill-progress">
             <div class="skill-progress-bar" style="width: 65%"></div>
- z         </div>
+          </div>
         </div>
         <div class="skill-card">
           <i class="fas fa-palette skill-icon"></i>
@@ -1138,12 +1109,12 @@
     <h2 class="fade-in-up">Education <span class="emoji emoji-education">🎓</span></h2>
     <div class="education-grid">
       <div class="education-card fade-in-up-delay">
-        <a href="https://hitms.edu.pk/" target="_blank">
-          <img src="https://hitms.edu.pk/wp-content/uploads/2024/07/WhatsApp-Image-2024-10-10-at-16.43.48_ff2d2aec-1024x986.jpg" class="education-image" />
+        <a href="https://hitms.edu.pk/" target="_blank" rel="noopener noreferrer">
+          <img src="https://hitms.edu.pk/wp-content/uploads/2024/07/WhatsApp-Image-2024-10-10-at-16.43.48_ff2d2aec.jpg" class="education-image" alt="Hyderabad Institute for Technology and Management Sciences - Campus" />
         </a>
         <div class="education-content">
           <h3 class="education-title">Hyderabad Institute for Technology and Management Sciences</h3>
-          <p>BS in Software Engineering • <br> 2024 - 2028</p>
+          <p>BS in Software Engineering • <br> 2025 - 2028</p>
           <p>Current GPA: 3.4/4.0 (Expected)</p>
           <div class="button-group">
             <button type="button" class="cta-button open-modal" data-target="modal-marksheet1">View Marksheet</button>
@@ -1151,12 +1122,12 @@
         </div>
       </div>
       <div class="education-card fade-in-up-delay-2">
-        <a href="https://scs.smartpupils.com/web/home/" target="_blank">
-          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSVSfmV92OGO65_zURLF4HI0EbbiEdLQsn1pA&s" class="education-image" />
+        <a href="https://scs.smartpupils.com/web/home/" target="_blank" rel="noopener noreferrer">
+          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSVSfmV92OGO65_zURLF4HI0EbbiEdLQsn1pA&s" class="education-image" alt="Superior College of Science - Campus Logo" />
         </a>
         <div class="education-content">
           <h3 class="education-title">Superior College of Science</h3>
-          <p>Intermediate in Pre-Engineering • <br>2022 - 2024</p>
+          <p>Intermediate in Pre-Engineering • <br>2022 - 2025</p>
           <p>Grade: A</p>
           <div class="button-group">
             <button type="button" class="cta-button open-modal" data-target="modal-marksheet2">View Marksheet</button>
@@ -1164,8 +1135,8 @@
         </div>
       </div>
       <div class="education-card fade-in-up-delay-3">
-        <a href="https://www.facebook.com/sbhscity/" target="_blank">
-          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRs7X8AilhCVUnziR4ph1K7DE84-wKaeYYzTg&s" class="education-image" />
+        <a href="https://www.facebook.com/sbhscity/" target="_blank" rel="noopener noreferrer">
+          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRs7X8AilhCVUnziR4ph1K7DE84-wKaeYYzTg&s" class="education-image" alt="St Bonaventure High School - City Branch Logo" />
         </a>
         <div class="education-content">
           <h3 class="education-title">St Bonaventure High School - City Branch</h3>
@@ -1228,37 +1199,37 @@
     <h2 class="fade-in-up">Latest Blog <span class="emoji emoji-blog">📖</span></h2>
     <div class="blog-container">
       <a href="#" class="blog-card fade-in-up-delay open-blog-modal">
-        <img src="https://rejolut.com/wp-content/uploads/2024/02/unnamed-20.jpg" alt="Blog 1" class="blog-image" />
+        <img src="https://eu-images.contentstack.com/v3/assets/blt6b0f74e5591baa03/blt1ccb3b9d8f58a9db/6656364fbf04fb9138d40433/GettyImages-1443914481.jpg?width=1280&auto=webp&quality=95&format=jpg&disable=upscale" alt="Blog 1" class="blog-image" loading="lazy" />
         <h3>The Uncharted Frontier: Exploring the Synergy of Generative AI and Ethical Boundaries</h3>
         <p>2025</p>
         <p>Explore the ethical implications and potential of generative AI in various industries.</p>
       </a>
       <a href="#" class="blog-card fade-in-up-delay-2 open-blog-modal">
-        <img src="https://miro.medium.com/v2/resize:fit:1010/1*eUmii7O0Bt6teDMREVZJsA.png" alt="Blog 2" class="blog-image" />
+        <img src="https://miro.medium.com/v2/resize:fit:1010/1*eUmii7O0Bt6teDMREVZJsA.png" alt="Blog 2" class="blog-image" loading="lazy" />
         <h3>The Future of Data Science: Shaping the World with Insights</h3>
         <p>2025</p>
         <p>Discover how data science is transforming industries and driving innovation.</p>
       </a>
       <a href="#" class="blog-card fade-in-up-delay-3 open-blog-modal">
-        <img src="https://media.licdn.com/dms/image/D4D12AQFByCcbc68k-w/article-cover_image-shrink_600_2000/0/1716205796483?e=2147483647&v=beta&t=OITEQZCS2zz7ak_lb2kfbfUJ_Txx2pAC8xLKfazDZ6U" alt="Blog 3" class="blog-image" />
+        <img src="https://media.licdn.com/dms/image/D4D12AQFByCcbc68k-w/article-cover_image-shrink_600_2000/0/1716205796483?e=2147483647&v=beta&t=OITEQZCS2zz7ak_lb2kfbfUJ_Txx2pAC8xLKfazDZ6U" alt="Blog 3" class="blog-image" loading="lazy" />
         <h3>Exploring the Future of Computer Vision, LLMs, and NLP – University of Birmingham Dubai</h3>
         <p>2025</p>
         <p>An in-depth look at the advancements in computer vision, large language models, and natural language processing.</p>
       </a>
       <a href="#" class="blog-card fade-in-up-delay-4 open-blog-modal">
-        <img src="https://res.cloudinary.com/jerrick/image/upload/d_642250b563292b35f27461a7.png,f_jpg,fl_progressive,q_auto,w_1024/67396d61eb6906001dadcb58.jpg" alt="Blog 4" class="blog-image" />
+        <img src="https://res.cloudinary.com/jerrick/image/upload/d_642250b563292b35f27461a7.png,f_jpg,fl_progressive,q_auto,w_1024/67396d61eb6906001dadcb58.jpg" alt="Blog 4" class="blog-image" loading="lazy" />
         <h3>AI in Healthcare: Revolutionizing Patient Care and Diagnosis</h3>
         <p>2025</p>
         <p>How AI is transforming the healthcare industry by improving patient care and diagnosis.</p>
       </a>
       <a href="#" class="blog-card fade-in-up-delay-5 open-blog-modal">
-        <img src="https://miro.medium.com/v2/resize:fit:624/1*WVgbO4clqXdeT8C19VhFPA.png" alt="Blog 5" class="blog-image" />
+        <img src="https://miro.medium.com/v2/resize:fit:624/1*WVgbO4clqXdeT8C19VhFPA.png" alt="Blog 5" class="blog-image" loading="lazy" />
         <h3>Blockchain Beyond Cryptocurrency: Real-World Applications</h3>
         <p>2025</p>
         <p>Explore the various real-world applications of blockchain technology beyond cryptocurrency.</p>
       </a>
       <a href="#" class="blog-card fade-in-up-delay-6 open-blog-modal">
-        <img src="https://upes-production-cvb3e7frghdda0a4.z01.azurefd.net/drupal-data/2024-09/Cybersecurity-in-the-Digital-Age.webp" alt="Blog 6" class="blog-image" />
+        <img src="https://www.tecziq.com/wp-content/uploads/2024/01/cybersecurity.webp" alt="Blog 6" class="blog-image" loading="lazy" />
         <h3>Cybersecurity Trends: Protecting Data in the Digital Age</h3>
         <p>2025</p>
         <p>Stay updated on the latest trends in cybersecurity and how to protect data in the digital age.</p>
@@ -1296,12 +1267,15 @@
       </div>
       <form class="contact-form fade-in-up-delay-4" id="contactForm" action="https://formspree.io/f/mzzepnke" method="POST">
         <div class="form-group">
+          <label for="name" class="sr-only">Name</label>
           <input type="text" id="name" name="name" placeholder="Name" required autocomplete="name" />
         </div>
         <div class="form-group">
+          <label for="email" class="sr-only">Email</label>
           <input type="email" id="email" name="email" placeholder="Email" required autocomplete="email" />
         </div>
         <div class="form-group">
+          <label for="message" class="sr-only">Message</label>
           <textarea rows="5" id="message" name="message" placeholder="Message" required autocomplete="message"></textarea>
         </div>
         <input type="hidden" name="_replyto" value="ahmarshah170@gmail.com" />
@@ -1344,7 +1318,7 @@
       </div>
       <div class="modal-body">
         <div class="modal-image-container">
-          <img src="https://media.licdn.com/dms/image/v2/D4D22AQGv43TjoOH-aw/feedshare-shrink_2048_1536/B4DZXrBwO2G8Ak-/0/1743404896981?e=1746662400&v=beta&t=D0r_5fVBiRAXdsnWAkxltdyj9Ms4dDNaLGus8uPB7cE" alt="Rock Paper Scissors Lizard Spock: AI-Powered Gesture Recognition Game Project" class="modal-image" />
+          <img src="https://media.licdn.com/dms/image/v2/D4D22AQGv43TjoOH-aw/feedshare-shrink_2048_1536/B4DZXrBwO2G8Ak-/0/1743404896981?e=1746662400&v=beta&t=D0r_5fVBiRAXdsnWAkxltdyj9Ms4dDNaLGus8uPB7cE" alt="Rock Paper Scissors Lizard Spock: AI-Powered Gesture Recognition Game Project" class="modal-image" loading="lazy" />
         </div>
         <div class="modal-info">
           <div class="info-section">
@@ -1383,10 +1357,10 @@
           <div class="info-section">
             <span class="info-label"><i class="fas fa-link"></i> Project Links</span>
             <div class="project-links">
-              <a href="https://github.com/ahmershah29/Rock-Paper-Scissor.git" target="_blank" class="link-button">
+              <a href="https://github.com/ahmershah29/Rock-Paper-Scissor.git" target="_blank" rel="noopener noreferrer" class="link-button">
                 <i class="fab fa-github"></i> View on GitHub
               </a>
-              <a href="https://www.linkedin.com/posts/ahmer-shah_machinelearning-computervision-tensorflowjs-activity-7312370335876636673-_VmE?utm_source=share&utm_medium=member_desktop&rcm=ACoAAFYGSTEBdXhu5Nct7g5el39jRpHn5c_RuQ8" target="_blank" class="link-button">
+              <a href="https://www.linkedin.com/posts/ahmer-shah_machinelearning-computervision-tensorflowjs-activity-7312370335876636673-_VmE?utm_source=share&utm_medium=member_desktop&rcm=ACoAAFYGSTEBdXhu5Nct7g5el39jRpHn5c_RuQ8" target="_blank" rel="noopener noreferrer" class="link-button">
                 <i class="fab fa-linkedin"></i> Watch Demo
               </a>
             </div>
@@ -1605,7 +1579,7 @@
       <div class="modal-header">
         <h2>Certified Machine Learning Specialist</h2>
       </div>
-      <div class "modal-body">
+      <div class="modal-body">
         <div class="modal-image-container">
           <img src="https://s3.amazonaws.com/coursera_assets/meta_images/generated/CERTIFICATE_LANDING_PAGE/CERTIFICATE_LANDING_PAGE~BRBRBJ502Y24/CERTIFICATE_LANDING_PAGE~BRBRBJ502Y24.jpeg" alt="Certified Machine Learning Specialist Certificate" class="modal-image" />
         </div>
@@ -1648,7 +1622,7 @@
         <div class="modal-image-container">
           <img src="https://s3.amazonaws.com/coursera_assets/meta_images/generated/CERTIFICATE_LANDING_PAGE/CERTIFICATE_LANDING_PAGE~RIBECK9H9GNM/CERTIFICATE_LANDING_PAGE~RIBECK9H9GNM.jpeg" alt="Certified Cybersecurity Expert Certificate" class="modal-image" />
         </div>
-        <div class "modal-info">
+        <div class="modal-info">
           <div class="info-section">
             <span class="info-label"><i class="fas fa-certificate"></i> Issuing Organization</span>
             <p>IBM</p>
