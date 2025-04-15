@@ -887,49 +887,64 @@ document.addEventListener('DOMContentLoaded', () => {
             const modal = document.getElementById(modalId);
             
             if (modal) {
-                modal.style.display = 'block';
-                modal.classList.add('loading');
-                
-                const modalContent = modal.querySelector('.modal-content');
-                if (modalContent) {
-                    modalContent.style.overflowY = 'auto';
-                    modalContent.style.webkitOverflowScrolling = 'touch';
-                    modalContent.style.maxHeight = '90vh';
-                    modalContent.style.margin = '5vh auto';
-                }
+                // Use requestAnimationFrame for better performance
+                requestAnimationFrame(() => {
+                    modal.style.display = 'block';
+                    modal.classList.add('loading');
+                    
+                    const modalContent = modal.querySelector('.modal-content');
+                    if (modalContent) {
+                        modalContent.style.overflowY = 'auto';
+                        modalContent.style.webkitOverflowScrolling = 'touch';
+                        modalContent.style.maxHeight = '90vh';
+                        modalContent.style.margin = '5vh auto';
+                    }
+                });
                 
                 const images = modal.querySelectorAll('img');
                 
                 try {
                     if (images.length) {
-                        await Promise.all([...images].map(img => {
+                        // Optimize image loading by adding debounce
+                        const loadingPromises = [...images].map(img => {
                             return new Promise((resolve) => {
                                 if (img.complete) {
                                     img.classList.add('loaded');
                                     resolve();
                                 } else {
                                     img.onload = () => {
-                                        img.classList.add('loaded');
-                                        resolve();
+                                        requestAnimationFrame(() => {
+                                            img.classList.add('loaded');
+                                            resolve();
+                                        });
                                     };
                                     img.onerror = () => {
                                         console.error('Failed to load image:', img.src);
                                         img.classList.add('error');
                                         resolve();
                                     };
-                                    const currentSrc = img.src;
-                                    img.src = '';
-                                    img.src = currentSrc;
+                                    // Force image load
+                                    if (!img.src.includes('data:')) {
+                                        const currentSrc = img.src;
+                                        img.src = '';
+                                        img.src = currentSrc;
+                                    }
                                 }
                             });
-                        }));
+                        });
+                        
+                        await Promise.all(loadingPromises);
                     }
                     
-                    modal.classList.remove('loading');
-                    if (modalContent) {
-                        modalContent.classList.add('rotate-in');
-                        modalContent.style.opacity = '1';
-                    }
+                    requestAnimationFrame(() => {
+                        modal.classList.remove('loading');
+                        if (modalContent) {
+                            modalContent.classList.add('rotate-in');
+                            modalContent.style.opacity = '1';
+                            // Add will-change for hardware acceleration
+                            modalContent.style.willChange = 'transform, opacity';
+                        }
+                    });
                     
                 } catch (error) {
                     console.error('Error loading modal images:', error);
@@ -945,96 +960,20 @@ document.addEventListener('DOMContentLoaded', () => {
             if (modal) {
                 const modalContent = modal.querySelector('.modal-content');
                 if (modalContent) {
+                    // Clean up will-change after animation
+                    modalContent.addEventListener('transitionend', () => {
+                        modalContent.style.willChange = 'auto';
+                    }, { once: true });
+                    
                     modalContent.classList.remove('rotate-in');
-                }
-                setTimeout(() => {
+                    
+                    // Use setTimeout to ensure animation completes
+                    setTimeout(() => {
+                        modal.style.display = 'none';
+                    }, 300);
+                } else {
                     modal.style.display = 'none';
-                }, 300);
-            }
-        });
-    });
-
-    window.addEventListener('click', function(e) {
-        if (e.target.classList.contains('modal')) {
-            const modalContent = e.target.querySelector('.modal-content');
-            if (modalContent) {
-                modalContent.classList.remove('rotate-in');
-            }
-            setTimeout(() => {
-                e.target.style.display = 'none';
-            }, 300);
-        }
-    });
-
-    document.querySelectorAll('.modal').forEach(modal => {
-        const modalContent = modal.querySelector('.modal-content');
-        if (modalContent) {
-            let startY;
-            let startScrollTop;
-
-            modalContent.addEventListener('touchstart', (e) => {
-                startY = e.touches[0].pageY;
-                startScrollTop = modalContent.scrollTop;
-            }, { passive: true });
-
-            modalContent.addEventListener('touchmove', (e) => {
-                if (!startY) return;
-                
-                const y = e.touches[0].pageY;
-                const walk = (startY - y);
-                modalContent.scrollTop = startScrollTop + walk;
-            }, { passive: true });
-
-            modalContent.addEventListener('touchend', () => {
-                startY = null;
-                startScrollTop = null;
-            });
-        }
-    });
-
-    let resizeTimeout;
-    window.addEventListener('resize', function() {
-        clearTimeout(resizeTimeout);
-        resizeTimeout = setTimeout(function() {
-            const openModal = document.querySelector('.modal[style*="display: block"]');
-            if (openModal) {
-                const modalContent = openModal.querySelector('.modal-content');
-                if (modalContent) {
-                    modalContent.style.maxHeight = '90vh';
-                    modalContent.style.margin = '2vh auto';
                 }
-            }
-        }, 250);
-    });
-
-    const blogLinks = document.querySelectorAll('.open-blog-modal');
-    const blogModal = document.getElementById('blog-modal');
-
-    blogLinks.forEach(link => {
-        link.addEventListener('click', (e) => {
-            e.preventDefault();
-            e.stopPropagation();
-            if (blogModal) {
-                blogModal.style.display = 'block';
-                const modalContent = blogModal.querySelector('.modal-content');
-                if (modalContent) {
-                    modalContent.classList.add('rotate-in');
-                }
-            }
-        });
-    });
-
-    document.querySelectorAll('.modal-close').forEach(button => {
-        button.addEventListener('click', function() {
-            const modal = this.closest('.modal');
-            if (modal) {
-                const modalContent = modal.querySelector('.modal-content');
-                if (modalContent) {
-                    modalContent.classList.remove('rotate-in');
-                }
-                setTimeout(() => {
-                    modal.style.display = 'none';
-                }, 300);
             }
         });
     });
@@ -1167,49 +1106,64 @@ document.querySelectorAll('.open-modal').forEach(button => {
         const modal = document.getElementById(modalId);
         
         if (modal) {
-            modal.style.display = 'block';
-            modal.classList.add('loading');
-            
-            const modalContent = modal.querySelector('.modal-content');
-            if (modalContent) {
-                modalContent.style.overflowY = 'auto';
-                modalContent.style.webkitOverflowScrolling = 'touch';
-                modalContent.style.maxHeight = '90vh';
-                modalContent.style.margin = '5vh auto';
-            }
+            // Use requestAnimationFrame for better performance
+            requestAnimationFrame(() => {
+                modal.style.display = 'block';
+                modal.classList.add('loading');
+                
+                const modalContent = modal.querySelector('.modal-content');
+                if (modalContent) {
+                    modalContent.style.overflowY = 'auto';
+                    modalContent.style.webkitOverflowScrolling = 'touch';
+                    modalContent.style.maxHeight = '90vh';
+                    modalContent.style.margin = '5vh auto';
+                }
+            });
             
             const images = modal.querySelectorAll('img');
             
             try {
                 if (images.length) {
-                    await Promise.all([...images].map(img => {
+                    // Optimize image loading by adding debounce
+                    const loadingPromises = [...images].map(img => {
                         return new Promise((resolve) => {
                             if (img.complete) {
                                 img.classList.add('loaded');
                                 resolve();
                             } else {
                                 img.onload = () => {
-                                    img.classList.add('loaded');
-                                    resolve();
+                                    requestAnimationFrame(() => {
+                                        img.classList.add('loaded');
+                                        resolve();
+                                    });
                                 };
                                 img.onerror = () => {
                                     console.error('Failed to load image:', img.src);
                                     img.classList.add('error');
                                     resolve();
                                 };
-                                const currentSrc = img.src;
-                                img.src = '';
-                                img.src = currentSrc;
+                                // Force image load
+                                if (!img.src.includes('data:')) {
+                                    const currentSrc = img.src;
+                                    img.src = '';
+                                    img.src = currentSrc;
+                                }
                             }
                         });
-                    }));
+                    });
+                    
+                    await Promise.all(loadingPromises);
                 }
                 
-                modal.classList.remove('loading');
-                if (modalContent) {
-                    modalContent.classList.add('rotate-in');
-                    modalContent.style.opacity = '1';
-                }
+                requestAnimationFrame(() => {
+                    modal.classList.remove('loading');
+                    if (modalContent) {
+                        modalContent.classList.add('rotate-in');
+                        modalContent.style.opacity = '1';
+                        // Add will-change for hardware acceleration
+                        modalContent.style.willChange = 'transform, opacity';
+                    }
+                });
                 
             } catch (error) {
                 console.error('Error loading modal images:', error);
@@ -1671,3 +1625,234 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
 });
+
+// Add a more efficient modal handler function
+function initModalHandlers() {
+    // Cache modal elements for better performance
+    const modalButtons = document.querySelectorAll('.open-modal');
+    const modalCloseButtons = document.querySelectorAll('.modal-close');
+    const modals = document.querySelectorAll('.modal');
+    
+    // Pre-cache all modal content elements
+    const modalContents = {};
+    modals.forEach(modal => {
+        modalContents[modal.id] = modal.querySelector('.modal-content');
+    });
+    
+    // Use event delegation instead of multiple event listeners
+    document.addEventListener('click', function(event) {
+        // Handle opening modals
+        if (event.target.classList.contains('open-modal') || 
+            event.target.closest('.open-modal')) {
+            
+            const button = event.target.classList.contains('open-modal') ? 
+                event.target : event.target.closest('.open-modal');
+            
+            const modalId = button.getAttribute('data-target');
+            const modal = document.getElementById(modalId);
+            
+            if (modal) {
+                openModal(modal);
+            }
+        }
+        
+        // Handle closing modals
+        if (event.target.classList.contains('modal-close') || 
+            event.target.closest('.modal-close')) {
+            
+            const modal = event.target.closest('.modal');
+            if (modal) {
+                closeModal(modal);
+            }
+        }
+        
+        // Handle clicking outside modal
+        if (event.target.classList.contains('modal')) {
+            closeModal(event.target);
+        }
+    });
+    
+    // Optimized modal opening function
+    function openModal(modal) {
+        // Use requestAnimationFrame for better performance
+        requestAnimationFrame(() => {
+            modal.style.display = 'block';
+            modal.classList.add('loading');
+            
+            const modalContent = modalContents[modal.id] || modal.querySelector('.modal-content');
+            if (modalContent) {
+                // Batch style changes together to reduce reflows
+                Object.assign(modalContent.style, {
+                    overflowY: 'auto',
+                    webkitOverflowScrolling: 'touch',
+                    maxHeight: '90vh',
+                    margin: '5vh auto',
+                    willChange: 'transform, opacity' // Hardware acceleration hint
+                });
+            }
+            
+            // Process images in the modal
+            const images = modal.querySelectorAll('img');
+            if (images.length) {
+                Promise.all([...images].map(img => {
+                    return new Promise((resolve) => {
+                        if (img.complete) {
+                            img.classList.add('loaded');
+                            resolve();
+                        } else {
+                            img.onload = () => {
+                                requestAnimationFrame(() => {
+                                    img.classList.add('loaded');
+                                    resolve();
+                                });
+                            };
+                            img.onerror = () => {
+                                img.classList.add('error');
+                                resolve();
+                            };
+                        }
+                    });
+                })).then(() => {
+                    requestAnimationFrame(() => {
+                        modal.classList.remove('loading');
+                        if (modalContent) {
+                            modalContent.classList.add('rotate-in');
+                            modalContent.style.opacity = '1';
+                        }
+                    });
+                }).catch(error => {
+                    console.error('Error loading modal images:', error);
+                    modal.classList.remove('loading');
+                });
+            } else {
+                // No images to load
+                requestAnimationFrame(() => {
+                    modal.classList.remove('loading');
+                    if (modalContent) {
+                        modalContent.classList.add('rotate-in');
+                        modalContent.style.opacity = '1';
+                    }
+                });
+            }
+        });
+    }
+    
+    // Optimized modal closing function
+    function closeModal(modal) {
+        const modalContent = modalContents[modal.id] || modal.querySelector('.modal-content');
+        if (modalContent) {
+            // Clean up will-change after animation completes
+            modalContent.addEventListener('transitionend', () => {
+                modalContent.style.willChange = 'auto';
+            }, { once: true });
+            
+            modalContent.classList.remove('rotate-in');
+            
+            // Use setTimeout to ensure animation completes
+            setTimeout(() => {
+                modal.style.display = 'none';
+            }, 300);
+        } else {
+            modal.style.display = 'none';
+        }
+    }
+}
+
+// Initialize modal handlers when DOM is fully loaded
+document.addEventListener('DOMContentLoaded', initModalHandlers);
+
+// Performance optimization function
+function optimizePerformance() {
+    // Debounce scroll events for better performance
+    let scrollTimeout;
+    let lastKnownScrollPosition = 0;
+    let ticking = false;
+    
+    // Use passive event listeners for scrolling
+    window.addEventListener('scroll', function(e) {
+        lastKnownScrollPosition = window.scrollY;
+        
+        if (!ticking) {
+            window.requestAnimationFrame(function() {
+                // Handle all scroll-dependent animations here in one go
+                handleScrollAnimations(lastKnownScrollPosition);
+                ticking = false;
+            });
+            ticking = true;
+        }
+        
+        // Debounce expensive operations
+        clearTimeout(scrollTimeout);
+        scrollTimeout = setTimeout(() => {
+            // Handle expensive operations that don't need to run on every scroll
+            handleExpensiveScrollOperations(lastKnownScrollPosition);
+        }, 100);
+    }, { passive: true }); // passive: true improves scroll performance
+    
+    // Consolidated scroll animation handler
+    function handleScrollAnimations(scrollPos) {
+        // Handle parallax effects
+        const parallaxLayers = document.querySelectorAll('.parallax__layer');
+        parallaxLayers.forEach(layer => {
+            const depth = layer.getAttribute('data-depth');
+            const movement = -(scrollPos * depth);
+            layer.style.transform = `translate3d(0, ${movement}px, 0)`;
+        });
+        
+        // Handle scroll-to-top button visibility
+        const scrollToTopBtn = document.getElementById('scrollToTopBtn');
+        if (scrollToTopBtn) {
+            if (scrollPos > 300) {
+                scrollToTopBtn.style.opacity = '1';
+                scrollToTopBtn.style.visibility = 'visible';
+            } else {
+                scrollToTopBtn.style.opacity = '0';
+                scrollToTopBtn.style.visibility = 'hidden';
+            }
+        }
+    }
+    
+    // Handler for expensive operations that don't need to run on every scroll frame
+    function handleExpensiveScrollOperations(scrollPos) {
+        // Any operations that are expensive but don't need to run on every scroll
+        // For example, checking which section is currently in view
+    }
+    
+    // Optimize image loading
+    function lazyLoadImages() {
+        const images = document.querySelectorAll('img[loading="lazy"]');
+        
+        if ('IntersectionObserver' in window) {
+            const imageObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const img = entry.target;
+                        img.src = img.dataset.src || img.src;
+                        img.classList.add('loaded');
+                        imageObserver.unobserve(img);
+                    }
+                });
+            }, { 
+                rootMargin: '200px 0px' // Load images 200px before they come into view
+            });
+            
+            images.forEach(img => {
+                imageObserver.observe(img);
+            });
+        } else {
+            // Fallback for browsers that don't support IntersectionObserver
+            images.forEach(img => {
+                img.src = img.dataset.src || img.src;
+                img.classList.add('loaded');
+            });
+        }
+    }
+    
+    // Execute optimization functions
+    window.addEventListener('load', () => {
+        lazyLoadImages();
+    });
+}
+
+// Initialize performance optimizations
+document.addEventListener('DOMContentLoaded', optimizePerformance);
