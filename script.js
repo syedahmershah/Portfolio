@@ -405,7 +405,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 function setupTypingAnimation() {
     if (window.typingAnimationRunning) {
-        console.log('Typing animation already running');
+        
         return;
     }
     
@@ -418,7 +418,7 @@ function setupTypingAnimation() {
         return;
     }
     
-    console.log('Setting up typing animation');
+    
     window.typingAnimationRunning = true;
     
     greetingEl.textContent = '';
