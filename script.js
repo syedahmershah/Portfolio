@@ -1,3 +1,5 @@
+// Google Analytics Initialization has been removed
+
 if (typeof window.AppState === 'undefined') {
     window.AppState = {
         typingAnimationRunning: false,
