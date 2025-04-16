@@ -1362,37 +1362,37 @@
       <div class="section-container">
         <h2 class="fade-in-up" id="blog-heading">Latest Blog <span class="emoji emoji-blog">📖</span></h2>
         <div class="blog-container">
-          <a href="#" class="blog-card fade-in-up-delay open-blog-modal">
+          <a href="#" class="blog-card fade-in-up-delay open-blog-modal" data-target="blog-modal">
             <img src="Images/Blogs/Blog 1.webp" alt="Exploring the Synergy of Generative AI and Ethical Boundaries" class="blog-image" loading="lazy" />
             <h3>The Uncharted Frontier: Exploring the Synergy of Generative AI and Ethical Boundaries</h3>
             <p>2025</p>
             <p>Explore the ethical implications and potential of generative AI in various industries.</p>
           </a>
-          <a href="#" class="blog-card fade-in-up-delay-2 open-blog-modal">
+          <a href="#" class="blog-card fade-in-up-delay-2 open-blog-modal" data-target="blog-modal">
             <img src="Images/Blogs/Blog 2.webp" alt="Data Science Insights: Future Trends and Applications" class="blog-image" loading="lazy" />
             <h3>The Future of Data Science: Shaping the World with Insights</h3>
             <p>2025</p>
             <p>Discover how data science is transforming industries and driving innovation.</p>
           </a>
-          <a href="#" class="blog-card fade-in-up-delay-3 open-blog-modal">
+          <a href="#" class="blog-card fade-in-up-delay-3 open-blog-modal" data-target="blog-modal">
             <img src="Images/Blogs/Blog 3.webp" alt="Advancements in Computer Vision, LLMs, and NLP Research at Birmingham Dubai" class="blog-image" loading="lazy" />
         <h3>Exploring the Future of Computer Vision, LLMs, and NLP – University of Birmingham Dubai</h3>
         <p>2025</p>
         <p>An in-depth look at the advancements in computer vision, large language models, and natural language processing.</p>
       </a>
-      <a href="#" class="blog-card fade-in-up-delay-4 open-blog-modal">
+      <a href="#" class="blog-card fade-in-up-delay-4 open-blog-modal" data-target="blog-modal">
         <img src="Images/Blogs/Blog 4.webp" alt="AI Applications in Healthcare: Patient Care and Diagnostic Innovations" class="blog-image" loading="lazy" />
         <h3>AI in Healthcare: Revolutionizing Patient Care and Diagnosis</h3>
         <p>2025</p>
         <p>How AI is transforming the healthcare industry by improving patient care and diagnosis.</p>
       </a>
-      <a href="#" class="blog-card fade-in-up-delay-5 open-blog-modal">
+      <a href="#" class="blog-card fade-in-up-delay-5 open-blog-modal" data-target="blog-modal">
         <img src="Images/Blogs/Blog 5.webp" alt="Blockchain Technology Applications Beyond Cryptocurrency" class="blog-image" loading="lazy" />
         <h3>Blockchain Beyond Cryptocurrency: Real-World Applications</h3>
         <p>2025</p>
         <p>Explore the various real-world applications of blockchain technology beyond cryptocurrency.</p>
       </a>
-      <a href="#" class="blog-card fade-in-up-delay-6 open-blog-modal">
+      <a href="#" class="blog-card fade-in-up-delay-6 open-blog-modal" data-target="blog-modal">
         <img src="Images/Blogs/Blog 6.webp" alt="Cybersecurity Trends: Protecting Data in the Digital Age" class="blog-image" loading="lazy" />
         <h3>Cybersecurity Trends: Protecting Data in the Digital Age</h3>
         <p>2025</p>
@@ -2081,5 +2081,51 @@
       </div>
     </div>
   </div>
+
+  <script>
+    // Direct script to handle blog modal
+    document.addEventListener('DOMContentLoaded', function() {
+      // Handle blog cards click
+      const blogCards = document.querySelectorAll('.open-blog-modal');
+      blogCards.forEach(card => {
+        card.addEventListener('click', function(e) {
+          e.preventDefault();
+          const modalId = this.getAttribute('data-target');
+          if (modalId) {
+            const modal = document.getElementById(modalId);
+            if (modal) {
+              console.log("Opening modal: " + modalId);
+              modal.style.display = 'block';
+              
+              // Add animation class to modal content
+              const modalContent = modal.querySelector('.modal-content');
+              if (modalContent) {
+                modalContent.classList.add('rotate-in');
+                modalContent.style.opacity = '1';
+              }
+            }
+          }
+        });
+      });
+      
+      // Handle modal close buttons
+      const closeButtons = document.querySelectorAll('.modal-close');
+      closeButtons.forEach(button => {
+        button.addEventListener('click', function() {
+          const modal = this.closest('.modal');
+          if (modal) {
+            modal.style.display = 'none';
+          }
+        });
+      });
+      
+      // Close modal when clicking outside
+      window.addEventListener('click', function(e) {
+        if (e.target.classList.contains('modal')) {
+          e.target.style.display = 'none';
+        }
+      });
+    });
+  </script>
 </body>
 </html>
