@@ -889,69 +889,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const modal = document.getElementById(modalId);
             
             if (modal) {
-                // Use requestAnimationFrame for better performance
-                requestAnimationFrame(() => {
-                    modal.style.display = 'block';
-                    modal.classList.add('loading');
-                    
-                    const modalContent = modal.querySelector('.modal-content');
-                    if (modalContent) {
-                        modalContent.style.overflowY = 'auto';
-                        modalContent.style.webkitOverflowScrolling = 'touch';
-                        modalContent.style.maxHeight = '90vh';
-                        modalContent.style.margin = '5vh auto';
-                    }
-                });
-                
-                const images = modal.querySelectorAll('img');
-                
-                try {
-                    if (images.length) {
-                        // Optimize image loading by adding debounce
-                        const loadingPromises = [...images].map(img => {
-                            return new Promise((resolve) => {
-                                if (img.complete) {
-                                    img.classList.add('loaded');
-                                    resolve();
-                                } else {
-                                    img.onload = () => {
-                                        requestAnimationFrame(() => {
-                                            img.classList.add('loaded');
-                                            resolve();
-                                        });
-                                    };
-                                    img.onerror = () => {
-                                        console.error('Failed to load image:', img.src);
-                                        img.classList.add('error');
-                                        resolve();
-                                    };
-                                    // Force image load
-                                    if (!img.src.includes('data:')) {
-                                        const currentSrc = img.src;
-                                        img.src = '';
-                                        img.src = currentSrc;
-                                    }
-                                }
-                            });
-                        });
-                        
-                        await Promise.all(loadingPromises);
-                    }
-                    
-                    requestAnimationFrame(() => {
-                        modal.classList.remove('loading');
-                        if (modalContent) {
-                            modalContent.classList.add('rotate-in');
-                            modalContent.style.opacity = '1';
-                            // Add will-change for hardware acceleration
-                            modalContent.style.willChange = 'transform, opacity';
-                        }
-                    });
-                    
-                } catch (error) {
-                    console.error('Error loading modal images:', error);
-                    modal.classList.remove('loading');
-                }
+                openModalAndHandleContent(modal);
             }
         });
     });
@@ -1108,69 +1046,7 @@ document.querySelectorAll('.open-modal').forEach(button => {
         const modal = document.getElementById(modalId);
         
         if (modal) {
-            // Use requestAnimationFrame for better performance
-            requestAnimationFrame(() => {
-                modal.style.display = 'block';
-                modal.classList.add('loading');
-                
-                const modalContent = modal.querySelector('.modal-content');
-                if (modalContent) {
-                    modalContent.style.overflowY = 'auto';
-                    modalContent.style.webkitOverflowScrolling = 'touch';
-                    modalContent.style.maxHeight = '90vh';
-                    modalContent.style.margin = '5vh auto';
-                }
-            });
-            
-            const images = modal.querySelectorAll('img');
-            
-            try {
-                if (images.length) {
-                    // Optimize image loading by adding debounce
-                    const loadingPromises = [...images].map(img => {
-                        return new Promise((resolve) => {
-                            if (img.complete) {
-                                img.classList.add('loaded');
-                                resolve();
-                            } else {
-                                img.onload = () => {
-                                    requestAnimationFrame(() => {
-                                        img.classList.add('loaded');
-                                        resolve();
-                                    });
-                                };
-                                img.onerror = () => {
-                                    console.error('Failed to load image:', img.src);
-                                    img.classList.add('error');
-                                    resolve();
-                                };
-                                // Force image load
-                                if (!img.src.includes('data:')) {
-                                    const currentSrc = img.src;
-                                    img.src = '';
-                                    img.src = currentSrc;
-                                }
-                            }
-                        });
-                    });
-                    
-                    await Promise.all(loadingPromises);
-                }
-                
-                requestAnimationFrame(() => {
-                    modal.classList.remove('loading');
-                    if (modalContent) {
-                        modalContent.classList.add('rotate-in');
-                        modalContent.style.opacity = '1';
-                        // Add will-change for hardware acceleration
-                        modalContent.style.willChange = 'transform, opacity';
-                    }
-                });
-                
-            } catch (error) {
-                console.error('Error loading modal images:', error);
-                modal.classList.remove('loading');
-            }
+            openModalAndHandleContent(modal);
         }
     });
 });
@@ -1654,7 +1530,7 @@ function initModalHandlers() {
             const modal = document.getElementById(modalId);
             
             if (modal) {
-                openModal(modal);
+                openModalAndHandleContent(modal);
             }
         }
         
@@ -1674,74 +1550,11 @@ function initModalHandlers() {
         }
     });
     
-    // Optimized modal opening function
-    function openModal(modal) {
-        // Use requestAnimationFrame for better performance
-        requestAnimationFrame(() => {
-            modal.style.display = 'block';
-            modal.classList.add('loading');
-            
-            const modalContent = modalContents[modal.id] || modal.querySelector('.modal-content');
-            if (modalContent) {
-                // Batch style changes together to reduce reflows
-                Object.assign(modalContent.style, {
-                    overflowY: 'auto',
-                    webkitOverflowScrolling: 'touch',
-                    maxHeight: '90vh',
-                    margin: '5vh auto',
-                    willChange: 'transform, opacity' // Hardware acceleration hint
-                });
-            }
-            
-            // Process images in the modal
-            const images = modal.querySelectorAll('img');
-            if (images.length) {
-                Promise.all([...images].map(img => {
-                    return new Promise((resolve) => {
-                        if (img.complete) {
-                            img.classList.add('loaded');
-                            resolve();
-                        } else {
-                            img.onload = () => {
-                                requestAnimationFrame(() => {
-                                    img.classList.add('loaded');
-                                    resolve();
-                                });
-                            };
-                            img.onerror = () => {
-                                img.classList.add('error');
-                                resolve();
-                            };
-                        }
-                    });
-                })).then(() => {
-                    requestAnimationFrame(() => {
-                        modal.classList.remove('loading');
-                        if (modalContent) {
-                            modalContent.classList.add('rotate-in');
-                            modalContent.style.opacity = '1';
-                        }
-                    });
-                }).catch(error => {
-                    console.error('Error loading modal images:', error);
-                    modal.classList.remove('loading');
-                });
-            } else {
-                // No images to load
-                requestAnimationFrame(() => {
-                    modal.classList.remove('loading');
-                    if (modalContent) {
-                        modalContent.classList.add('rotate-in');
-                        modalContent.style.opacity = '1';
-                    }
-                });
-            }
-        });
-    }
-    
     // Optimized modal closing function
     function closeModal(modal) {
-        const modalContent = modalContents[modal.id] || modal.querySelector('.modal-content');
+        if (!modal) return;
+        
+        const modalContent = modal.querySelector('.modal-content');
         if (modalContent) {
             // Clean up will-change after animation completes
             modalContent.addEventListener('transitionend', () => {
@@ -1758,6 +1571,94 @@ function initModalHandlers() {
             modal.style.display = 'none';
         }
     }
+}
+
+// Define openModalAndHandleContent globally so it can be accessed by all event listeners
+function openModalAndHandleContent(modal) {
+    if (!modal) return;
+    
+    // First show loading state
+    modal.classList.add('loading');
+    
+    // Get the modal content element and hide it initially
+    const modalContent = modal.querySelector('.modal-content');
+    if (modalContent) {
+        modalContent.style.opacity = '0';
+        modalContent.style.transform = 'scale(0.95)';
+    }
+    
+    // Then make modal visible with loading indicator
+    modal.style.display = 'block';
+    
+    // Setup modal content but keep it hidden
+    requestAnimationFrame(() => {
+        if (modalContent) {
+            modalContent.style.willChange = 'transform, opacity';
+            modalContent.style.overflowY = 'auto';
+            modalContent.style.webkitOverflowScrolling = 'touch';
+            modalContent.style.maxHeight = '90vh';
+            modalContent.style.margin = '5vh auto';
+        }
+        
+        const images = modal.querySelectorAll('img');
+        
+        const processImages = async () => {
+            try {
+                if (images.length) {
+                    // Optimize image loading by adding debounce
+                    const loadingPromises = [...images].map(img => {
+                        return new Promise((resolve) => {
+                            if (img.complete) {
+                                img.classList.add('loaded');
+                                resolve();
+                            } else {
+                                img.onload = () => {
+                                    requestAnimationFrame(() => {
+                                        img.classList.add('loaded');
+                                        resolve();
+                                    });
+                                };
+                                img.onerror = () => {
+                                    console.error('Failed to load image:', img.src);
+                                    img.classList.add('error');
+                                    resolve();
+                                };
+                                // Force image load
+                                if (!img.src.includes('data:')) {
+                                    const currentSrc = img.src;
+                                    img.src = '';
+                                    img.src = currentSrc;
+                                }
+                            }
+                        });
+                    });
+                    
+                    // Wait for all images to load before showing content
+                    await Promise.all(loadingPromises);
+                }
+                
+                // Only after everything is loaded, show the content
+                requestAnimationFrame(() => {
+                    // First remove loading state
+                    modal.classList.remove('loading');
+                    
+                    // Then after a small delay, show the content with animation
+                    setTimeout(() => {
+                        if (modalContent) {
+                            modalContent.classList.add('rotate-in');
+                            modalContent.style.opacity = '1';
+                        }
+                    }, 300); // Small delay to ensure loading indicator disappears first
+                });
+                
+            } catch (error) {
+                console.error('Error loading modal images:', error);
+                modal.classList.remove('loading');
+            }
+        };
+        
+        processImages();
+    });
 }
 
 // Initialize modal handlers when DOM is fully loaded

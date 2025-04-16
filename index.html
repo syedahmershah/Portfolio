@@ -34,6 +34,49 @@
       opacity: 1 !important;
     }
     
+    /* Enhanced scroll-to-top button */
+    #scrollToTopBtn {
+      transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+                opacity 0.3s ease-out,
+                visibility 0.3s !important;
+      will-change: transform, opacity;
+    }
+    
+    #scrollToTopBtn:hover {
+      transform: translateY(-5px) !important;
+    }
+    
+    #scrollToTopBtn:active {
+      transform: scale(0.95) !important;
+    }
+    
+    /* Modal Loading Indicator */
+    .modal-loading {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 50px;
+      height: 50px;
+      display: none;
+      z-index: 10;
+    }
+    
+    .modal-loading:after {
+      content: '';
+      display: block;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      border: 3px solid transparent;
+      border-top-color: var(--primary-color);
+      animation: modal-spin 1s ease-in-out infinite;
+    }
+    
+    @keyframes modal-spin {
+      to { transform: rotate(360deg); }
+    }
+    
     /* Optimize animations */
     @media (prefers-reduced-motion: no-preference) {
       .fade-in-up, .fade-in-up-delay, .fade-in-up-delay-2, .fade-in-up-delay-3,
@@ -1432,6 +1475,7 @@
 </section>
 
 <div id="blog-modal" class="modal">
+  <div class="modal-loading"></div>
   <div class="modal-content">
     <h2>Coming Soon</h2>
     <p>Our blogs are coming soon. Stay tuned for updates!</p>
@@ -1512,6 +1556,7 @@
   </footer>
   
   <div id="modal-rpsls" class="modal">
+    <div class="modal-loading"></div>
     <div class="modal-content">
       <div class="modal-header">
         <h2>Rock Paper Scissors Lizard Spock: AI-Powered Gesture Recognition Game</h2>
@@ -1574,6 +1619,7 @@
   </div>
   
   <div id="modal-cert1" class="modal">
+    <div class="modal-loading"></div>
     <div class="modal-content">
       <div class="modal-header">
         <h2>Certified Software Developer</h2>
@@ -1615,6 +1661,7 @@
     </div>
   </div>
   <div id="modal-cert2" class="modal">
+    <div class="modal-loading"></div>
     <div class="modal-content">
       <div class="modal-header">
         <h2>Certified Frontend Developer</h2>
@@ -1656,6 +1703,7 @@
     </div>
   </div>
   <div id="modal-cert3" class="modal">
+    <div class="modal-loading"></div>
     <div class="modal-content">
       <div class="modal-header">
         <h2>Certified RESTful API Developer</h2>
@@ -1696,6 +1744,7 @@
     </div>
   </div>
   <div id="modal-cert4" class="modal">
+    <div class="modal-loading"></div>
     <div class="modal-content">
       <div class="modal-header">
         <h2>Certified in AI & ML</h2>
@@ -1737,6 +1786,7 @@
     </div>
   </div>
   <div id="modal-cert5" class="modal">
+    <div class="modal-loading"></div>
     <div class="modal-content">
       <div class="modal-header">
         <h2>Certified in AI For Everyone</h2>
@@ -1775,6 +1825,7 @@
     </div>
   </div>
   <div id="modal-cert6" class="modal">
+    <div class="modal-loading"></div>
     <div class="modal-content">
       <div class="modal-header">
         <h2>Certified Machine Learning Specialist</h2>
@@ -1814,6 +1865,7 @@
     </div>
   </div>
   <div id="modal-cert7" class="modal">
+    <div class="modal-loading"></div>
     <div class="modal-content">
       <div class="modal-header">
         <h2>Certified in Introduction to Artificial Intelligence (AI)</h2>
@@ -1853,6 +1905,7 @@
     </div>
   </div>
   <div id="modal-cert8" class="modal">
+    <div class="modal-loading"></div>
     <div class="modal-content">
       <div class="modal-header">
         <h2>Certified in GitHub Copilot Fundamentals</h2>
@@ -1892,6 +1945,7 @@
     </div>
   </div>
   <div id="modal-cert9" class="modal">
+    <div class="modal-loading"></div>
     <div class="modal-content">
       <div class="modal-header">
         <h2>Certified Full Stack Web Developer</h2>
@@ -1931,6 +1985,7 @@
     </div>
   </div>
   <div id="modal-cert10" class="modal">
+    <div class="modal-loading"></div>
     <div class="modal-content">
       <div class="modal-header">
         <h2>Certified Front End Web Developer</h2>
@@ -1970,6 +2025,7 @@
     </div>
   </div>
   <div id="modal-cert11" class="modal">
+    <div class="modal-loading"></div>
     <div class="modal-content">
       <div class="modal-header">
         <h2>Mastered the Fundamentals of Software Development</h2>
@@ -2009,6 +2065,7 @@
     </div>
   </div>
   <div id="modal-cert12" class="modal">
+    <div class="modal-loading"></div>
     <div class="modal-content">
       <div class="modal-header">
         <h2>Mastered the Fundamentals of Front-End Development</h2>
@@ -2080,6 +2137,7 @@
 
   <!-- Add the modal for "More About Me" button -->
   <div id="modal-know-more" class="modal">
+    <div class="modal-loading"></div>
     <div class="modal-content">
       <h2>More About Me <span class="emoji emoji-about">👨‍💻</span></h2>
       <div class="know-more-content">
@@ -2182,14 +2240,36 @@
               if (modalId) {
                 const modal = document.getElementById(modalId);
                 if (modal) {
-                  // Manually open the modal instead of relying on the main script
+                  // Show loading indicator
+                  const loadingIndicator = modal.querySelector('.modal-loading');
+                  if (loadingIndicator) {
+                    loadingIndicator.style.display = 'block';
+                  }
+                  
+                  // Display modal
                   modal.style.display = 'block';
+                  
+                  // Hide content initially
                   const modalContent = modal.querySelector('.modal-content');
                   if (modalContent) {
-                    modalContent.style.transform = 'scale(1)';
-                    modalContent.style.opacity = '1';
-                    modalContent.classList.add('rotate-in');
+                    modalContent.style.opacity = '0';
+                    modalContent.style.transform = 'scale(0.95)';
                   }
+                  
+                  // Simulate loading time for modal content
+                  setTimeout(() => {
+                    // Hide loading indicator
+                    if (loadingIndicator) {
+                      loadingIndicator.style.display = 'none';
+                    }
+                    
+                    // Show content with animation
+                    if (modalContent) {
+                      modalContent.style.transform = 'scale(1)';
+                      modalContent.style.opacity = '1';
+                      modalContent.classList.add('rotate-in');
+                    }
+                  }, 600); // Short loading time for better UX
                 }
               }
             });
@@ -2249,6 +2329,55 @@
               }
             });
           });
+          
+          // Add loading behavior to all modal buttons
+          const modalButtons = document.querySelectorAll('.open-modal');
+          const self = this;
+          
+          modalButtons.forEach(button => {
+            button.addEventListener('click', function(e) {
+              e.preventDefault();
+              const modalId = this.getAttribute('data-target');
+              if (modalId) {
+                const modal = document.getElementById(modalId);
+                if (modal) {
+                  // Show loading indicator
+                  const loadingIndicator = modal.querySelector('.modal-loading');
+                  if (loadingIndicator) {
+                    loadingIndicator.style.display = 'block';
+                  }
+                  
+                  // Display modal
+                  modal.style.display = 'block';
+                  
+                  // Hide content initially
+                  const modalContent = modal.querySelector('.modal-content');
+                  if (modalContent) {
+                    modalContent.style.opacity = '0';
+                    modalContent.style.transform = 'scale(0.95)';
+                  }
+                  
+                  // Simulate loading time for modal content (variable based on content size)
+                  const hasLargeImages = modal.querySelectorAll('img[src*="http"]').length > 0;
+                  const loadTime = hasLargeImages ? 800 : 400; // Longer time for external images
+                  
+                  setTimeout(() => {
+                    // Hide loading indicator
+                    if (loadingIndicator) {
+                      loadingIndicator.style.display = 'none';
+                    }
+                    
+                    // Show content with animation
+                    if (modalContent) {
+                      modalContent.style.transform = 'scale(1)';
+                      modalContent.style.opacity = '1';
+                      modalContent.classList.add('rotate-in');
+                    }
+                  }, loadTime);
+                }
+              }
+            });
+          });
         },
         
         // Initialize everything
@@ -2282,8 +2411,45 @@
           // Handle scroll to top button
           const scrollToTopBtn = document.getElementById('scrollToTopBtn');
           if (scrollToTopBtn) {
+            // Add pulse animation when the button appears
+            window.addEventListener('scroll', function() {
+              if (window.scrollY > 300) {
+                // Show the button
+                if (scrollToTopBtn.style.opacity !== '1') {
+                  scrollToTopBtn.style.visibility = 'visible';
+                  scrollToTopBtn.style.opacity = '1';
+                  
+                  // Add a subtle pulse animation when it appears
+                  scrollToTopBtn.animate([
+                    { transform: 'scale(0.95)' },
+                    { transform: 'scale(1.05)' },
+                    { transform: 'scale(1)' }
+                  ], {
+                    duration: 600,
+                    easing: 'cubic-bezier(0.175, 0.885, 0.32, 1.275)'
+                  });
+                }
+              } else {
+                // Hide the button
+                scrollToTopBtn.style.opacity = '0';
+                scrollToTopBtn.style.visibility = 'hidden';
+              }
+            }, { passive: true });
+            
+            // Enhanced scroll to top
             scrollToTopBtn.addEventListener('click', function(e) {
               e.preventDefault();
+              
+              // Add click animation
+              this.animate([
+                { transform: 'scale(1)' },
+                { transform: 'scale(0.9)' },
+                { transform: 'translateY(-5px)' }
+              ], {
+                duration: 300,
+                easing: 'cubic-bezier(0.175, 0.885, 0.32, 1.275)'
+              });
+              
               self.smoothScrollTo(document.body, 400);
             });
           }
