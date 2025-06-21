@@ -1,0 +1,228 @@
+/* Laptop Performance Optimizations */
+@media screen and (min-width: 1024px) {
+  /* Enable hardware acceleration for smooth animations */
+  .profile-header-image,
+  .project-card,
+  .skill-card,
+  .blog-card,
+  .certification-card,
+  .nav-links a,
+  .cta-button,
+  .resume-button {
+    backface-visibility: hidden;
+    perspective: 1000px;
+    transform-style: preserve-3d;
+  }
+
+  /* Optimize animations */
+  .profile-header-image {
+    animation: 6s linear infinite rotate360 3s,
+              3s ease-in-out infinite alternate fireGlow;
+  }
+
+  /* Optimize transitions */
+  .project-card,
+  .skill-card,
+  .blog-card,
+  .certification-card {
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+                box-shadow 0.3s ease-out;
+  }
+
+  /* Optimize hover effects */
+  .nav-links a:hover,
+  .cta-button:hover,
+  .resume-button:hover {
+    transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  }
+
+  /* Optimize scrolling */
+  .parallax {
+    perspective: 1px;
+    height: 100vh;
+    overflow-x: hidden;
+    overflow-y: auto;
+    transform-style: preserve-3d;
+  }
+
+  /* Optimize layout shifts */
+  .section-container {
+    contain: layout style paint;
+    width: 92%;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+
+  /* Optimize images */
+  img {
+    content-visibility: auto;
+  }
+
+  /* Optimize text rendering */
+  h1, h2, h3, h4, h5, h6 {
+    text-rendering: optimizeLegibility;
+  }
+
+  /* Grid optimizations */
+  .projects-grid,
+  .skills-grid,
+  .blog-container,
+  .certifications-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+  }
+
+  /* Card optimizations */
+  .project-card,
+  .skill-card,
+  .blog-card,
+  .certification-card {
+    padding: 2rem;
+  }
+
+  /* Image optimizations */
+  .project-image,
+  .blog-image {
+    height: 220px;
+  }
+
+  .certification-image {
+    max-height: 180px;
+  }
+}
+
+/* Laptop-specific layout adjustments */
+@media screen and (min-width: 1024px) and (max-width: 1366px) {
+  /* Container adjustments */
+  .section-container {
+    width: 92%;
+    max-width: 1200px;
+  }
+
+  /* Section spacing */
+  section {
+    padding: 4rem 0;
+    margin: 2rem 0;
+    min-height: auto;
+  }
+
+  /* Header optimization */
+  header {
+    height: 70px;
+  }
+
+  .nav-container {
+    padding: 0.75rem 2rem;
+  }
+
+  /* Typography scale */
+  :root {
+    --h1-size: clamp(2.5rem, 4vw, 3.5rem);
+    --h2-size: clamp(2rem, 3vw, 2.8rem);
+    --h3-size: clamp(1.2rem, 2vw, 1.5rem);
+    --body-size: clamp(1rem, 1.5vw, 1.1rem);
+  }
+
+  h1 { font-size: var(--h1-size); }
+  h2 { font-size: var(--h2-size); }
+  h3 { font-size: var(--h3-size); }
+  p { font-size: var(--body-size); }
+
+  /* About section adjustments */
+  .about-container {
+    gap: 3rem;
+  }
+
+  .profile-img {
+    max-width: 280px;
+    height: 280px;
+  }
+
+  /* Contact section optimization */
+  .contact-container {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+  }
+
+  .contact-form {
+    max-width: 500px;
+  }
+
+  /* Button adjustments */
+  .cta-button,
+  .resume-button {
+    padding: 0.8rem 1.8rem;
+    font-size: 1rem;
+  }
+
+  /* Modal optimizations */
+  .modal-content {
+    width: 85%;
+    max-width: 1000px;
+    margin: 5vh auto;
+  }
+
+  .modal-body {
+    gap: 1.5rem;
+  }
+}
+
+/* Higher resolution laptops */
+@media screen and (min-width: 1367px) and (max-width: 1600px) {
+  .section-container {
+    width: 85%;
+    max-width: 1400px;
+  }
+
+  .projects-grid,
+  .skills-grid,
+  .blog-container,
+  .certifications-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2.5rem;
+  }
+
+  section {
+    padding: 5rem 0;
+  }
+}
+
+/* Animation performance optimizations */
+@media screen and (min-width: 1024px) {
+  .fade-in-up,
+  .fade-in-up-delay,
+  .fade-in-up-delay-2 {
+    will-change: transform, opacity;
+  }
+
+  .profile-header-image,
+  .project-image,
+  .blog-image,
+  .certification-image {
+    will-change: transform;
+    transform: translateZ(0);
+  }
+
+  .project-card,
+  .skill-card,
+  .blog-card,
+  .certification-card {
+    will-change: transform;
+    transform: translateZ(0);
+  }
+}
+
+/* Disable profile image rotation for tablets and larger screens */
+@media screen and (min-width: 768px) {
+  .profile-header-image {
+    animation: none !important;
+    transform: none !important;
+    transition: transform 0.3s ease-out, box-shadow 0.3s ease-out;
+  }
+
+  .profile-header-image:hover {
+    transform: scale(1.1) !important;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  }
+} 

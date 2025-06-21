@@ -1,0 +1,14 @@
+/* Fix for containerization skill overlapping education section */
+#skills{margin-bottom:8rem!important;padding-bottom:8rem!important;position:relative;z-index:1}
+#education{position:relative;z-index:2;padding-top:8rem!important;margin-top:4rem!important}
+.skill-meter-container:last-child{margin-bottom:6rem!important}
+@media (max-width:768px){
+#skills{margin-bottom:12rem!important;padding-bottom:12rem!important}
+#education{padding-top:12rem!important;margin-top:8rem!important}
+.skill-meter-container:last-child{margin-bottom:8rem!important}
+}
+@media (max-width:480px){
+#skills{margin-bottom:15rem!important;padding-bottom:15rem!important}
+#education{padding-top:15rem!important;margin-top:10rem!important}
+.skill-meter-container:last-child{margin-bottom:12rem!important}
+}
