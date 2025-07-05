@@ -1,0 +1,12 @@
+# robots.txt for https://syedahmershah.github.io/Portfolio/
+# Syed Ahmer Shah's Portfolio Website
+
+User-agent: *
+Allow: /
+Disallow: /Images/Screenshots/
+
+# Cache Control
+Crawl-delay: 1
+
+# Primary Sitemap
+Sitemap: https://syedahmershah.github.io/Portfolio/sitemap.xml 
